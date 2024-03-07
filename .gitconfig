@@ -1,0 +1,8 @@
+[user]
+  name = Saif Al-Din Samy Hussein
+  email = SeifOwleN@proton.me
+  username = SaifOwleN
+[core]
+  editor = nvim
+[credential]
+  helper = store
