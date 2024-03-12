@@ -113,6 +113,9 @@ alias vim="nvim"
 alias nivm="nvim"
 alias ls="eza"
 alias notes="cd ~/Documents/notes; nvim"
+alias pick="hyprpicker | wl-copy" 
+
+
 # bun
 export BUN_INSTALL="$HOME/.bun"
 export PATH=$BUN_INSTALL/bin:$PATH

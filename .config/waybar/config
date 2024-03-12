@@ -26,9 +26,9 @@
         // "backlight#icon",
         // "backlight#value",
         "pulseaudio",
-        "pulseaudio#microphone",
-        "clock",
-        "tray"
+    	"pulseaudio#microphone",
+	"clock",
+        "tray",
     ],
 
     // Modules
@@ -57,7 +57,7 @@
 
     "custom/PBPbattery": {
         "exec": "~/.config/waybar/scripts/PBPbattery.sh",
-        "format": "{}"
+        "format": "{}",
     },
 
     "clock": {
@@ -72,9 +72,9 @@
         "format": "  {usage}%", // Icon: microchip
         "states": {
             "warning": 70,
-            "critical": 90
+            "critical": 90,
         },
-        "on-click": "kitty -e 'btm'"
+        "on-click": "kitty -e 'btm'",
     },
 
     "custom/keyboard-layout": {
@@ -85,7 +85,7 @@
         // Signal sent by Sway key binding (~/.config/sway/key-bindings)
         "signal": 1, // SIGHUP
         "tooltip": false,
-        "on-click": "~/.config/waybar/scripts/keyhint.sh"
+        "on-click": "~/.config/waybar/scripts/keyhint.sh",
     },
 
     "memory": {
@@ -104,7 +104,7 @@
         "format-ethernet": " ", // Icon: ethernet
         "format-disconnected": "⚠  Disconnected",
         "tooltip-format": "{ifname}: {ipaddr}",
-        "on-click": "kitty -e 'nmtui'"
+        "on-click": "kitty -e 'nmtui'",
     },
     "network#vpn": {
         "interface": "tun0",
@@ -227,7 +227,7 @@
     "custom/media": {
         "format": "{icon} {}",
         "return-type": "json",
-        "max-length": 40,
+        "max-length": 30,
         "format-icons": {
             "spotify": " ",
             "default": "󰗃 "
