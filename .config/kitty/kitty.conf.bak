@@ -2454,6 +2454,6 @@ background_opacity 0.94
 
 
 # BEGIN_KITTY_THEME
-# Solarized Dark
+# kanagawabones
 include current-theme.conf
 # END_KITTY_THEME

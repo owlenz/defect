@@ -1,5 +1,8 @@
 export PATH=$HOME/bin:/usr/local/bin:$PATH
 
+export ZSH="$HOME/.oh-my-zsh"
+
+ZSH_THEME="robbyrussell"
 # Set list of themes to pick from when loading at random
 # Setting this variable when ZSH_THEME=random will cause zsh to load
 # a theme from this variable instead of looking in $ZSH/themes/
@@ -60,7 +63,13 @@ ENABLE_CORRECTION="true"
 # Custom plugins may be added to $ZSH_CUSTOM/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(git)
+plugins=( 
+    zsh-syntax-highlighting
+    tmux
+    git
+    zsh-autosuggestions
+)
+source $ZSH/oh-my-zsh.sh
 
 # User configuration
 
@@ -120,10 +129,7 @@ alias pick="hyprpicker | wl-copy"
 export BUN_INSTALL="$HOME/.bun"
 export PATH=$BUN_INSTALL/bin:$PATH
 
-PS1='[\u@\h \W]\$ '
 . "$HOME/.cargo/env"
-
-eval "$(starship init zsh)"
 
 # Created by `pipx` on 2024-03-04 02:07:12
 export PATH="$PATH:/home/owlen/.local/bin"

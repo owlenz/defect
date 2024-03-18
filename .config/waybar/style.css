@@ -36,7 +36,7 @@ Arc-Dark Color Scheme
 }
 
 @define-color text white;
-@define-color text2 #C18EE3;
+@define-color text2 white;
 
 /* -----------------------------------------------------------------------------
  * Base styles
@@ -85,7 +85,7 @@ window#waybar {
 #custom-PBPbattery {
     font-weight: 600;
     padding: 0.25rem 0.75rem;
-    margin: 1px 6px;
+    margin: 0px 5px;
     background-color: rgba(0, 0, 0, 1);
     border-radius: 3px;
     border-width: 1rem;
@@ -180,7 +180,7 @@ window#waybar {
     border-left: 0px;
     border-right: 0px;
     margin-right: 0;
-    border-radius: 20px 0 0 20px;
+    border-radius: 2px 0 0 2px;
 }
 
 /* #pulseaudio.muted { */
@@ -192,7 +192,7 @@ window#waybar {
     border-right: 0px;
     margin-left: 0;
     padding-left: 0;
-    border-radius: 0 20px 20px 0;
+    border-radius: 0 2px 2px 0;
 }
 
 /* #pulseaudio.microphone.muted { */
@@ -210,7 +210,7 @@ window#waybar {
 }
 
 #custom-media {
-    color: @text;
+    color: #BE0032 ;
     /* display: flex; */
     /* justify-content: center; */
 }
