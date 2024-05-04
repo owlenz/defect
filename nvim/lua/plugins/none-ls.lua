@@ -8,6 +8,7 @@ return {
     opts.sources = vim.list_extend(opts.sources or {}, {
       biome,
       none.builtins.diagnostics.tidy,
+      -- none.builtins.formatting.tidy.with({ args = { "--tidy-mark", "-quiet", "-indent", "-wrap", "-" } }),
     })
   end,
 }

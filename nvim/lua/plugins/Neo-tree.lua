@@ -12,8 +12,8 @@ return {
         },
       },
       window = {
-        position = "right",
-        width = "35",
+        position = "float",
+        width = "40",
       },
       buffers = {
         group_empty_dirs = false,
