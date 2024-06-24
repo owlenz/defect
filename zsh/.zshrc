@@ -67,6 +67,7 @@ plugins=(
     zsh-syntax-highlighting
     tmux
     git
+    kitty
     zsh-autosuggestions
 )
 source $ZSH/oh-my-zsh.sh
@@ -131,9 +132,6 @@ export PATH=$BUN_INSTALL/bin:$PATH
 
 . "$HOME/.cargo/env"
 
-# Created by `pipx` on 2024-03-04 02:07:12
-export PATH="$PATH:/home/owlen/.local/bin"
-
 eval "$(atuin init zsh)"
 
 export NVM_DIR="$HOME/.nvm"
@@ -142,3 +140,8 @@ export NVM_DIR="$HOME/.nvm"
 
 # bun completions
 [ -s "/home/saif/.bun/_bun" ] && source "/home/saif/.bun/_bun"
+export EDITOR='nvim'
+
+export ANDROID_HOME=$HOME/Android/Sdk
+export PATH=$PATH:$ANDROID_HOME/emulator
+export PATH=$PATH:$ANDROID_HOME/platform-tools

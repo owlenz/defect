@@ -7,21 +7,18 @@ return {
   },
   {
     "jesseleite/nvim-noirbuddy",
-    name = "noirbuddy",
     dependencies = {
       { "tjdevries/colorbuddy.nvim" },
     },
-    -- lazy = false,
-    -- priority = 1000,
-    opts = {
-      preset = "miami-nights",
-    },
+    lazy = false,
+    priority = 10,
   },
+  { "EdenEast/nightfox.nvim", priority = 1000 },
   { "catppuccin/nvim", name = "catppuccin", priority = 1000 },
   {
     "LazyVim/LazyVim",
     opts = {
-      colorscheme = "noirbuddy",
+      colorscheme = "carbonfox",
     },
   },
 }
