@@ -64,11 +64,14 @@ ENABLE_CORRECTION="true"
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
 plugins=( 
-    zsh-syntax-highlighting
     tmux
     git
     kitty
+    bun
+    tmux
+    golang
     zsh-autosuggestions
+    zsh-syntax-highlighting
 )
 source $ZSH/oh-my-zsh.sh
 
@@ -102,19 +105,19 @@ HISTFILE=~/.zsh_history
 # Example aliases
 
 ## Config aliases
-alias passC="cat ~/Documents/xdd/pass | wl-copy"
+alias passC="cat ~/Documents/xdd/pass | xclip -sel clip"
 alias kittyC="nvim ~/.config/kitty/kitty.conf"
 alias hyprC="nvim ~/.config/hypr/hyprland.conf"
 alias tmuxC="nvim ~/.tmux.conf"
 alias barC="cd ~/.config/waybar/ ; nvim"
 alias nvimC="cd ~/.config/nvim/ ; nvim"
 alias vimC="cd ~/.config/nvim/ ; nvim"
+alias i3C="cd ~/.config/i3/ ; nvim"
 alias zshC="nvim ~/.zshrc"
 alias starC="nvim ~/.config/starship.toml"
 
 ## QOL aliases
 alias ..="cd .."
-alias ls='ls --color=auto'
 alias grep='grep --color=auto'
 alias pac="sudo pacman"
 alias icat="kitten icat"
@@ -124,13 +127,16 @@ alias nivm="nvim"
 alias ls="eza"
 alias notes="cd ~/Documents/notes; nvim"
 alias pick="hyprpicker | wl-copy" 
+alias xpick="xcolor | xclip -sel clip" 
 
+
+export PKG_CONFIG_PATH=/usr/lib/pkgconfig:/usr/share/pkgconfig:/lib/pkgconfig:$PKG_CONFIG_PATH
 
 # bun
 export BUN_INSTALL="$HOME/.bun"
 export PATH=$BUN_INSTALL/bin:$PATH
 
-. "$HOME/.cargo/env"
+# . "$HOME/.cargo/env"
 
 eval "$(atuin init zsh)"
 
@@ -145,3 +151,9 @@ export EDITOR='nvim'
 export ANDROID_HOME=$HOME/Android/Sdk
 export PATH=$PATH:$ANDROID_HOME/emulator
 export PATH=$PATH:$ANDROID_HOME/platform-tools
+export VCPKG_ROOT=~/vcpkg
+export PATH=$VCPKG_ROOT:$PATH
+
+
+export PATH="$PATH:$(go env GOBIN):$(go env GOPATH)/bin"
+

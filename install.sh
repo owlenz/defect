@@ -14,7 +14,7 @@ for element in "${homeFiles[@]}"; do
 	stow $element -v -t ~/
 done
 
-configFiles=(fuzzel nvim kitty hypr mako rofi waybar neofetch i3 polybar)
+configFiles=(picom fuzzel nvim kitty hypr mako rofi waybar neofetch i3 polybar)
 configDir="${HOME}/.config"
 
 for element in "${configFiles[@]}"; do
