@@ -14,7 +14,7 @@ set $wm_setting_key_right            Right
 
 set $wm_setting_app_terminal         kitty
 set $wm_setting_app_browser          brave
-set $wm_setting_app_launcher         dmenu_run
+set $wm_setting_app_launcher         rofi -show
 set $wm_setting_app_compositor       picom
 set $wm_setting_notification	       dunst
 

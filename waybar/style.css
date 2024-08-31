@@ -46,7 +46,7 @@ Arc-Dark Color Scheme
 * {
     border-radius: 0;
     min-height: 0;
-    margin: 1px;
+    margin: 0.5px;
     padding: 0;
 }
 
@@ -59,7 +59,7 @@ window#waybar {
     background-color: rgba(0, 0, 0, 0);
     /* font-family: JetBrains Mono Nerd Font; */
     font-family: Intel One Mono Nerd Font;
-    font-size: 14px;
+    font-size: 12px;
     /* border-radius: 22px; */
 }
 
@@ -216,8 +216,8 @@ window#waybar {
 }
 
 #workspaces {
-    padding-left: 8px;
-    padding-right: 8px;
+    padding-left: 6px;
+    padding-right: 6px;
 }
 
 #workspaces * {
@@ -227,9 +227,9 @@ window#waybar {
 #workspaces button {
     background: gray;
     border-radius: 100%;
-    min-height: 14px;
-    min-width: 14px;
-    margin: 5px 8px;
+    min-height: 12px;
+    min-width: 12px;
+    margin: 5px 6px;
     padding: 0px;
     /*transition: all 0.5s cubic-bezier(0.33, 1.0, 0.68, 1.0); easeInOutCubic */
     transition: all 0.5s cubic-bezier(.55, -0.68, .48, 1.68);
@@ -239,7 +239,7 @@ window#waybar {
 #workspaces button.active {
     background: white;
     border-radius: 1rem;
-    padding: 0rem 10px;
+    padding: 0rem 8px;
     background-size: 400% 400%;
     animation: gradient_f 20s ease-in-out infinite;
     transition: all 0.3s cubic-bezier(.55, -0.68, .48, 1.682);

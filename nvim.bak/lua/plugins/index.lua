@@ -54,6 +54,7 @@ return {
         "query",
         "regex",
         "tsx",
+        "astro",
         "typescript",
         "vim",
         "yaml",
@@ -61,6 +62,7 @@ return {
       })
     end,
   },
+
   {
     "xiyaowong/transparent.nvim",
     lazy = false,

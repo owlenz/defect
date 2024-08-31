@@ -104,8 +104,15 @@ HISTFILE=~/.zsh_history
 
 # Example aliases
 
-## Config aliases
+## Config Aliases
+
 alias passC="cat ~/Documents/xdd/pass | xclip -sel clip"
+
+if [[ "$(loginctl show-session $(awk '/tty/ {print $1}' <(loginctl)) -p Type | awk -F= '{print $2}')" == "wayland" ]]; then
+    alias passC="cat ~/Documents/xdd/pass | wl-copy"
+fi
+
+
 alias kittyC="nvim ~/.config/kitty/kitty.conf"
 alias hyprC="nvim ~/.config/hypr/hyprland.conf"
 alias tmuxC="nvim ~/.tmux.conf"
@@ -128,7 +135,8 @@ alias ls="eza"
 alias notes="cd ~/Documents/notes; nvim"
 alias pick="hyprpicker | wl-copy" 
 alias xpick="xcolor | xclip -sel clip" 
-
+alias cat="bat"
+alias ls="eza -all --icons=always --no-time --group-directories-first --no-permissions --no-user"
 
 export PKG_CONFIG_PATH=/usr/lib/pkgconfig:/usr/share/pkgconfig:/lib/pkgconfig:$PKG_CONFIG_PATH
 
@@ -139,6 +147,7 @@ export PATH=$BUN_INSTALL/bin:$PATH
 # . "$HOME/.cargo/env"
 
 eval "$(atuin init zsh)"
+eval "$(fzf --zsh)"
 
 export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
@@ -148,12 +157,17 @@ export NVM_DIR="$HOME/.nvm"
 [ -s "/home/saif/.bun/_bun" ] && source "/home/saif/.bun/_bun"
 export EDITOR='nvim'
 
+## android studio
 export ANDROID_HOME=$HOME/Android/Sdk
 export PATH=$PATH:$ANDROID_HOME/emulator
 export PATH=$PATH:$ANDROID_HOME/platform-tools
+
+## vcpkg
 export VCPKG_ROOT=~/vcpkg
 export PATH=$VCPKG_ROOT:$PATH
 
 
-export PATH="$PATH:$(go env GOBIN):$(go env GOPATH)/bin"
+export TERM='xterm-kitty'
 
+export PATH="$PATH:$(go env GOBIN):$(go env GOPATH)/bin"
+export BROWSER='chromium'

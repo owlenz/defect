@@ -113,9 +113,7 @@ try:
         # Add 4 to trunclen to account for status symbol, spaces, and other padding characters
         print(
             truncate(
-                output.format(
-                    artist=artist, song=song, play_pause=play_pause, album=album
-                ),
+                output.format(artist=artist, song=song, play_pause=play_pause),
                 trunclen + 4,
             )
         )

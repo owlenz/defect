@@ -1,20 +1,12 @@
 #!/usr/bin/bash
 
-xdd=()
-
-# shopt -s dotglob
-for dir in */; do
-	dir="${dir%/}"
-	xdd+=("$dir")
-done
-
 homeFiles=(git zsh tmux)
 
 for element in "${homeFiles[@]}"; do
 	stow $element -v -t ~/
 done
 
-configFiles=(picom fuzzel nvim kitty hypr mako rofi waybar neofetch i3 polybar)
+configFiles=(picom fuzzel nvim kitty hypr mako rofi waybar neofetch i3 polybar lf zellij)
 configDir="${HOME}/.config"
 
 for element in "${configFiles[@]}"; do
