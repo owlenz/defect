@@ -124,6 +124,7 @@ alias zshC="nvim ~/.zshrc"
 alias starC="nvim ~/.config/starship.toml"
 
 ## QOL aliases
+alias cls='printf "\033c"'
 alias ..="cd .."
 alias grep='grep --color=auto'
 alias pac="sudo pacman"

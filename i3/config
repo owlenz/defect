@@ -58,7 +58,7 @@ bindsym $mod+$smod+Return exec --no-startup-id $wm_setting_app_browser
 # Start a program launcher
 bindsym $mod+d exec --no-startup-id $wm_setting_app_launcher
 
-bindsym --release $mod+w exec --no-startup-id xcolor | xclip -sel clip
+bindsym --release $mod+w exec --no-startup-id xcolor | tail -c +1 | head -c -1 | xclip -sel clip
 
 # Run a window compositor (for effects like transparency or full VSync)
 exec --no-startup-id $wm_setting_app_compositor -b
