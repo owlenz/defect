@@ -1,0 +1,30 @@
+* {
+	background-color: #4e2f7c;
+}
+
+window {
+	width: 30%;
+}
+
+entry {
+	placeholder: "xddMORS";
+	width: 4em;
+}
+
+listview {
+	spacing: 7px;
+	lines: 7;
+}
+
+entry {
+    expand:     false;
+    width:      10em;
+}
+
+element {
+    padding: 0px 2px;
+}
+
+element selected {
+    background-color: SteelBlue;
+}

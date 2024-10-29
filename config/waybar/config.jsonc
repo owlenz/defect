@@ -1,0 +1,67 @@
+{
+	"layer": "top",
+	"position": "top",
+	"margin-top": 4,
+	"margin-right": 10,
+	"margin-left": 10,
+	"modules-left": [
+		"hyprland/workspaces",
+		"hyprland/window"
+	],
+	"modules-center": [
+		"custom/media"
+	],
+	"modules-right": [
+		"tray",
+		"pulseaudio",
+		"clock"
+	],
+	"clock": {
+		"interval": 10,
+		"format-alt": "{:%e %b %Y}", // Icon: calendar-alt
+		"format": "{:%H:%M} ",
+		"tooltip-format": "{:%e %B %Y}"
+	},
+	"hyprland/window": {
+		"format": "{title}",
+		"rewrite": {
+			"(.*) — Zen Browser": "$1"
+		},
+		"separate-outputs": true,
+		"max-length": 30
+	},
+	"hyprland/workspaces": {
+		"format": "{icon}",
+		"format-window-separator": "\n"
+		//"window-rewrite": {
+		//	"title<.*youtube.*>": "",
+		//	"vim": ""
+		//}
+	},
+	"pulseaudio": {
+		"scroll-step": 1,
+		"format": "{icon}  {volume}%",
+		"format-muted": "muted",
+		"format-icons": {
+			"headphone": "󰋋"
+		},
+		"on-click": "pactl set-sink-mute @DEFAULT_SINK@ toggle",
+		"on-click-right": "pavucontrol",
+		"on-scroll-up": "pactl set-sink-volume @DEFAULT_SINK@ +5%",
+		"on-scroll-down": "pactl set-sink-volume @DEFAULT_SINK@ -5%"
+	},
+	"tray": {
+		"icon-size": 19,
+		"spacing": 10
+	},
+	"custom/media": {
+		"exec": "python3 ~/.config/waybar/scripts/mediaplayer.py --player spotify",
+		"format": "{}",
+		"return-type": "json",
+		"max-length": 30,
+		"escape": true,
+		"on-click": "playerctl -p spotify play-pause",
+		"on-scroll-up": "playerctl next",
+		"on-scroll-down": "playerctl previous"
+	}
+}
