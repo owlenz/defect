@@ -3,8 +3,7 @@ padding = { x = 5, y = 5 }
 opacity = 0.88
 
 [font]
-normal = { family = "JetBrainsMono Nerd Font", style = "Regular" }
+normal = { family = "BlexMono Nerd Font", style = "Regular" }
 bold = { style = "Medium" }
-italic = { style = "Book Italic" }
 bold_italic = { style = "Medium Italic" }
 size = 18

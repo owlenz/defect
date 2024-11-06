@@ -16,7 +16,6 @@ plugins=(
 )
 source $ZSH/oh-my-zsh.sh
 
-
 SAVEHIST=10000  # Save most-recent 1000 lines
 HISTFILE=~/.zsh_history
 

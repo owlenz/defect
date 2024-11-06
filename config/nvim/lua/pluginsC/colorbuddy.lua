@@ -27,29 +27,29 @@ Color.new('gray1', '#7B7C7E')
 Color.new('blue', '#52BDFF')
 Color.new('cyan', '#3DDBD9')
 Color.new('BracketHover', '#ffcc00')
-Color.new('visual', "#2A2A2A")
+Color.new('visual', "#444444")
 
 
 -- Editor
 
-Group.new("Normal", c.blue:dark(), c.background)
+Group.new("Normal", c.white, c.background)
 Group.new("Folded", c.gray3:dark(), c.gray2)
 Group.new("MatchParen", c.violet, nil, s.bold)
 Group.new("LineNr", c.gray1, c.background)
 Group.new('FoldColumn', c.gray1)
 Group.new("SignColumn", nil, c.background)
-Group.new("StatusLine", c.gray2, c.blue, nil)
-Group.new("StatusLineNC", c.gray3, c.gray1:light())
-Group.new("PMenu", c.gray4, c.gray2)
-Group.new("PMenuSbar", c.purple, c.gray)
-Group.new("PMenuSel", c.gray, c.purple:light())
+-- Group.new("StatusLine", c.gray2, c.blue, nil)
+-- Group.new("StatusLineNC", c.gray3, c.gray1:light())
+Group.new("PMenu", c.white, c.gray2)
+Group.new("PMenuSel", c.black, c.purple:light())
+Group.new("PMenuSbar", nil, c.gray2)
+Group.new("PMenuThumb", nil, c.black)
 Group.new("Directory", c.violet)
-Group.new("PMenuThumb", nil, c.gray4)
 Group.new("Visual", nil, c.visual)
 Group.new("VisualLineMode", g.Visual, g.Visual)
 Group.new("VisualMode", g.Visual, g.Visual)
-Group.new("Conceal", g.Normal.bg, c.gray2:light(), s.italic)
-Group.new("qfFileName", c.purple, nil, s.bold)
+-- Group.new("Conceal", g.Normal.bg, c.gray2:light(), s.italic)
+-- Group.new("qfFileName", c.purple, nil, s.bold)
 -- Define highlights in terms of `colors` and `groups`
 
 -- Code
@@ -75,6 +75,7 @@ Group.new("@number", c.cyan)
 Group.link("Float", g.Number)
 Group.new('@string.escape', c.cyan)
 Group.new("Character", c.green)
+Group.new("Comment", c.gray3, nil, s.italic)
 
 Group.new('PreProc', c.red, nil)
 
@@ -110,4 +111,3 @@ Color.new('GitAddColor', '#00FF00')     -- Green for added lines
 Color.new('GitChangeColor', '#FFA500')  -- Orange for modified lines
 Color.new('GitRemoveColor', '#FF0000')  -- Red for removed lines
 Color.new('GitSignsBgColor', '#2E3B61') -- Background color for GitSigns
-
