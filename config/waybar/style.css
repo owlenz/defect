@@ -6,15 +6,15 @@
 		min-height: 0;
 }
 
-@define-color porpleBG #2E3B61;
+@define-color porpleBG #000000;
 @define-color darkRedBG #4C222C;
 @define-color porpleActive #A062EA;
 @define-color text1 #C0C0C0;
 
 window#waybar {
-    background-color: @porpleBG;
+    background-color: transparent;
     color: @text1;
-		border-radius: 5px;
+		border-radius: 3px;
     transition-property: background-color;
     transition-duration: .6s;
 }
@@ -49,9 +49,10 @@ button {
 #custom-media,
 #custom-launcher,
 #custom-PBPbattery {
+    background-color: @porpleBG;
 		padding: 0.35rem 0.50rem;
     margin: 0px 3px;
-    border-radius: 5px;
+    border-radius: 3px;
     border-width: 1rem;
 }
 
@@ -62,13 +63,13 @@ button {
 
 #workspaces button {
     padding: 0 5px;
-		border-radius: 5px;
+		border-radius: 3px;
     background-color: transparent;
     color: @text1;
 }
 
 #workspaces button:hover {
-    background: rgba(0, 0, 0, 0.3);
+	background: rgba(0, 0, 0, 0.3);
 }
 
 #workspaces button.active {
@@ -88,15 +89,17 @@ button {
     margin-left: 0;
 }
 
-#clock {
-}
-
-#pulseaudio {
-}
-
 #custom-media {
     min-width: 100px;
 }
+
+.modules-center {
+		padding-left: 6px;
+		border-radius: 3px;
+		padding-right: 6px;
+		background-color: @porpleBG;
+}
+
 
 #tray > .needs-attention {
     -gtk-icon-effect: highlight;

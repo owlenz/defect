@@ -37,6 +37,10 @@ require 'nvim-treesitter.configs'.setup {
 	},
 }
 
+vim.filetype.add({
+  pattern = { [".*/hypr/.*%.conf"] = "hyprlang" },
+})
+
 require('nvim-ts-autotag').setup({
   opts = {
     -- Defaults

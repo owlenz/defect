@@ -41,16 +41,19 @@ return {
 		lazy = true,
 		cmd = "Silicon",
 		init = function()
-			require("which-key").register(
-				{ ["<Leader>sc"] = { ":Silicon<CR>", "Screenshot Selected Code" } },
-				{ mode = "v" }
-			)
-		end,
-		config = function()
-			require("silicon").setup({
-				font = "JetBrainsMono Nerd Font=34;Noto Color Emoji=34",
+			require("which-key").add({
+				mode = { "v" },
+				{ "<leader>s",  group = "Silicon" },
+				{ "<leader>sc", function() require("nvim-silicon").clip() end,  desc = "Copy code screenshot to clipboard" },
+				{ "<leader>sf", function() require("nvim-silicon").file() end,  desc = "Save code screenshot as file" },
+				{ "<leader>ss", function() require("nvim-silicon").shoot() end, desc = "Create code screenshot" },
 			})
 		end,
+		opts = {
+			background = "#5F5F87",
+			font = "BlexMono Nerd Font=34;Noto Color Emoji=34",
+		}
+
 	},
 	{
 		"akinsho/bufferline.nvim",
@@ -59,7 +62,6 @@ return {
 	},
 	{
 		'nvim-telescope/telescope.nvim',
-		tag = '0.1.8',
 		dependencies = { 'nvim-lua/plenary.nvim' }
 	},
 }

@@ -796,7 +796,7 @@ enable_audio_bell no
 #: start_resizing_window. The cells value is used for horizontal
 #: resizing, and the lines value is used for vertical resizing.
 
-# window_border_width 0.5pt
+window_border_width 0pt
 
 #: The width of window borders. Can be either in pixels (px) or pts
 #: (pt). Values in pts will be rounded to the nearest number of pixels
@@ -804,14 +804,14 @@ enable_audio_bell no
 #: to be pts. Note that borders are displayed only when more than one
 #: window is visible. They are meant to separate multiple windows.
 
-# draw_minimal_borders yes
+draw_minimal_borders yes
 
 #: Draw only the minimum borders needed. This means that only the
 #: borders that separate the window from a neighbor are drawn. Note
 #: that setting a non-zero window_margin_width overrides this and
 #: causes all borders to be drawn.
 
-window_margin_width 5 5
+window_margin_width 0
 
 #: The window margin (in pts) (blank area outside the border). A
 #: single value sets all four sides. Two values set the vertical and
@@ -826,7 +826,7 @@ window_margin_width 5 5
 #: set the vertical and horizontal sides. Three values set top,
 #: horizontal and bottom. Four values set top, right, bottom and left.
 
-# window_padding_width 20 10
+window_padding_width 0
 
 #: The window padding (in pts) (blank area between the text and the
 #: window border). A single value sets all four sides. Two values set
@@ -958,7 +958,7 @@ window_margin_width 5 5
 
 #: The margin to the left and right of the tab bar (in pts).
 
-# tab_bar_margin_height 0.0 0.0
+tab_bar_margin_height 0.0 0.0
 
 #: The margin above and below the tab bar (in pts). The first number
 #: is the margin between the edge of the OS Window and the tab bar.
@@ -2452,6 +2452,10 @@ background_opacity 0.90
 #: }}}
 
 
+
+
+placement_strategy top-left
+
 # BEGIN_KITTY_THEME
 # Afterglow
 include current-theme.conf
@@ -2459,8 +2463,8 @@ include current-theme.conf
 
 
 # BEGIN_KITTY_FONTS
-font_family      family='JetBrainsMono Nerd Font' style=Light
-bold_font        family='JetBrainsMono Nerd Font' postscript_name=JetBrainsMonoNF-Regular
-italic_font      family='JetBrainsMono Nerd Font' postscript_name=JetBrainsMonoNF-Italic
-bold_italic_font auto
+font_family      family='BlexMono Nerd Font' style=Regular
+bold_font        family='BlexMono Nerd Font' style=Medium
+italic_font      auto
+bold_italic_font family='BlexMono Nerd Font' style='Medium Italic'
 # END_KITTY_FONTS

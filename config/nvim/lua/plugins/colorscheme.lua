@@ -5,13 +5,14 @@ return {
 	{
 		"cocopon/iceberg.vim",
 	},
+	{ "tjdevries/colorbuddy.nvim" },
 	{
-		"jesseleite/nvim-noirbuddy",
+		"owlenz/violetdream.nvim",
+		lazy = false,
+		priority = 1000,
 		dependencies = {
 			{ "tjdevries/colorbuddy.nvim" },
 		},
-		lazy = false,
-		priority = 10,
 	},
 	{
 		"maxmx03/fluoromachine.nvim"
@@ -27,8 +28,6 @@ return {
 	},
 	{
 		"LazyVim/LazyVim",
-		opts = {
-			colorscheme = "kanagawa",
-		},
+
 	},
 }

@@ -1,14 +1,5 @@
 #!/bin/sh
 
-dbus=""
-
-if command -v qdbus &> /dev/null
-then
-  dbus="qdbus"
-else
-	dbus="qdbus6"
-fi
-
 while getopts "1234567" flag; do
 	case $flag in
 	1) # open spotify
@@ -19,14 +10,14 @@ while getopts "1234567" flag; do
 		if [[ $browserStatus == "Playing" ]]; then
 			playerctl pause -p firefox
 		else
-			dbus org.mpris.MediaPlayer2.spotify /org/mpris/MediaPlayer2 org.mpris.MediaPlayer2.Player.PlayPause
+			qdbus org.mpris.MediaPlayer2.spotify /org/mpris/MediaPlayer2 org.mpris.MediaPlayer2.Player.PlayPause
 		fi
 		;;
 	3) # prev song
-		dbus org.mpris.MediaPlayer2.spotify /org/mpris/MediaPlayer2 org.mpris.MediaPlayer2.Player.Previous
+		qdbus org.mpris.MediaPlayer2.spotify /org/mpris/MediaPlayer2 org.mpris.MediaPlayer2.Player.Previous
 		;;
 	4) # next song
-		dbus org.mpris.MediaPlayer2.spotify /org/mpris/MediaPlayer2 org.mpris.MediaPlayer2.Player.Next
+		qdbus org.mpris.MediaPlayer2.spotify /org/mpris/MediaPlayer2 org.mpris.MediaPlayer2.Player.Next
 		;;
 	5) # lower volume by 5%
 		pactl set-sink-mute 0 false

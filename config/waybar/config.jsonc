@@ -9,6 +9,7 @@
 		"hyprland/window"
 	],
 	"modules-center": [
+		"image",
 		"custom/media"
 	],
 	"modules-right": [
@@ -51,17 +52,22 @@
 		"on-scroll-down": "pactl set-sink-volume @DEFAULT_SINK@ -5%"
 	},
 	"tray": {
-		"icon-size": 19,
+		"icon-size": 20,
 		"spacing": 10
 	},
 	"custom/media": {
-		"exec": "python3 ~/.config/waybar/scripts/mediaplayer.py --player spotify",
+		"exec": "python3 ~/.config/waybar/scripts/mediaplayer.py",
 		"format": "{}",
 		"return-type": "json",
 		"max-length": 30,
 		"escape": true,
 		"on-click": "playerctl -p spotify play-pause",
-		"on-scroll-up": "playerctl next",
-		"on-scroll-down": "playerctl previous"
+		"on-scroll-up": "playerctl -p spotify next",
+		"on-scroll-down": "playerctl -p spotify previous"
+	},
+	"image": {
+     "exec":"~/.config/waybar/scripts/img.sh",
+     "size": 30,
+     "interval": 3,  
 	}
 }
