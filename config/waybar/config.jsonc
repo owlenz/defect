@@ -68,6 +68,6 @@
 	"image": {
      "exec":"~/.config/waybar/scripts/img.sh",
      "size": 30,
-     "interval": 3,  
+     "interval": 1  
 	}
 }

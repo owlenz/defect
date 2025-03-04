@@ -10,8 +10,8 @@ fi
 
 output_file="/tmp/$length.jpeg"
 
+# Download the image only if it doesn't exist
 if [[ ! -f "$output_file" ]]; then
-    # Download the image only if it doesn't exist
     curl -s "$album_art" --output "$output_file"
 fi
 

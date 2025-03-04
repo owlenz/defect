@@ -7,7 +7,7 @@ return {
 	},
 	config = function()
 		require("neo-tree").setup({
-			popup_border_style = "rounded",
+			-- popup_border_style = "rounded",
 			filesystem = {
 				filtered_items = {
 					hide_dotfiles = false,
@@ -22,7 +22,7 @@ return {
 				width = 40,
 			},
 			buffers = {
-				group_empty_dirs = false,
+				group_empty_dirs = true,
 			},
 		})
 	end,

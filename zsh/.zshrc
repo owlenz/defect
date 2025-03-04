@@ -24,7 +24,7 @@ HISTFILE=~/.zsh_history
 bindkey -v
 
 ## Aliases ##
-# alias passC="cat ~/Documents/xdd/pass | wl-copy"
+alias passC="cat ~/Documents/xdd/pass | wl-copy"
 if [[ "$(loginctl show-session $(awk '/tty/ {print $1}' <(loginctl)) -p Type | awk -F= '{print $2}')" == "wayland" ]]; then
 alias passC="cat ~/Documents/xdd/pass | wl-copy"
 fi

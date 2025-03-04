@@ -55,11 +55,11 @@ return {
 		}
 
 	},
-	{
-		"akinsho/bufferline.nvim",
-		dependencies = "nvim-tree/nvim-web-devicons",
-		opts = {}
-	},
+	-- {
+	-- 	"akinsho/bufferline.nvim",
+	-- 	dependencies = "nvim-tree/nvim-web-devicons",
+	-- 	opts = {}
+	-- },
 	{
 		'nvim-telescope/telescope.nvim',
 		dependencies = { 'nvim-lua/plenary.nvim' }
