@@ -1,0 +1,9 @@
+elpa/
+eln-cache/
+etc/
+var/
+auto-save-list/
+
+recentf
+tramp
+history

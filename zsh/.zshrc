@@ -26,7 +26,7 @@ bindkey -v
 ## Aliases ##
 alias passC="cat ~/Documents/xdd/pass | wl-copy"
 if [[ "$(loginctl show-session $(awk '/tty/ {print $1}' <(loginctl)) -p Type | awk -F= '{print $2}')" == "wayland" ]]; then
-alias passC="cat ~/Documents/xdd/pass | wl-copy"
+	alias passC="cat ~/Documents/xdd/pass | wl-copy"
 fi
 
 ### Config Aliases ###
@@ -78,9 +78,16 @@ export PATH=$PATH:$ANDROID_HOME/emulator
 export PATH=$PATH:$ANDROID_HOME/platform-tools
 
 
-# export PATH="$PATH:$(go env GOBIN):$(go env GOPATH)/bin"
+export PATH="$PATH:$(go env GOBIN):$(go env GOPATH)/bin"
 
 [ -f "/home/saif/.ghcup/env" ] && . "/home/saif/.ghcup/env" # ghcup-env
 
 . "/home/saif/.deno/env"
 # zprof
+
+## arm-linux cross-compile
+export PATH=$HOME/x-tools/arm-balls-linux-musleabihf/bin:$PATH
+export ARCH=arm
+export CROSS_COMPILE=arm-linux-
+
+export PATH=$HOME/.config/emacs/bin:$PATH

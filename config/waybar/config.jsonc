@@ -19,14 +19,16 @@
 	],
 	"clock": {
 		"interval": 10,
-		"format-alt": "{:%e %b %Y}", // Icon: calendar-alt
-		"format": "{:%H:%M} ",
+		"format": "{:%e %b %H:%M} ",
 		"tooltip-format": "{:%e %B %Y}"
 	},
 	"hyprland/window": {
 		"format": "{title}",
 		"rewrite": {
-			"(.*) — Zen Browser": "$1"
+			"(.*) — Zen Browser": "$1",
+			"(.*) - Brave": "$1",
+			"(.*) - Discord": "$1",
+			"_zsh_tmux_plugin_run": "foot"
 		},
 		"separate-outputs": true,
 		"max-length": 30
@@ -41,7 +43,7 @@
 	},
 	"pulseaudio": {
 		"scroll-step": 1,
-		"format": "{icon}  {volume}%",
+		"format": "{icon} {volume}%",
 		"format-muted": "muted",
 		"format-icons": {
 			"headphone": "󰋋"
@@ -57,17 +59,17 @@
 	},
 	"custom/media": {
 		"exec": "python3 ~/.config/waybar/scripts/mediaplayer.py",
-		"format": "{}",
+		"format": "  {}",
 		"return-type": "json",
 		"max-length": 30,
 		"escape": true,
 		"on-click": "playerctl -p spotify play-pause",
 		"on-scroll-up": "playerctl -p spotify next",
 		"on-scroll-down": "playerctl -p spotify previous"
-	},
-	"image": {
-     "exec":"~/.config/waybar/scripts/img.sh",
-     "size": 30,
-     "interval": 1  
 	}
+	//"image": {
+	//    "exec":"~/.config/waybar/scripts/img.sh",
+	//    "size": 30,
+	//    "interval": 1  
+	//}
 }

@@ -43,8 +43,6 @@ def on_metadata(player, metadata, manager):
         track_info = "{artist} - {title}".format(
             artist=player.get_artist(), title=player.get_title()
         )
-    else:
-        track_info = player.get_title()
 
     write_output(track_info, player)
 

@@ -10,6 +10,19 @@ return {
 		end
 	},
 	{
+		'numToStr/Comment.nvim',
+		opts = {}
+	},
+	{
+		"folke/todo-comments.nvim",
+		dependencies = { "nvim-lua/plenary.nvim" },
+		opts = {}
+	},
+	{
+		"OXY2DEV/markview.nvim",
+		lazy = false,
+	},
+	{
 		"folke/flash.nvim",
 		event = "VeryLazy",
 		---@type Flash.Config

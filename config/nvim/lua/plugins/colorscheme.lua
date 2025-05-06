@@ -9,7 +9,7 @@ return {
 	{
 		"owlenz/violetdream.nvim",
 		lazy = false,
-		priority = 1000,
+		priority = 10000,
 		dependencies = {
 			{ "tjdevries/colorbuddy.nvim" },
 		},
