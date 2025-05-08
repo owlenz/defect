@@ -1,9 +1,9 @@
 * {
     /* `otf-font-awesome` is required to be installed for icons */
-    font-family: 'Space Mono';
+    font-family: 'Space Mono Nerd Font';
     font-size: 15px;
-		font-weight: 600;
-		min-height: 0;
+    font-weight: 600;
+    min-height: 0;
 }
 
 @define-color background #0B1215;
@@ -14,7 +14,7 @@
 window#waybar {
     background-color: transparent;
     color: @text1;
-		border-radius: 3px;
+    border-radius: 3px;
     transition-property: background-color;
     transition-duration: .6s;
 }
@@ -50,7 +50,7 @@ button {
 #custom-launcher,
 #custom-PBPbattery {
     background-color: @background;
-		padding: 0.35rem 0.50rem;
+	padding: 0.35rem 0.50rem;
     margin: 0px 3px;
     border-radius: 3px;
     border-width: 1rem;
@@ -65,7 +65,7 @@ button {
 
 #workspaces button {
     padding: 0 5px;
-		border-radius: 3px;
+	border-radius: 3px;
     background-color: transparent;
     color: @text1;
 }
@@ -92,12 +92,12 @@ button {
 }
 
 .modules-center {
-		padding-left: 0px;
-		border-radius: 3px;
-		padding-right: 4px;
-		padding-top: 0px;
-		padding-bottom: 0px;
-		background-color: @background;
+	padding-left: 0px;
+	border-radius: 3px;
+	padding-right: 4px;
+	padding-top: 0px;
+	padding-bottom: 0px;
+	background-color: @background;
 }
 
 

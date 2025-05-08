@@ -1,4 +1,5 @@
-#!/bin/bash
+#!/usr/bin/env nix-shell
+#!nix-shell -i bash python3 -p python3Packages.pygobject3 playerctl
 
 # start waybar if not started
 if ! pgrep -x "waybar" >/dev/null; then
@@ -18,7 +19,7 @@ while true; do
 	# if checksums are different
 	if [ "$current_checksum_config" != "$new_checksum_config" ] || [ "$current_checksum_style" != "$new_checksum_style" ]; then
 		# kill waybar
-		killall waybar
+		pgrep waybar | xargs kill
 
 		# start waybar
 		waybar &
@@ -27,4 +28,5 @@ while true; do
 		current_checksum_config=$new_checksum_config
 		current_checksum_style=$new_checksum_style
 	fi
+    sleep 10
 done

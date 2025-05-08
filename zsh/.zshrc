@@ -1,23 +1,21 @@
 # zmodload zsh/zprof
 export PATH=$HOME/bin:/usr/local/bin:$PATH
 
-export ZSH="$HOME/.oh-my-zsh"
-
-
-plugins=( 
-    zsh-syntax-highlighting
-    tmux
-    git
-    zsh-autosuggestions
-)
-source $ZSH/oh-my-zsh.sh
+## handled by nix
+# export ZSH="$HOME/.oh-my-zsh"
+# plugins=( 
+#     zsh-syntax-highlighting
+#     tmux
+#     git
+#     zsh-autosuggestions
+# )
+# source $ZSH/oh-my-zsh.sh
 
 
 ## PROMPT ##
 export PS1="%F{#FD43B7}%n%f@%F{cyan}%m%f-> %1~ $ " ## BASH-like prompt
 
-
-SAVEHIST=10000 
+SAVEHIST=1000
 HISTFILE=~/.zsh_history
 
 # Vi Mode
@@ -44,17 +42,31 @@ alias starC="nvim ~/.config/starship/starship.toml"
 ### QOL aliases ###
 alias cls='printf "\033c"'
 alias ..="cd .."
-alias grep='grep --color=yes'
+alias grep='ripgrep --color=yes'
 alias pac="sudo pacman"
 alias vim="nvim"
 alias nivm="nvim"
 alias notes="cd ~/Documents/notes; nvim"
 alias pick="hyprpicker | tail -c +2 | head -c -1 |wl-copy" 
 alias xpick="xcolor | xclip -sel clip" 
-alias cat="bat"
-alias ls="eza --icons=always --no-time --group-directories-first --no-user"
-alias icat="kitten icat"
-alias themes="kitten themes"
+
+### nixos ###
+alias np="nix-store --query --requisites /run/current-system | cut -d- -f2- | sort -u"
+alias nrf="sudo nixos-rebuild switch --flake"
+alias ns="nix search"
+alias nsp="nix search nixpkgs"
+
+if [[ $+commands[eza] ]]; then
+	alias ls="eza --icons=always --no-time --group-directories-first --no-user"
+	alias ll="eza -blF --icons"
+	alias tree="eza --tree --icons"
+fi
+
+if [[ $+commands[kitten] ]]; then
+	alias icat="kitten icat"
+	alias themes="kitten themes"
+fi
+
 
 export PKG_CONFIG_PATH=/usr/lib/pkgconfig:/usr/share/pkgconfig:/lib/pkgconfig:$PKG_CONFIG_PATH
 
@@ -72,17 +84,16 @@ export STARSHIP_CONFIG=~/.config/starship/starship.toml
 [ -s "/home/saif/.bun/_bun" ] && source "/home/saif/.bun/_bun"
 export EDITOR='nvim'
 
-## android studio
-export ANDROID_HOME=$HOME/Android/Sdk
-export PATH=$PATH:$ANDROID_HOME/emulator
-export PATH=$PATH:$ANDROID_HOME/platform-tools
+## android studio ##
+# export ANDROID_HOME=$HOME/Android/Sdk
+# export PATH=$PATH:$ANDROID_HOME/emulator
+# export PATH=$PATH:$ANDROID_HOME/platform-tools
 
-
-export PATH="$PATH:$(go env GOBIN):$(go env GOPATH)/bin"
+## go ##
+# export PATH="$PATH:$(go env GOBIN):$(go env GOPATH)/bin"
 
 [ -f "/home/saif/.ghcup/env" ] && . "/home/saif/.ghcup/env" # ghcup-env
 
-. "/home/saif/.deno/env"
 # zprof
 
 ## arm-linux cross-compile
