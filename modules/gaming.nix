@@ -20,10 +20,6 @@ in {
           inhibit_screensaver = 0;
           renice = 10;
         };
-        custom = {
-          start = "${heyBin} hook gamemode --on";
-          end = "${heyBin} hook gamemode --off";
-        };
       };
     };
     user.extraGroups = [ "gamemode" ];
