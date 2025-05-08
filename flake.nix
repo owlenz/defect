@@ -20,6 +20,7 @@
             ./modules/hyprland.nix
             ./modules/fonts.nix
             ./modules/shell/zsh.nix
+            ./modules/gaming.nix
             { nixpkgs.overlays = [ spotxOverlay ]; }
             
             ({pkgs, ...}: {

@@ -20,6 +20,9 @@
 
   # Enable networking
   networking.networkmanager.enable = true;
+  services.atftpd.enable = true;
+  # services.tftpd.path = "/var/tftp"
+  # services.tftpd.port = 69;
 
   # Set your time zone.
   time.timeZone = "Africa/Cairo";
@@ -65,31 +68,6 @@
     #jack.enable = true;
   };
 
-
-  # Load nvidia driver for Xorg and Wayland
-  services.xserver.videoDrivers = ["nvidia"];
-  # video driver
-  hardware.graphics = {
-    enable = true;
-    enable32Bit = true;
-    extraPackages = [ pkgs.vaapiVdpau ];
-  };
-
-  hardware.nvidia = {
-
-    modesetting.enable = true;
-
-    powerManagement.enable = false;
-    powerManagement.finegrained = false;
-
-    open = false;
-    nvidiaSettings = true;
-
-    package = config.boot.kernelPackages.nvidiaPackages.stable;
-  };
-
-
-
   # Allow unfree packages
   nixpkgs.config.allowUnfree = true;
 
@@ -97,10 +75,15 @@
   # $ nix search wget
   environment.systemPackages = with pkgs; [
 	  git
+    file
+    autoconf
+    automake
 	  kitty
 	  brave
 	  stow
+    atftp
 	  neovim
+    gnum4
     btop
     zathura
     pulseaudio
@@ -114,10 +97,7 @@
     keepassxc
     libtool
     foot
-    (discord.override {
-      withOpenASAR = true; # can do this here too
-      withVencord = true;
-    })
+    vesktop
   ];		
   services.emacs = {
     enable = true;

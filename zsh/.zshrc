@@ -1,4 +1,3 @@
-# zmodload zsh/zprof
 export PATH=$HOME/bin:/usr/local/bin:$PATH
 
 ## handled by nix
@@ -42,19 +41,12 @@ alias starC="nvim ~/.config/starship/starship.toml"
 ### QOL aliases ###
 alias cls='printf "\033c"'
 alias ..="cd .."
-alias grep='ripgrep --color=yes'
 alias pac="sudo pacman"
 alias vim="nvim"
 alias nivm="nvim"
 alias notes="cd ~/Documents/notes; nvim"
 alias pick="hyprpicker | tail -c +2 | head -c -1 |wl-copy" 
 alias xpick="xcolor | xclip -sel clip" 
-
-### nixos ###
-alias np="nix-store --query --requisites /run/current-system | cut -d- -f2- | sort -u"
-alias nrf="sudo nixos-rebuild switch --flake"
-alias ns="nix search"
-alias nsp="nix search nixpkgs"
 
 if [[ $+commands[eza] ]]; then
 	alias ls="eza --icons=always --no-time --group-directories-first --no-user"
@@ -65,6 +57,14 @@ fi
 if [[ $+commands[kitten] ]]; then
 	alias icat="kitten icat"
 	alias themes="kitten themes"
+fi
+
+if [[ $+commands[nix] ]]; then
+    alias nrf="sudo nixos-rebuild switch --flake ~/dotfiles"
+    alias nr="sudo nixos-rebuild switch"
+    alias nsp="nix search nixpkgs"
+    alias nsp="nix search"
+    alias nlp="nix-store --query --requisites /run/current-system | cut -d- -f2- | sort -u"
 fi
 
 
@@ -78,23 +78,14 @@ export PATH=$BUN_INSTALL/bin:$PATH
 eval "$(fzf --zsh)"
 # eval "$(ssh-agent -s)"
 
-export STARSHIP_CONFIG=~/.config/starship/starship.toml
-
 # bun completions
 [ -s "/home/saif/.bun/_bun" ] && source "/home/saif/.bun/_bun"
-export EDITOR='nvim'
+export EDITOR='emacs'
 
 ## android studio ##
 # export ANDROID_HOME=$HOME/Android/Sdk
 # export PATH=$PATH:$ANDROID_HOME/emulator
 # export PATH=$PATH:$ANDROID_HOME/platform-tools
-
-## go ##
-# export PATH="$PATH:$(go env GOBIN):$(go env GOPATH)/bin"
-
-[ -f "/home/saif/.ghcup/env" ] && . "/home/saif/.ghcup/env" # ghcup-env
-
-# zprof
 
 ## arm-linux cross-compile
 export PATH=$HOME/x-tools/arm-balls-linux-musleabihf/bin:$PATH
