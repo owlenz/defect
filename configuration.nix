@@ -66,12 +66,14 @@
   };
 
 
+  # Load nvidia driver for Xorg and Wayland
+  services.xserver.videoDrivers = ["nvidia"];
   # video driver
   hardware.graphics = {
     enable = true;
+    enable32Bit = true;
+    extraPackages = [ pkgs.vaapiVdpau ];
   };
-  # Load nvidia driver for Xorg and Wayland
-  services.xserver.videoDrivers = ["nvidia"];
 
   hardware.nvidia = {
 
@@ -80,7 +82,7 @@
     powerManagement.enable = false;
     powerManagement.finegrained = false;
 
-    open = true;
+    open = false;
     nvidiaSettings = true;
 
     package = config.boot.kernelPackages.nvidiaPackages.stable;
@@ -119,7 +121,7 @@
   ];		
   services.emacs = {
     enable = true;
-    package = pkgs.emacs;
+    package = pkgs.emacs-pgtk;
   };
 	
 

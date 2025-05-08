@@ -32,5 +32,6 @@ for the nix packages (i am still using configuration.nix, so don't forget to cha
   sudo nixos-rebuild switch -v --flake .#owlenz
 #+end_src
 
+* TODOs
 ** TODO finish modularizing all of nix
 ** TODO find some less ugly way to manage the config files
