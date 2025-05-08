@@ -1,0 +1,36 @@
+#+TITLE: dotfiles
+#+AUTHOR: owlenz 
+
+My humble nixos config and dotfiles (still learning nix, be nice >_<)
+
+* What is this exactly?
+
+This repo is basically my dotfiles and a nix playground. rn it has my dotfiles for
+- emacs
+- hyprland et al
+- nvim, foot
+- some nix configuration (hopefully, ill finish it all)
+- and more
+
+* How may this poor soul install your mighty dotfiles
+
+that's the most basic of all. I still use the non-nix approach to the config.
+
+#+begin_src zsh
+  git clone https://github.com/owlenz/dotfiles.git ~/.dotfiles
+  cd ~/.dotfiles/config 
+  ../install.sh
+#+end_src
+
+for the nix packages (i am still using configuration.nix, so don't forget to change hostname first)
+
+#+begin_src zsh
+  # if not cloned already
+  git clone https://github.com/owlenz/dotfiles.git ~/.dotfiles
+
+  ## enable nix-command and flake first in /etc/nixos/configuration.nix
+  sudo nixos-rebuild switch -v --flake .#owlenz
+#+end_src
+
+** TODO finish modularizing all of nix
+** TODO find some less ugly way to manage the config files
