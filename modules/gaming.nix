@@ -22,9 +22,9 @@ in {
         };
       };
     };
-    user.extraGroups = [ "gamemode" ];
-    systemd.extraConfig = "DefaultLimitNOFILE=1048576";
-
   };
+
+  users.users.saif.extraGroups = [ "gamemode" ];
+  systemd.extraConfig = "DefaultLimitNOFILE=1048576";
 }
   

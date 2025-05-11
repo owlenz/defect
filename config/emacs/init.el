@@ -10,6 +10,7 @@
 (require 'package)
 (add-to-list 'package-archives '("melpa" . "https://melpa.org/packages/") t)
 (add-to-list 'package-archives '("org" . "https://orgmode.org/elpa/") t)
+(add-to-list 'package-archives '("gnu-devel" . "https://elpa.gnu.org/devel/") t)
 (package-initialize)
 
 
@@ -30,12 +31,85 @@
   :config
   (global-undo-tree-mode 1))
 
+;; tree-sitter
+(use-package tree-sitter
+  :ensure t
+  :init
+  (global-tree-sitter-mode)
+  )
+
+(use-package tree-sitter-langs
+  :ensure t
+  )
+
+(use-package typst-ts-mode
+  :ensure t)
+
+;; WEB MODE
+(use-package web-mode
+  :ensure t)
+
+;; ASTRO
+(define-derived-mode astro-mode web-mode "astro")
+(setq auto-mode-alist
+      (append '((".*\\.astro\\'" . astro-mode))
+              auto-mode-alist))
+
+(defun get-ts-path ()
+  (interactive)
+  (let ((output (shell-command-to-string "nix-store --query --requisites /run/current-system | grep typescript")))
+    (string-trim output))
+  )
+
+;; EGLOT
+(use-package eglot
+  :ensure t
+  :config
+  (let ((ts-path (get-ts-path)))
+    (message "ts-path: %s" ts-path)
+    (add-to-list 'eglot-server-programs
+                 '(astro-mode . ("astro-ls" "--stdio"
+                                 :initializationOptions
+                                 (:typescript (:tsdk (concat ts-path "/lib/node_modules/typescript/lib")))))))
+  (add-to-list 'eglot-server-programs
+               `((typst-ts-mode) .
+                 ,(eglot-alternatives `("tinymist"
+                                        ,typst-ts-lsp-download-path
+                                        "typst-lsp"))))
+  :init
+  (add-hook 'astro-mode-hook 'eglot-ensure)
+  )
+
+
+(use-package nix-mode
+  :mode ("\\.nix\\'" "\\.nix.in\\'"))
+
+(use-package nix-drv-mode
+  :ensure nix-mode
+  :mode "\\.drv\\'")
+
+(use-package nix-shell
+  :ensure nix-mode
+  :commands (nix-shell-unpack nix-shell-configure nix-shell-build))
+
+(use-package nix-repl
+  :ensure nix-mode
+  :commands (nix-repl))
+
+(use-package direnv
+  :ensure t
+  :config
+  (direnv-mode))
+
 (use-package vterm
   :ensure t
   :config
-  (setq shell-file-name "/bin/zsh"
+  (setq shell-file-name "/usr/bin/zsh"
         vterm-max-scrollback 5000
-        vterm-timer-delay 0.01)
+        vterm-kill-buffer-on-exit t
+        vterm-timer-delay 0.00)
+  (add-hook 'vterm-mode-hook (lambda ()
+                               (display-line-numbers-mode -1)))
   )
 
 ;; (use-package vterm-toggle
@@ -68,6 +142,12 @@
   :after evil
   :init
   (evil-commentary-mode)
+  )
+
+(use-package evil-surround
+  :ensure t
+  :config
+  (global-evil-surround-mode 1)
   )
 
 ;; vertico
@@ -104,7 +184,7 @@
   :ensure t
   :bind ("C-c p" . cape-prefix-map) ;; Alternative key: M-<tab>, M-p, M-+
   ;; Alternatively bind Cape commands individually.
-  :bind (("C-c f" . cape-file))
+  ;; :bind (("C-c f" . cape-file)
   ;;        ("C-c p h" . cape-history)
   ;;        ("C-c p f" . cape-file)
   ;;        ...)
@@ -113,9 +193,9 @@
   ;; used by `completion-at-point'.  The order of the functions matters, the
   ;; first function returning a result wins.  Note that the list of buffer-local
   ;; completion functions takes precedence over the global list.
-  (add-hook 'completion-at-point-functions #'cape-dabbrev)
+  ;; (add-hook 'completion-at-point-functions #'cape-dabbrev)
   (add-hook 'completion-at-point-functions #'cape-file)
-  (add-hook 'completion-at-point-functions #'cape-elisp-block)
+  ;; (add-hook 'completion-at-point-functions #'cape-elisp-block)
   )
 
 (use-package orderless
@@ -211,7 +291,6 @@
 
 (global-set-key (kbd "<escape>") 'keyboard-quit)
 (evil-define-key 'normal 'global (kbd "K") 'man)
-()
 
 ;; indentation
 (setq-default indent-tabs-mode nil)
@@ -236,22 +315,22 @@
                     :slant 'italic)
 
 ;; lsp
-(use-package lsp-mode
-  :init
-  ;; set prefix for lsp-command-keymap (few alternatives - "C-l", "C-c l")
-  (setq lsp-keymap-prefix "C-c l")
-  :hook (
-         (c-mode . lsp-deferred)
-         (lsp-mode . lsp-enable-which-key-integration))
-  :commands lsp-deferred)
+;; (use-package lsp-mode
+;;   :init
+;;   ;; set prefix for lsp-command-keymap (few alternatives - "C-l", "C-c l")
+;;   (setq lsp-keymap-prefix "C-c l")
+;;   :hook (
+;;          (c-mode . lsp-deferred)
+;;          (lsp-mode . lsp-enable-which-key-integration))
+;;   :commands lsp-deferred)
 
-(setq gc-cons-threshold (* 100 1024 1024)
-      read-process-output-max (* 1024 1024)
-      treemacs-space-between-root-nodes nil
-      company-idle-delay 0.1
-      company-minimum-prefix-length 1
-      lsp-headerline-breadcrumb-enable nil
-      lsp-idle-delay 1.0)
+;; (setq gc-cons-threshold (* 100 1024 1024)
+;;       read-process-output-max (* 1024 1024)
+;;       treemacs-space-between-root-nodes nil
+;;       company-idle-delay 0.1
+;;       company-minimum-prefix-length 1
+;;       lsp-headerline-breadcrumb-enable nil
+;;       lsp-idle-delay 1.0)
 
 (font-lock-add-keywords
  'c-mode
@@ -261,17 +340,19 @@
 (setq lsp-headerline-breadcrumb-enable nil)
 (load-theme 'violetdream t)
 
-(use-package org)
-
+(use-package org
+  :ensure t
+ )
 (custom-set-variables
  ;; custom-set-variables was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
  '(package-selected-packages
-   '(corfu diminish dired dired-du evil-collection evil-commentary
-           general magit no-littering orderless undo-tree vertico
-           visual-fill-column vterm)))
+   '(cape corfu diminish direnv evil-collection evil-commentary
+          evil-surround general magit nix-mode no-littering orderless
+          svg-tag-mode tree-sitter-langs typst-ts-mode undo-tree
+          vertico visual-fill-column vterm web-mode)))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.

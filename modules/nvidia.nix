@@ -1,4 +1,4 @@
-{pkgs, ...}:
+{pkgs, config, ...}:
 let
 in {
   # Load nvidia driver for Xorg and Wayland

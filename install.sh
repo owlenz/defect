@@ -1,4 +1,4 @@
-#!/usr/bin/bash
+#!/usr/bin/env bash
 
 homeFiles=(git zsh tmux)
 
@@ -6,7 +6,7 @@ homeFiles=(git zsh tmux)
 # 	stow $element -v -t ~/
 # done
 
-configFiles=(xdg-desktop-portal gtk picom fuzzel nvim kitty hypr mako rofi waybar neofetch i3 polybar lf zellij zathura foot)
+configFiles=(xdg-desktop-portal gtk picom fuzzel nvim kitty hypr mako rofi waybar neofetch i3 polybar lf zellij zathura foot emacs)
 configDir="${HOME}/.config"
 
 ##

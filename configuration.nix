@@ -18,6 +18,7 @@
   # networking.proxy.default = "http://user:password@proxy:port/";
   # networking.proxy.noProxy = "127.0.0.1,localhost,internal.domain";
 
+  
   # Enable networking
   networking.networkmanager.enable = true;
   services.atftpd.enable = true;
@@ -57,6 +58,9 @@
     packages = with pkgs; [];
   };
 
+
+  services.envfs.enable = true;
+
   # sound 
   security.rtkit.enable = true;
   services.pipewire = {
@@ -74,15 +78,19 @@
   # List packages installed in system profile. To search, run:
   # $ nix search wget
   environment.systemPackages = with pkgs; [
-	  git
+    git
     file
     autoconf
     automake
-	  kitty
-	  brave
-	  stow
-    atftp
-	  neovim
+    typst
+    kitty
+		unzip
+    brave
+    stow
+    rs-tftpd
+    neovim
+    tinymist
+    tree-sitter
     gnum4
     btop
     zathura
@@ -99,11 +107,7 @@
     foot
     vesktop
   ];		
-  services.emacs = {
-    enable = true;
-    package = pkgs.emacs-pgtk;
-  };
-	
+  
 
   # Some programs need SUID wrappers, can be configured further or are
   # started in user sessions.
@@ -119,7 +123,7 @@
   # services.openssh.enable = true;
 
   # Open ports in the firewall.
-  # networking.firewall.allowedTCPPorts = [ ... ];
+  networking.firewall.allowedTCPPorts = [ 6969 ];
   # networking.firewall.allowedUDPPorts = [ ... ];
   # Or disable the firewall altogether.
   # networking.firewall.enable = false;

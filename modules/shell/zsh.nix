@@ -1,4 +1,4 @@
-{pkgs, ...}:
+{pkgs, config, ...}:
 let
 
 in {
@@ -9,28 +9,48 @@ in {
     promptInit = "";
     ohMyZsh = {
       enable = true;
+      custom = "${config.users.users.saif.home}/.config/oh-my-zsh";
       plugins = [
         "git"
+        "direnv"
+        "nix-shell"
       ];
     };
   };
-  
   users.defaultUserShell = pkgs.zsh; 
+
+  documentation = {
+    enable = true;
+    man = {
+      man-db.enable = false;
+      mandoc.enable = true;
+    };
+    info.enable = true;
+    doc.enable = true;
+    dev.enable = true;
+  };
 
   environment.systemPackages = with pkgs; [
     at
-    bat      # a better cat
+    bat
+    man
     bc
-    dust     # a better du
-    eza      # a better ls
+    dust
+    eza
     fasd
     fd
+    nil
     fzf
     gnumake
-    libqalculate  # calculator cli w/ currency conversion
     nix-zsh-completions
-    ripgrep  # a better grep
-    tokei    # for code statistics
+    ripgrep  
+    tokei    
     unar
+    zip
+    feh
+    ## man pages
+    man-pages
+    man-pages-posix
+    mpi
   ];
 }

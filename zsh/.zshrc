@@ -10,7 +10,6 @@ export PATH=$HOME/bin:/usr/local/bin:$PATH
 # )
 # source $ZSH/oh-my-zsh.sh
 
-
 ## PROMPT ##
 export PS1="%F{#FD43B7}%n%f@%F{cyan}%m%f-> %1~ $ " ## BASH-like prompt
 
