@@ -32,6 +32,7 @@
             ./modules/shell/direnv.nix
             ./modules/dev/web.nix
             ./modules/emacs.nix
+            ./modules/desktop/misc.nix
             { nixpkgs.overlays = [ spotxOverlay ]; }
             
             ({pkgs, ...}: {

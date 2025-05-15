@@ -65,21 +65,22 @@ button {
 
 #workspaces button {
     padding: 0 5px;
-	border-radius: 3px;
+	border-radius: 2px;
     background-color: transparent;
     color: @text1;
 }
 
 #workspaces button:hover {
-	background: rgba(0, 0, 0, 0.0);
+	background: rgba(129, 70, 122, 1.0);
 }
 
 #workspaces button.active {
-    background-color: @porpleActive;
+    background-color: #C6C1C9;
+    color: black;
 }
 
 #workspaces button.urgent {
-    background-color: #eb4d4b;
+    background-color: #aa4d4b;
 }
 
 /* if workspaces is the leftmost module, omit left margin */

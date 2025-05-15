@@ -2,7 +2,7 @@
 (tool-bar-mode 0)
 (menu-bar-mode 0)
 (scroll-bar-mode 0)
-(setq truncate-lines t)
+(toggle-truncate-lines t)
 (setq org-agenda-files '("~/Documents/college/third/second_sem/college.org"))
 (add-to-list 'load-path (expand-file-name "packages" user-emacs-directory))
 
@@ -111,6 +111,23 @@
   (add-hook 'vterm-mode-hook (lambda ()
                                (display-line-numbers-mode -1)))
   )
+
+(use-package multi-vterm
+	:config
+	(add-hook 'vterm-mode-hook
+			(lambda ()
+			(setq-local evil-insert-state-cursor 'box)
+			(evil-insert-state)))
+	(define-key vterm-mode-map [return]                      #'vterm-send-return)
+
+	(setq vterm-keymap-exceptions nil)
+	(evil-define-key 'insert vterm-mode-map (kbd "C-c <escape>") #'vterm--self-insert)
+    (evil-define-key 'normal vterm-mode-map (kbd ",c")           #'multi-vterm)
+    (evil-define-key 'normal vterm-mode-map (kbd ",n")           #'multi-vterm-next)
+    (evil-define-key 'normal vterm-mode-map (kbd ",p")           #'multi-vterm-prev)
+    (evil-define-key 'normal vterm-mode-map (kbd "i")            #'evil-insert-resume)
+    (evil-define-key 'normal vterm-mode-map (kbd "o")            #'evil-insert-resume)
+	(evil-define-key 'normal vterm-mode-map (kbd "<return>")     #'evil-insert-resume))
 
 ;; (use-package vterm-toggle
 ;;   :after vterm
@@ -238,6 +255,8 @@
   :ensure t)
 
 (require 'writeroom-mode)
+(add-hook 'writeroom-mode-hook (lambda ()
+                                 (display-line-numbers-mode -1)))
 
 (with-eval-after-load 'dired
   (define-key dired-mode-map (kbd "C-a") 'dired-create-empty-file)
@@ -284,7 +303,7 @@
  "wv" '(split-window-vertically :wk "split vertical window")
  "wh" '(split-window-below :wk "split horizontal window")
 
- "vt" '(vterm :wk "vterm")
+ "vt" '(multi-vterm :wk "multi vterm")
 
  "uz" '(writeroom-mode :wk "Zen Mode")
  )
@@ -299,8 +318,8 @@
 (global-display-line-numbers-mode 1)
 
 ;; transparency
-(set-frame-parameter nil 'alpha-background 90)
-(add-to-list 'default-frame-alist '(alpha-background . 90))
+(set-frame-parameter nil 'alpha-background 85) ;; frames (emacs client)
+(add-to-list 'default-frame-alist '(alpha-background . 85)) ;; default window (emacs)
 
 
 ;; fonts
@@ -330,14 +349,15 @@
 ;;       company-idle-delay 0.1
 ;;       company-minimum-prefix-length 1
 ;;       lsp-headerline-breadcrumb-enable nil
-;;       lsp-idle-delay 1.0)
+;;       lsp-idle-delay 1.0
+;;       lsp-headerline-breadcrumb-enable nil
+;;       header-line-format nil
+;;       )
 
 (font-lock-add-keywords
  'c-mode
  '(("\\<\\(\\sw+\\) ?(" 1 'font-lock-function-call-face)))
 
-(setq header-line-format nil)
-(setq lsp-headerline-breadcrumb-enable nil)
 (load-theme 'violetdream t)
 
 (use-package org
@@ -350,9 +370,10 @@
  ;; If there is more than one, they won't work right.
  '(package-selected-packages
    '(cape corfu diminish direnv evil-collection evil-commentary
-          evil-surround general magit nix-mode no-littering orderless
-          svg-tag-mode tree-sitter-langs typst-ts-mode undo-tree
-          vertico visual-fill-column vterm web-mode)))
+          evil-surround general magit multi-vterm nix-mode
+          no-littering orderless svg-tag-mode tree-sitter-langs
+          typst-ts-mode undo-tree vertico visual-fill-column vterm
+          web-mode)))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
