@@ -15,13 +15,15 @@
       system = "x86_64-linux";
       pkgs = import nixpkgs { inherit system; };
 
-      zen = zen-browser.packages."${system}".default;
       spotxOverlay = import ./overlays/spotx.nix;
-
+      bibata-hyprcursor = pkgs.callPackage ./pkgs/bibata_hyprcursor {inherit (pkgs) hyprcursor; };
 	  in {
 		  nixosConfigurations = {
 			  owlen = lib.nixosSystem {
           inherit system;
+          specialArgs = {
+            inherit zen-browser bibata-hyprcursor;
+          };
 				  modules = [
             ./configuration.nix
             ./modules/hyprland.nix
@@ -31,12 +33,14 @@
             ./modules/shell/zsh.nix
             ./modules/shell/direnv.nix
             ./modules/dev/web.nix
+            ./modules/dev/c.nix
             ./modules/emacs.nix
             ./modules/desktop/misc.nix
+            ./modules/desktop/browsers.nix
             { nixpkgs.overlays = [ spotxOverlay ]; }
             
             ({pkgs, ...}: {
-              environment.systemPackages = [pkgs.spotify zen];
+              environment.systemPackages = [pkgs.spotify];
             })
           ];
         };

@@ -44,11 +44,6 @@
   };
 
   # Configure keymap in X11
-  services.xserver.xkb = {
-    layout = "us,ara";
-    variant = ",eg";
-    options = "grp:alt_shift_toggle";
-  };
 
   # Define a user account. Don't forget to set a password with ‘passwd’.
   users.users.saif = {
@@ -85,7 +80,6 @@
     typst
     kitty
 		unzip
-    brave
     stow
     neovim
     tinymist
