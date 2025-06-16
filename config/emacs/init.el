@@ -121,13 +121,14 @@
 	(define-key vterm-mode-map [return]                      #'vterm-send-return)
 
 	(setq vterm-keymap-exceptions nil)
-	(evil-define-key 'insert vterm-mode-map (kbd "C-c <escape>") #'vterm--self-insert)
-    (evil-define-key 'normal vterm-mode-map (kbd ",c")           #'multi-vterm)
-    (evil-define-key 'normal vterm-mode-map (kbd ",n")           #'multi-vterm-next)
-    (evil-define-key 'normal vterm-mode-map (kbd ",p")           #'multi-vterm-prev)
-    (evil-define-key 'normal vterm-mode-map (kbd "i")            #'evil-insert-resume)
-    (evil-define-key 'normal vterm-mode-map (kbd "o")            #'evil-insert-resume)
-	(evil-define-key 'normal vterm-mode-map (kbd "<return>")     #'evil-insert-resume))
+	;; (evil-define-key 'insert vterm-mode-map (kbd "C-c <escape>") #'vterm--self-insert)
+    ;; (evil-define-key 'normal vterm-mode-map (kbd ",c")           #'multi-vterm)
+    ;; (evil-define-key 'normal vterm-mode-map (kbd ",n")           #'multi-vterm-next)
+    ;; (evil-define-key 'normal vterm-mode-map (kbd ",p")           #'multi-vterm-prev)
+    ;; (evil-define-key 'normal vterm-mode-map (kbd "i")            #'evil-insert-resume)
+    ;; (evil-define-key 'normal vterm-mode-map (kbd "o")            #'evil-insert-resume)
+	;; (evil-define-key 'normal vterm-mode-map (kbd "<return>")     #'evil-insert-resume)
+    )
 
 ;; (use-package vterm-toggle
 ;;   :after vterm
@@ -373,7 +374,8 @@
           evil-surround general magit multi-vterm nix-mode
           no-littering orderless svg-tag-mode tree-sitter-langs
           typst-ts-mode undo-tree vertico visual-fill-column vterm
-          web-mode)))
+          web-mode))
+ '(send-mail-function 'mailclient-send-it))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.

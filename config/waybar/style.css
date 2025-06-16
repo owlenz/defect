@@ -12,7 +12,7 @@
 @define-color text1 #c6c1c9;
 
 window#waybar {
-    background-color: transparent;
+    background-color: @background;
     color: @text1;
     border-radius: 3px;
     transition-property: background-color;

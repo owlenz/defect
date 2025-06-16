@@ -1,15 +1,14 @@
-default-timeout=4000
+default-timeout=2000
 margin=10
 padding=10
 width=400
 border-radius=1
 
-
 # Colors
 
-background-color=#1e1e2e
-text-color=#cdd6f4
-border-color=#89b4fa
+background-color=#0B1215
+text-color=#C6C1C9
+border-color=#C6C1C9
 progress-color=over #313244
 
 [urgency=high]

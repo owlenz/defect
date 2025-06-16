@@ -23,7 +23,9 @@ in {
       };
     };
   };
-
+  environment.systemPackages = with pkgs; [
+    lutris
+  ];
   users.users.saif.extraGroups = [ "gamemode" ];
   systemd.extraConfig = "DefaultLimitNOFILE=1048576";
 }

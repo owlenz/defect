@@ -6,7 +6,7 @@ in {
     # firefox
     zen
     brave
-    librewolf
+    # librewolf
     wineWowPackages.waylandFull
   ];
 }

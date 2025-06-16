@@ -10,14 +10,14 @@ while getopts "1234567" flag; do
 		if [[ $browserStatus == "Playing" ]]; then
 			playerctl pause -p firefox
 		else
-			qdbus org.mpris.MediaPlayer2.spotify /org/mpris/MediaPlayer2 org.mpris.MediaPlayer2.Player.PlayPause
+			playerctl play-pause -p spotify
 		fi
 		;;
 	3) # prev song
-		qdbus org.mpris.MediaPlayer2.spotify /org/mpris/MediaPlayer2 org.mpris.MediaPlayer2.Player.Previous
+			playerctl previous -p spotify
 		;;
 	4) # next song
-		qdbus org.mpris.MediaPlayer2.spotify /org/mpris/MediaPlayer2 org.mpris.MediaPlayer2.Player.Next
+			playerctl next -p spotify
 		;;
 	5) # lower volume by 5%
 		pactl set-sink-mute 0 false

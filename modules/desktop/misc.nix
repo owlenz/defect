@@ -26,7 +26,9 @@ in {
   environment.systemPackages = with pkgs; [
     krita
     qbittorrent
-    wineWowPackages.waylandFull
+    wineWowPackages.stable
+    nemo
+    adwaita-icon-theme
     (discord.override {
       withOpenASAR = true;
       withVencord = true;

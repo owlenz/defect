@@ -34,6 +34,7 @@
             ./modules/shell/direnv.nix
             ./modules/dev/web.nix
             ./modules/dev/c.nix
+            ./modules/dev/tools.nix
             ./modules/emacs.nix
             ./modules/desktop/misc.nix
             ./modules/desktop/browsers.nix

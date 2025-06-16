@@ -7,6 +7,7 @@ in{
     valgrind
     clang-tools
     bear
+    gnum4
     gnumake
     cmake
     pkg-config

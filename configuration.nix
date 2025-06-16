@@ -18,6 +18,16 @@
   # networking.proxy.default = "http://user:password@proxy:port/";
   # networking.proxy.noProxy = "127.0.0.1,localhost,internal.domain";
 
+  hardware.bluetooth = {
+    enable = true;
+    powerOnBoot = true;
+    settings = {
+      General = {
+        Experimental = true;
+      };
+    };
+  };
+  services.blueman.enable = true;
   
   # Enable networking
   networking.networkmanager.enable = true;
@@ -77,22 +87,14 @@
     file
     autoconf
     automake
-    typst
     kitty
 		unzip
     stow
-    neovim
-    tinymist
     tree-sitter
-    gnum4
     btop
     zathura
     pulseaudio
-    gcc
     wl-clipboard
-    clang-tools
-    gnumake
-    cmake
     fuzzel
     wget
     keepassxc

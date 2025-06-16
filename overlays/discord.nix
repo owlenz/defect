@@ -14,6 +14,9 @@ in
         unzip
         zip
         curl
+        python3
+        python312Packages.pyelftools
+        python312Packages.capstone
       ]);
 
     unpackPhase =
