@@ -9,8 +9,20 @@
     };
   };
 
-	outputs = { self, nixpkgs, zen-browser, ...}:
+	outputs = { nixpkgs, zen-browser, ...}:
 		let
+      getNixFiles = dir: let
+        dirContents = builtins.readDir dir;
+        isNixFile = name: type: type == "regular" && builtins.match ".*\.nix$" name != null;
+        nixFiles = builtins.filter (name: isNixFile name (dirContents.${name})) (builtins.attrNames dirContents);
+        nixFilesPaths = map (x: dir + "/${x}") nixFiles;
+        isDir = type: type == "directory";
+        test =  builtins.filter (name: isDir (dirContents.${name})) (builtins.attrNames dirContents);
+        subDirPaths = map (x: getNixFiles ( dir + "/${x}" )) test;
+      in
+        nixFilesPaths ++ builtins.concatLists subDirPaths;
+
+      moduleFiles = getNixFiles ./modules;
 		  lib = nixpkgs.lib;
       system = "x86_64-linux";
       pkgs = import nixpkgs { inherit system; };
@@ -24,6 +36,10 @@
           specialArgs = {
             inherit zen-browser bibata-hyprcursor;
           };
+<<<<<<< HEAD
+				  modules = moduleFiles ++ [
+            ./configuration.nix
+=======
 				  modules = [
             ./configuration.nix
             ./modules/hyprland.nix
@@ -34,10 +50,10 @@
             ./modules/shell/direnv.nix
             ./modules/dev/web.nix
             ./modules/dev/c.nix
-            ./modules/dev/tools.nix
             ./modules/emacs.nix
             ./modules/desktop/misc.nix
             ./modules/desktop/browsers.nix
+>>>>>>> e938fff (cursor, browsers and more)
             { nixpkgs.overlays = [ spotxOverlay ]; }
             
             ({pkgs, ...}: {

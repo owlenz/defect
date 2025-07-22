@@ -61,28 +61,45 @@
     (string-trim output))
   )
 
-;; EGLOT
-(use-package eglot
-  :ensure t
-  :config
-  (let ((ts-path (get-ts-path)))
-    (message "ts-path: %s" ts-path)
-    (add-to-list 'eglot-server-programs
-                 '(astro-mode . ("astro-ls" "--stdio"
-                                 :initializationOptions
-                                 (:typescript (:tsdk (concat ts-path "/lib/node_modules/typescript/lib")))))))
-  (add-to-list 'eglot-server-programs
-               `((typst-ts-mode) .
-                 ,(eglot-alternatives `("tinymist"
-                                        ,typst-ts-lsp-download-path
-                                        "typst-lsp"))))
-  :init
-  (add-hook 'astro-mode-hook 'eglot-ensure)
-  )
+(add-hook 'c-mode-hook 'hs-minor-mode)
 
+;; EGLOT
+;; (use-package eglot
+;;   :ensure t
+;;   :config
+;;   (let ((ts-path (get-ts-path)))
+;;     (message "ts-path: %s" ts-path)
+;;     (add-to-list 'eglot-server-programs
+;;                  '(astro-mode . ("astro-ls" "--stdio"
+;;                                  :initializationOptions
+;;                                  (:typescript (:tsdk (concat ts-path "/lib/node_modules/typescript/lib")))))))
+;;   (add-to-list 'eglot-server-programs
+;;                `((typst-ts-mode) .
+;;                  ,(eglot-alternatives `("tinymist"
+;;                                         ,typst-ts-lsp-download-path
+;;                                         "typst-lsp"))))
+;;   :init
+;;   (add-hook 'astro-mode-hook 'eglot-ensure)
+;;   )
+
+(use-package php-mode
+  :ensure t
+  :hook (php-mode . my-php-mode-setup)
+  :bind (:map php-mode-map ("M-<tab>" . completion-at-point))
+  :config
+  (setq php-manual-path "~/php_manual")
+  (custom-set-variables
+   '(php-mode-coding-style 'psr2)
+   '(php-mode-template-compatibility nil)
+   '(php-imenu-generic-expression 'php-imenu-generic-expression))
+  (defun my-php-mode-setup ()
+    (setq-local completion-at-point-functions
+                (list #'php-complete-complete-function)
+                        )))
 
 (use-package nix-mode
   :mode ("\\.nix\\'" "\\.nix.in\\'"))
+
 
 (use-package nix-drv-mode
   :ensure nix-mode
@@ -201,6 +218,7 @@
 (use-package cape
   :ensure t
   :bind ("C-c p" . cape-prefix-map) ;; Alternative key: M-<tab>, M-p, M-+
+  :bind ("M-<tab>" . completion-at-point)
   ;; Alternatively bind Cape commands individually.
   ;; :bind (("C-c f" . cape-file)
   ;;        ("C-c p h" . cape-history)
@@ -211,9 +229,9 @@
   ;; used by `completion-at-point'.  The order of the functions matters, the
   ;; first function returning a result wins.  Note that the list of buffer-local
   ;; completion functions takes precedence over the global list.
-  ;; (add-hook 'completion-at-point-functions #'cape-dabbrev)
+  (add-hook 'completion-at-point-functions #'cape-dabbrev)
   (add-hook 'completion-at-point-functions #'cape-file)
-  ;; (add-hook 'completion-at-point-functions #'cape-elisp-block)
+  (add-hook 'completion-at-point-functions #'cape-elisp-block)
   )
 
 (use-package orderless
@@ -325,8 +343,9 @@
 
 ;; fonts
 (set-face-attribute 'default nil
+                    ;; :family "departuremono nerd font"
                     :family "blexmono nerd font"
-                    :height 160
+                    :height 170
                     )
 
 (set-face-attribute 'font-lock-comment-face nil
@@ -335,25 +354,24 @@
                     :slant 'italic)
 
 ;; lsp
-;; (use-package lsp-mode
-;;   :init
-;;   ;; set prefix for lsp-command-keymap (few alternatives - "C-l", "C-c l")
-;;   (setq lsp-keymap-prefix "C-c l")
-;;   :hook (
-;;          (c-mode . lsp-deferred)
-;;          (lsp-mode . lsp-enable-which-key-integration))
-;;   :commands lsp-deferred)
+(use-package lsp-mode
+  :ensure
+  :init
+  ;; set prefix for lsp-command-keymap (few alternatives - "C-l", "C-c l")
+  (setq lsp-keymap-prefix "C-c l")
+  :hook (
+         (c-mode . lsp-deferred)
+         (php-mode . lsp-deferred)
+         (lsp-mode . lsp-enable-which-key-integration))
+  :commands lsp-deferred)
 
-;; (setq gc-cons-threshold (* 100 1024 1024)
-;;       read-process-output-max (* 1024 1024)
-;;       treemacs-space-between-root-nodes nil
-;;       company-idle-delay 0.1
-;;       company-minimum-prefix-length 1
-;;       lsp-headerline-breadcrumb-enable nil
-;;       lsp-idle-delay 1.0
-;;       lsp-headerline-breadcrumb-enable nil
-;;       header-line-format nil
-;;       )
+(setq gc-cons-threshold (* 100 1024 1024)
+      read-process-output-max (* 1024 1024)
+      lsp-headerline-breadcrumb-enable nil
+      lsp-idle-delay 1.0
+      lsp-headerline-breadcrumb-enable nil
+      header-line-format nil
+      )
 
 (font-lock-add-keywords
  'c-mode
@@ -363,22 +381,4 @@
 
 (use-package org
   :ensure t
- )
-(custom-set-variables
- ;; custom-set-variables was added by Custom.
- ;; If you edit it by hand, you could mess it up, so be careful.
- ;; Your init file should contain only one such instance.
- ;; If there is more than one, they won't work right.
- '(package-selected-packages
-   '(cape corfu diminish direnv evil-collection evil-commentary
-          evil-surround general magit multi-vterm nix-mode
-          no-littering orderless svg-tag-mode tree-sitter-langs
-          typst-ts-mode undo-tree vertico visual-fill-column vterm
-          web-mode))
- '(send-mail-function 'mailclient-send-it))
-(custom-set-faces
- ;; custom-set-faces was added by Custom.
- ;; If you edit it by hand, you could mess it up, so be careful.
- ;; Your init file should contain only one such instance.
- ;; If there is more than one, they won't work right.
- )
+)
