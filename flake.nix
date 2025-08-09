@@ -7,13 +7,13 @@
       url = "github:0xc000022070/zen-browser-flake";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-    cider = {
-      url = "git+https://git.nvds.be/NicolaiVdS/Nix-Cider2.git";
-      rev = "151de67423c86208e885fd4794d064521207029c";
-    };
+    # cider = {
+    #   url = "git+https://git.nvds.be/NicolaiVdS/Nix-Cider2.git";
+    #   rev = "151de67423c86208e885fd4794d064521207029c";
+    # };
   };
 
-	outputs = { nixpkgs, zen-browser, cider, ...}:
+	outputs = { nixpkgs, zen-browser, ...}:
 		let
       getNixFiles = dir: let
         dirContents = builtins.readDir dir;
@@ -38,7 +38,7 @@
 			  owlen = lib.nixosSystem {
           inherit system;
           specialArgs = {
-            inherit zen-browser cider bibata-hyprcursor;
+            inherit zen-browser bibata-hyprcursor;
           };
 				  modules = moduleFiles ++ [
             ./configuration.nix

@@ -3,6 +3,7 @@ let
 in {
   environment.systemPackages = with pkgs; [
     mpv
-    cider
+    # cider
+    cider-2
   ];
 }

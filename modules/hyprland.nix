@@ -1,18 +1,10 @@
 { pkgs, bibata-hyprcursor, ... }:
-<<<<<<< HEAD
-=======
-
->>>>>>> e938fff (cursor, browsers and more)
 let
 in
 {
   programs.hyprland = {
     enable = true;
-<<<<<<< HEAD
     # withUWSM = true;
-=======
-    withUWSM = true;
->>>>>>> e938fff (cursor, browsers and more)
     xwayland.enable = true;
     portalPackage = pkgs.xdg-desktop-portal-hyprland;
   };
