@@ -6,11 +6,7 @@ in {
     # firefox
     zen
     brave
-<<<<<<< HEAD
     # librewolf
-=======
-    librewolf
->>>>>>> e938fff (cursor, browsers and more)
     wineWowPackages.waylandFull
   ];
 }

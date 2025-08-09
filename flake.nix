@@ -7,9 +7,13 @@
       url = "github:0xc000022070/zen-browser-flake";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    cider = {
+      url = "git+https://git.nvds.be/NicolaiVdS/Nix-Cider2.git";
+      rev = "151de67423c86208e885fd4794d064521207029c";
+    };
   };
 
-	outputs = { nixpkgs, zen-browser, ...}:
+	outputs = { nixpkgs, zen-browser, cider, ...}:
 		let
       getNixFiles = dir: let
         dirContents = builtins.readDir dir;
@@ -34,26 +38,10 @@
 			  owlen = lib.nixosSystem {
           inherit system;
           specialArgs = {
-            inherit zen-browser bibata-hyprcursor;
+            inherit zen-browser cider bibata-hyprcursor;
           };
-<<<<<<< HEAD
 				  modules = moduleFiles ++ [
             ./configuration.nix
-=======
-				  modules = [
-            ./configuration.nix
-            ./modules/hyprland.nix
-            ./modules/fonts.nix
-            ./modules/gaming.nix
-            ./modules/nvidia.nix
-            ./modules/shell/zsh.nix
-            ./modules/shell/direnv.nix
-            ./modules/dev/web.nix
-            ./modules/dev/c.nix
-            ./modules/emacs.nix
-            ./modules/desktop/misc.nix
-            ./modules/desktop/browsers.nix
->>>>>>> e938fff (cursor, browsers and more)
             { nixpkgs.overlays = [ spotxOverlay ]; }
             
             ({pkgs, ...}: {

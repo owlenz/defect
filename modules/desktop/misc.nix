@@ -16,7 +16,6 @@ in {
       variant = ",";
       options = "grp:alt_shift_toggle";
     };
-<<<<<<< HEAD
     enable = false;
     desktopManager = {
       # xterm.enable = true;
@@ -24,14 +23,6 @@ in {
     };
   };
   services.gvfs.enable = true;
-=======
-    enable = true;
-    desktopManager = {
-      xterm.enable = false;
-      xfce.enable = false;
-    };
-  };
->>>>>>> e938fff (cursor, browsers and more)
 
   environment.systemPackages = with pkgs; [
     krita
