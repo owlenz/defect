@@ -31,6 +31,7 @@
     };
   };
   services.blueman.enable = true;
+  services.cloudflare-warp.enable = true;
   
   # Enable networking
   networking.networkmanager.enable = true;
@@ -62,7 +63,7 @@
   users.users.saif = {
     isNormalUser = true;
     description = "saif";
-    extraGroups = [ "networkmanager" "wheel" ];
+    extraGroups = [ "networkmanager" "wheel" "audio" ];
     packages = with pkgs; [];
   };
 
@@ -70,6 +71,12 @@
   services.envfs.enable = true;
 
   # sound 
+  # services.pipewire.enable = false;
+  # services.pulseaudio.enable = true;
+  # services.pulseaudio.support32Bit = true;
+  # nixpkgs.config.pulseaudio = true;
+  # services.pulseaudio.package = pkgs.pulseaudioFull;
+
   security.rtkit.enable = true;
   services.pipewire = {
     enable = true;
@@ -96,7 +103,7 @@
     tree-sitter
     btop
     zathura
-    pulseaudio
+    # pulseaudio
     wl-clipboard
     fuzzel
     wget

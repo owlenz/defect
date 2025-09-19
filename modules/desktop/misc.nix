@@ -1,4 +1,4 @@
-{ pkgs, ... }:
+{ pkgs, soulseek, ... }:
 let
 
 in {
@@ -26,12 +26,19 @@ in {
 
   environment.systemPackages = with pkgs; [
     krita
+    anydesk
+
+    # data
     qbittorrent
+    soulseek
+
     wineWowPackages.stable
     winetricks
     wineWowPackages.waylandFull
+
     nemo
     adwaita-icon-theme
+
     obs-studio
     (discord.override {
       withOpenASAR = true;

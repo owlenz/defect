@@ -6,5 +6,7 @@ in {
     filezilla
     remmina
     ffmpeg
+    python3
+    python3Packages.pygobject3
   ];
 }

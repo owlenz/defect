@@ -345,7 +345,7 @@
 (set-face-attribute 'default nil
                     ;; :family "departuremono nerd font"
                     :family "blexmono nerd font"
-                    :height 170
+                    :height 150
                     )
 
 (set-face-attribute 'font-lock-comment-face nil
@@ -362,6 +362,7 @@
   :hook (
          (c-mode . lsp-deferred)
          (php-mode . lsp-deferred)
+         (js-mode . lsp-deferred)
          (lsp-mode . lsp-enable-which-key-integration))
   :commands lsp-deferred)
 

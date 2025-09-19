@@ -6,12 +6,12 @@ while getopts "1234567" flag; do
 		spotify
 		;;
 	2) # play/pause
-		browserStatus=$(playerctl status -p firefox)
-		if [[ $browserStatus == "Playing" ]]; then
-			playerctl pause -p firefox
-		else
-			playerctl play-pause -p spotify
-		fi
+		# browserStatus=$(playerctl status -p firefox)
+		# if [[ $browserStatus == "Playing" ]]; then
+			# playerctl pause 
+		# else
+			playerctl play-pause
+		# fi
 		;;
 	3) # prev song
 			playerctl previous -p spotify

@@ -3,7 +3,9 @@ let
 in {
   environment.systemPackages = with pkgs; [
     mpv
-    # cider
-    cider-2
+    cider
+    wl-clipboard
   ];
+  ## waydroid for apple music 
+  virtualisation.waydroid.enable = true;
 }

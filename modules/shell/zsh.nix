@@ -52,5 +52,7 @@ in {
     man-pages
     man-pages-posix
     mpi
+
+    tmux
   ];
 }

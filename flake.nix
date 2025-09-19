@@ -32,18 +32,19 @@
       pkgs = import nixpkgs { inherit system; };
 
       spotxOverlay = import ./overlays/spotx.nix;
-      bibata-hyprcursor = pkgs.callPackage ./pkgs/bibata_hyprcursor {inherit (pkgs) hyprcursor; };
+      bibata-hyprcursor = pkgs.callPackage ./pkgs/bibata_hyprcursor { inherit (pkgs) hyprcursor; variant = "original"; };
+      soulseek = pkgs.callPackage ./pkgs/soulseek {};
 	  in {
 		  nixosConfigurations = {
 			  owlen = lib.nixosSystem {
           inherit system;
           specialArgs = {
-            inherit zen-browser bibata-hyprcursor;
+            inherit zen-browser bibata-hyprcursor soulseek;
           };
+
 				  modules = moduleFiles ++ [
             ./configuration.nix
             { nixpkgs.overlays = [ spotxOverlay ]; }
-            
             ({pkgs, ...}: {
               environment.systemPackages = [pkgs.spotify];
             })

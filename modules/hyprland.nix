@@ -31,6 +31,9 @@ in
     hyprpicker
     hyprpaper
     hyprsunset
+    hypridle
+    hyprlock
+
     bibata-hyprcursor
     waybar
     nwg-look
