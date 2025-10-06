@@ -55,6 +55,15 @@
       (append '((".*\\.astro\\'" . astro-mode))
               auto-mode-alist))
 
+(setq explicit-shell-file-name "~/.zshrc")
+(setq exec-path-from-shell-debug t)
+(use-package exec-path-from-shell
+  :ensure t
+  :config
+  (when (memq window-system '(mac ns x))
+    (exec-path-from-shell-initialize))
+  )
+
 (defun get-ts-path ()
   (interactive)
   (let ((output (shell-command-to-string "nix-store --query --requisites /run/current-system | grep typescript")))
@@ -130,22 +139,17 @@
   )
 
 (use-package multi-vterm
-	:config
-	(add-hook 'vterm-mode-hook
-			(lambda ()
-			(setq-local evil-insert-state-cursor 'box)
-			(evil-insert-state)))
-	(define-key vterm-mode-map [return]                      #'vterm-send-return)
+  :ensure t
+  :config
+  (add-hook 'vterm-mode-hook
+            (lambda ()
+              (setq-local evil-insert-state-cursor 'box)
+              (evil-insert-state)))
+  (define-key vterm-mode-map [return]                      #'vterm-send-return)
 
-	(setq vterm-keymap-exceptions nil)
-	;; (evil-define-key 'insert vterm-mode-map (kbd "C-c <escape>") #'vterm--self-insert)
-    ;; (evil-define-key 'normal vterm-mode-map (kbd ",c")           #'multi-vterm)
-    ;; (evil-define-key 'normal vterm-mode-map (kbd ",n")           #'multi-vterm-next)
-    ;; (evil-define-key 'normal vterm-mode-map (kbd ",p")           #'multi-vterm-prev)
-    ;; (evil-define-key 'normal vterm-mode-map (kbd "i")            #'evil-insert-resume)
-    ;; (evil-define-key 'normal vterm-mode-map (kbd "o")            #'evil-insert-resume)
-	;; (evil-define-key 'normal vterm-mode-map (kbd "<return>")     #'evil-insert-resume)
-    )
+  (setq vterm-keymap-exceptions nil)
+  (evil-define-key 'insert vterm-mode-map (kbd "C-c <escape>") #'vterm--next-insert)
+  )
 
 ;; (use-package vterm-toggle
 ;;   :after vterm
@@ -354,6 +358,9 @@
                     :slant 'italic)
 
 ;; lsp
+
+(use-package lsp-java
+  :ensure t)
 (use-package lsp-mode
   :ensure
   :init
@@ -361,6 +368,7 @@
   (setq lsp-keymap-prefix "C-c l")
   :hook (
          (c-mode . lsp-deferred)
+         ;; (java-mode . lsp-deferred)
          (php-mode . lsp-deferred)
          (js-mode . lsp-deferred)
          (lsp-mode . lsp-enable-which-key-integration))
@@ -383,3 +391,23 @@
 (use-package org
   :ensure t
 )
+(custom-set-variables
+ ;; custom-set-variables was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ '(package-selected-packages
+   '(cape corfu diminish direnv evil-collection evil-commentary
+          evil-surround exec-path-from-shell general lsp-java lsp-mode
+          magit multi-vterm nix-mode no-littering orderless php-mode
+          tree-sitter-langs typst-ts-mode undo-tree vertico
+          visual-fill-column web-mode))
+ '(php-imenu-generic-expression 'php-imenu-generic-expression)
+ '(php-mode-coding-style 'psr2)
+ '(php-mode-template-compatibility nil))
+(custom-set-faces
+ ;; custom-set-faces was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ )

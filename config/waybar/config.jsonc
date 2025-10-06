@@ -8,8 +8,8 @@
 		"hyprland/window"
 	],
 	"modules-center": [
-		"image",
-		"custom/media"
+		"image"
+		// "custom/media"
 	],
 	"modules-right": [
 		"tray",
@@ -44,6 +44,7 @@
 		"scroll-step": 1,
 		"format": "{icon} {volume}%",
 		"format-muted": "muted",
+
 		"format-icons": {
 			"headphone": "󰋋"
 		},

@@ -1,9 +1,9 @@
-#!/usr/bin/env nix-shell
-#!nix-shell -i bash python3 -p python3Packages.pygobject3 playerctl
+#!/bin/bash
 
 # start waybar if not started
 if ! pgrep -x "waybar" >/dev/null; then
-	waybar &
+	sleep 1
+	waybar > ~/waybar.log &
 fi
 
 # current checksums
@@ -28,5 +28,5 @@ while true; do
 		current_checksum_config=$new_checksum_config
 		current_checksum_style=$new_checksum_style
 	fi
-    sleep 10
+    sleep 1
 done

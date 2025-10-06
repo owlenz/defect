@@ -1,6 +1,6 @@
 export PATH=$HOME/bin:/usr/local/bin:$PATH
 
-## handled by nix
+## comment if using nix
 # export ZSH="$HOME/.oh-my-zsh"
 # plugins=( 
 #     zsh-syntax-highlighting
@@ -9,12 +9,37 @@ export PATH=$HOME/bin:/usr/local/bin:$PATH
 #     zsh-autosuggestions
 # )
 # source $ZSH/oh-my-zsh.sh
+##
 
 ## PROMPT ##
 export PS1="%F{#FD43B7}%n%f@%F{cyan}%m%f-> %1~ $ " ## BASH-like prompt
 
 SAVEHIST=1000
 HISTFILE=~/.zsh_history
+
+
+## antigen
+
+source ~/antigen.zsh
+
+# Load the oh-my-zsh's library.
+antigen use oh-my-zsh
+
+# Bundles from the default repo (robbyrussell's oh-my-zsh).
+antigen bundle git
+antigen bundle command-not-found
+
+antigen bundle zsh-users/zsh-syntax-highlighting
+antigen bundle zsh-users/zsh-completions
+# antigen bundle zsh-users/zsh-autosuggestions
+
+# Load the theme.
+# antigen theme robbyrussell
+
+# Tell Antigen that you're done.
+antigen apply
+
+##
 
 # Vi Mode
 bindkey -v
@@ -47,18 +72,18 @@ alias notes="cd ~/Documents/notes; nvim"
 alias pick="hyprpicker | tail -c +2 | head -c -1 |wl-copy" 
 alias xpick="xcolor | xclip -sel clip" 
 
-if [[ $+commands[eza] ]]; then
+if which eza &> /dev/null; then
 	alias ls="eza --icons=always --no-time --group-directories-first --no-user"
 	alias ll="eza -blF --icons"
 	alias tree="eza --tree --icons"
 fi
 
-if [[ $+commands[kitten] ]]; then
+if which kitten &> /dev/null; then
 	alias icat="kitten icat"
 	alias themes="kitten themes"
 fi
 
-if [[ $+commands[nix] ]]; then
+if which nix &> /dev/null; then
     alias nrf="sudo nixos-rebuild switch --flake ~/dotfiles"
     alias nr="sudo nixos-rebuild switch"
     alias nsp="nix search nixpkgs"
@@ -79,6 +104,7 @@ eval "$(fzf --zsh)"
 
 # bun completions
 [ -s "/home/saif/.bun/_bun" ] && source "/home/saif/.bun/_bun"
+
 export EDITOR='emacs'
 
 ## android studio ##
@@ -87,8 +113,13 @@ export EDITOR='emacs'
 # export PATH=$PATH:$ANDROID_HOME/platform-tools
 
 ## arm-linux cross-compile
-export PATH=$HOME/x-tools/arm-balls-linux-musleabihf/bin:$PATH
-export ARCH=arm
-export CROSS_COMPILE=arm-linux-
+# export PATH=$HOME/x-tools/arm-balls-linux-musleabihf/bin:$PATH
+# export ARCH=arm
+# export CROSS_COMPILE=arm-linux-
 
-export PATH=$HOME/.config/emacs/bin:$PATH
+# export PATH=$HOME/.config/emacs/bin:$PATH
+
+# pnpm
+export PNPM_HOME="/home/owlenz/.local/share/pnpm"
+export PATH="$PNPM_HOME:$PATH"
+# pnpm end

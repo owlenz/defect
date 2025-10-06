@@ -1,4 +1,4 @@
-default-timeout=2000
+default-timeout=6000
 margin=10
 padding=10
 width=400
