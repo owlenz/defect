@@ -3,15 +3,72 @@
 (menu-bar-mode 0)
 (scroll-bar-mode 0)
 (toggle-truncate-lines t)
-(setq org-agenda-files '("~/Documents/college/third/second_sem/college.org"))
-(add-to-list 'load-path (expand-file-name "packages" user-emacs-directory))
 
+(setq org-agenda-files '("~/college/senior/sched.org"))
 
 (require 'package)
+
 (add-to-list 'package-archives '("melpa" . "https://melpa.org/packages/") t)
 (add-to-list 'package-archives '("org" . "https://orgmode.org/elpa/") t)
 (add-to-list 'package-archives '("gnu-devel" . "https://elpa.gnu.org/devel/") t)
+
 (package-initialize)
+
+(load-theme 'violetdream t)
+
+;; indentation
+(setq-default indent-tabs-mode nil)
+(setq-default tab-width 4)
+(setq display-line-numbers-type 'relative)
+(global-display-line-numbers-mode 1)
+
+;; fonts
+(set-face-attribute 'default nil
+		    ;; :family "departuremono nerd font"
+		    :family "blexmono nerd font"
+		    ;; :family "victormono nerd font"
+		    :height 130
+            :weight 'medium 
+		    )
+
+(set-face-attribute 'font-lock-comment-face nil
+                    :slant 'italic)
+(set-face-attribute 'font-lock-keyword-face nil
+                    :slant 'italic)
+
+;; transparency
+(set-frame-parameter nil 'alpha-background 85) ;; frames (emacs client)
+(add-to-list 'default-frame-alist '(alpha-background . 85)) ;; default window (emacs)
+
+;; evil
+(use-package evil
+  :ensure t
+  :init
+  (setq evil-want-C-u-scroll t)
+  (setq evil-want-keybinding nil)
+  :config
+  (evil-mode 1)
+  (evil-set-undo-system 'undo-tree)
+  )
+
+(use-package evil-collection
+  :after evil
+  :ensure t
+  :init
+  (evil-collection-init))
+
+(use-package evil-commentary
+  :ensure t
+  :after evil
+  :init
+  (evil-commentary-mode)
+  )
+
+(use-package evil-surround
+  :ensure t
+  :config
+  (global-evil-surround-mode 1)
+  )
 
 
 ;; mics
@@ -42,8 +99,11 @@
   :ensure t
   )
 
-(use-package typst-ts-mode
-  :ensure t)
+
+;; (use-package typst-ts-mode
+;;   :ensure (:type git :host sourcehut :repo "meow_king/typst-ts-mode")
+;;   :custom
+;;   (typst-ts-mode-watch-options "--open"))
 
 ;; WEB MODE
 (use-package web-mode
@@ -56,7 +116,6 @@
               auto-mode-alist))
 
 (setq explicit-shell-file-name "~/.zshrc")
-(setq exec-path-from-shell-debug t)
 (use-package exec-path-from-shell
   :ensure t
   :config
@@ -64,13 +123,19 @@
     (exec-path-from-shell-initialize))
   )
 
-(defun get-ts-path ()
-  (interactive)
-  (let ((output (shell-command-to-string "nix-store --query --requisites /run/current-system | grep typescript")))
-    (string-trim output))
-  )
+;; (defun get-ts-path ()
+;;   (interactive)
+;;   (let ((output (shell-command-to-string "nix-store --query --requisites /run/current-system | grep typescript")))
+;;     (string-trim output))
+;;   )
 
 (add-hook 'c-mode-hook 'hs-minor-mode)
+
+(add-hook 'org-mode-hook
+          (lambda ()
+            (visual-line-mode 1)
+            (display-line-numbers-mode -1)
+            (flyspell-mode 1)))
 
 ;; EGLOT
 ;; (use-package eglot
@@ -106,26 +171,25 @@
                 (list #'php-complete-complete-function)
                         )))
 
-(use-package nix-mode
-  :mode ("\\.nix\\'" "\\.nix.in\\'"))
+;; (use-package nix-mode
+;;   :mode ("\\.nix\\'" "\\.nix.in\\'"))
+;;
+;; (use-package nix-drv-mode
+;;   :ensure nix-mode
+;;   :mode "\\.drv\\'")
+;;
+;; (use-package nix-shell
+;;   :ensure nix-mode
+;;   :commands (nix-shell-unpack nix-shell-configure nix-shell-build))
+;;
+;; (use-package nix-repl
+;;   :ensure nix-mode
+;;   :commands (nix-repl))
 
-
-(use-package nix-drv-mode
-  :ensure nix-mode
-  :mode "\\.drv\\'")
-
-(use-package nix-shell
-  :ensure nix-mode
-  :commands (nix-shell-unpack nix-shell-configure nix-shell-build))
-
-(use-package nix-repl
-  :ensure nix-mode
-  :commands (nix-repl))
-
-(use-package direnv
-  :ensure t
-  :config
-  (direnv-mode))
+;; (use-package direnv
+;;   :ensure t
+;;   :config
+;;   (direnv-mode))
 
 (use-package vterm
   :ensure t
@@ -156,42 +220,16 @@
 ;;   )
 
 ;; magit
-(use-package magit
-  :ensure t)
+;; (use-package transient 
+;;   :ensure t)
+;; (use-package magit
+;;   :ensure t)
 
-;; evil
-(use-package evil
-  :ensure t
-  :init
-  (setq evil-want-C-u-scroll t)
-  (setq evil-want-keybinding nil)
-  :config
-  (evil-mode 1)
-  (evil-set-undo-system 'undo-tree)
-  )
-
-(use-package evil-collection
-  :after evil
-  :ensure t
-  :init
-  (evil-collection-init))
-
-(use-package evil-commentary
-  :ensure t
-  :after evil
-  :init
-  (evil-commentary-mode)
-  )
-
-(use-package evil-surround
-  :ensure t
-  :config
-  (global-evil-surround-mode 1)
-  )
 
 ;; vertico
 ;; Emacs minibuffer configurations.
 (use-package emacs
+  :ensure nil
   :custom
   (enable-recursive-minibuffers t)
   (read-extended-command-predicate #'command-completion-default-include-p)
@@ -247,10 +285,22 @@
   (completion-category-defaults nil)
   (completion-category-overrides '((file (styles partial-completion)))))
 
-;; Persist history over Emacs restarts. Vertico sorts by history position.
+(use-package eat :ensure t)
+
+;; (use-package claude-code :ensure t
+;;   :vc (:url "https://github.com/stevemolitor/claude-code.el" :rev :newest)
+;;   :config
+
+;;   (claude-code-mode)
+;;   :bind-keymap ("C-c c" . claude-code-command-map)
+
+;;   :bind
+;;   (:repeat-map my-claude-code-map ("M" . claude-code-cycle-mode)))
+
 (use-package savehist
-  :init
-  (savehist-mode))
+  :ensure t
+  :config
+  (savehist-mode 1))
 
 ;; which key
 (use-package which-key
@@ -277,9 +327,9 @@
 (use-package visual-fill-column
   :ensure t)
 
-(require 'writeroom-mode)
-(add-hook 'writeroom-mode-hook (lambda ()
-                                 (display-line-numbers-mode -1)))
+;; (require 'writeroom-mode)
+;; (add-hook 'writeroom-mode-hook (lambda ()
+;;                                  (display-line-numbers-mode -1)))
 
 (with-eval-after-load 'dired
   (define-key dired-mode-map (kbd "C-a") 'dired-create-empty-file)
@@ -288,91 +338,81 @@
 ;; keybindings
 (use-package general
   :ensure t
-  :config
+  :config 
   (general-evil-setup)
   )
 
-
-;; keybindings
-;;;; Create a leader key definition
 (general-create-definer my-leader
   :states '(normal insert visual emacs)
   :keymaps 'override
   :prefix "SPC" ;; set leader
-  :global-prefix "M-SPC") ;; access leader in insert mode
-
+  :global-prefix "M-SPC")
 (my-leader
- ;; buffers
- "b"  '(:ignore t :wk "buffer")
- "bb" '(switch-to-buffer :wk "Switch buffer")
- "bi" '(ibuffer :wk "Ibuffer")
- "bd" '(kill-current-buffer :wk "Kill this buffer")
- "bn" '(next-buffer :wk "Next buffer")
- "bp" '(previous-buffer :wk "Previous buffer")
- "br" '(revert-buffer :wk "Reload buffer")
- ;; files
- "f"  '(:ignore t :wk "Files")
- "ff" '(find-file :wk "Find File")
- "fd" '(dired :wk "Dired")
- ;; evaluation
- "e"  '(:ignore t :wk "Evaluation")
- "ee" '(eval-last-sexp :wk "Evaluate last expression")
- "er" '(eval-buffer ~/.config/emacs/init.el :wk "Evaluate config file")
- ;; magit
- "g"  '(:ignore t :wk "Magit")
- "gg" '(magit :wk "Magit")
- ;; windows
- "w"  '(:ignore t :wk "Windows")
- "wv" '(split-window-vertically :wk "split vertical window")
- "wh" '(split-window-below :wk "split horizontal window")
+  ;; buffers
+  "b"  '(:ignore t :wk "buffer")
+  "bb" '(switch-to-buffer :wk "Switch buffer")
+  "bi" '(ibuffer :wk "Ibuffer")
+  "bd" '(kill-current-buffer :wk "Kill this buffer")
+  "bn" '(next-buffer :wk "Next buffer")
+  "bp" '(previous-buffer :wk "Previous buffer")
+  "br" '(revert-buffer :wk "Reload buffer")
+  ;; files
+  "f"  '(:ignore t :wk "Files")
+  "ff" '(find-file :wk "Find File")
+  "fd" '(dired :wk "Dired")
+  ;; evaluation
+  "e"  '(:ignore t :wk "Evaluation")
+  "ee" '(eval-last-sexp :wk "Evaluate last expression")
+  "er" '(eval-buffer ~/.config/emacs/init.el :wk "Evaluate config file")
+  ;; magit
+  "g"  '(:ignore t :wk "Magit")
+  "gg" '(magit :wk "Magit")
+  ;; windows
+  "w"  '(:ignore t :wk "Windows")
+  "wv" '(split-window-vertically :wk "split vertical window")
+  "wh" '(split-window-below :wk "split horizontal window")
 
- "vt" '(multi-vterm :wk "multi vterm")
+  "vt" '(multi-vterm :wk "multi vterm")
 
- "uz" '(writeroom-mode :wk "Zen Mode")
- )
+  "uz" '(writeroom-mode :wk "Zen Mode")
+  )
+
+;; keybindings
 
 (global-set-key (kbd "<escape>") 'keyboard-quit)
 (evil-define-key 'normal 'global (kbd "K") 'man)
 
-;; indentation
-(setq-default indent-tabs-mode nil)
-(setq-default tab-width 4)
-(setq display-line-numbers-type 'relative)
-(global-display-line-numbers-mode 1)
-
-;; transparency
-(set-frame-parameter nil 'alpha-background 85) ;; frames (emacs client)
-(add-to-list 'default-frame-alist '(alpha-background . 85)) ;; default window (emacs)
-
-
-;; fonts
-(set-face-attribute 'default nil
-                    ;; :family "departuremono nerd font"
-                    :family "blexmono nerd font"
-                    :height 150
-                    )
-
-(set-face-attribute 'font-lock-comment-face nil
-                    :slant 'italic)
-(set-face-attribute 'font-lock-keyword-face nil
-                    :slant 'italic)
-
 ;; lsp
+;; (use-package lsp-java
+;;   :ensure t)
 
-(use-package lsp-java
+
+(use-package ein 
   :ensure t)
+
+
+(use-package dap-mode 
+  :ensure t)
+
 (use-package lsp-mode
-  :ensure
+  :ensure t
   :init
   ;; set prefix for lsp-command-keymap (few alternatives - "C-l", "C-c l")
   (setq lsp-keymap-prefix "C-c l")
+  (setq lsp-clangd-binary-path "/home/owlenz/clangd/bin/clangd")
   :hook (
          (c-mode . lsp-deferred)
-         ;; (java-mode . lsp-deferred)
+         (c++-mode . lsp-deferred)
          (php-mode . lsp-deferred)
          (js-mode . lsp-deferred)
+         (python-mode . lsp-deferred)
          (lsp-mode . lsp-enable-which-key-integration))
   :commands lsp-deferred)
+
+(use-package pyvenv
+  :ensure t
+  :config (pyvenv-mode)
+  )
 
 (setq gc-cons-threshold (* 100 1024 1024)
       read-process-output-max (* 1024 1024)
@@ -386,22 +426,23 @@
  'c-mode
  '(("\\<\\(\\sw+\\) ?(" 1 'font-lock-function-call-face)))
 
-(load-theme 'violetdream t)
-
 (use-package org
   :ensure t
-)
+  )
+
 (custom-set-variables
  ;; custom-set-variables was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
  '(package-selected-packages
-   '(cape corfu diminish direnv evil-collection evil-commentary
-          evil-surround exec-path-from-shell general lsp-java lsp-mode
-          magit multi-vterm nix-mode no-littering orderless php-mode
-          tree-sitter-langs typst-ts-mode undo-tree vertico
-          visual-fill-column web-mode))
+   '(cape claude-code corfu diminish direnv eat ein evil-collection
+          evil-commentary evil-surround exec-path-from-shell general
+          lsp-java magit multi-vterm nix-mode no-littering orderless
+          php-mode pyvenv tree-sitter-langs typst-ts-mode undo-tree
+          vertico visual-fill-column web-mode))
+ '(package-vc-selected-packages
+   '((claude-code :url "https://github.com/stevemolitor/claude-code.el")))
  '(php-imenu-generic-expression 'php-imenu-generic-expression)
  '(php-mode-coding-style 'psr2)
  '(php-mode-template-compatibility nil))

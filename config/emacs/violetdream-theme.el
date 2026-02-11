@@ -3,11 +3,13 @@
 
 (let ((violetdream-superwhite "#F8F9F8")
       (violetdream-background "#030104")
+      (violetdream-highlight "#424860")
       (violetdream-black "#000000")
       (violetdream-red "#CA597F")
       (violetdream-green "#0e934a")
       (violetdream-pink "#E4599A")
       (violetdream-lightpink "#FF91C1")
+
       (violetdream-violet "#A45B9B")
       (violetdream-lightviolet "#BE95FF")
       (violetdream-select "#444444")
@@ -18,57 +20,71 @@
       (violetdream-violet4 "#5D4D7A")
       )
   (custom-theme-set-faces
-    `violetdream
-    `(default ((t (:background ,violetdream-background :foreground ,violetdream-superwhite))))
-    `(cursor ((t (:background ,violetdream-violet2, :extend t))))
-    `(region ((t (:background ,violetdream-select :extend t))))
-    `(highlight ((t (:background ,violetdream-blue :foreground ,violetdream-superwhite))))
-    `(hl-line ((t (:background "#0F0A12"))))
-    `(fringe ((t (:background ,violetdream-background))))
-    `(show-paren-match ((t (:foreground ,violetdream-violet :background "#250F20" :bold t))))
-    `(show-paren-mismatch ((t (:foreground ,violetdream-red :background "#250F20" :bold t))));;sadsaasddas
+   `violetdream
+   `(default ((t (:background ,violetdream-background :foreground ,violetdream-superwhite))))
+   `(cursor ((t (:background ,violetdream-violet2, :extend t))))
+   `(region ((t (:background ,violetdream-select :extend t))))
+   `(highlight ((t (:background ,violetdream-highlight :foreground ,violetdream-superwhite))))
+   `(hl-line ((t (:background "#0F0A12"))))
+   `(fringe ((t (:background ,violetdream-background))))
+   `(show-paren-match ((t (:foreground ,violetdream-violet :background "#250F20" :bold t))))
+   `(show-paren-mismatch ((t (:foreground ,violetdream-red :background "#250F20" :bold t))))
 
-    `(font-lock-function-name-face ((t (:foreground ,violetdream-blue))))
-    `(font-lock-type-face ((t (:foreground ,violetdream-lightviolet :italic t))))
-    `(font-lock-preprocessor-face ((t (:foreground ,violetdream-red))))
-    `(font-lock-keyword-face ((t (:foreground ,violetdream-violet :italic t))))
-    `(font-lock-variable-name-face ((t (:foreground ,violetdream-superwhite))))
-    `(font-lock-string-face ((t (:foreground ,violetdream-green))))
-    `(font-lock-constant-face ((t (:foreground ,violetdream-red))))
-    `(font-lock-comment-face ((t (:foreground ,violetdream-gray))))
-    `(font-lock-function-call-face ((t (:foreground ,violetdream-blue))))
-    `(lsp-face-highlight-textual ((t (:background ,violetdream-violet3 :foreground ,violetdream-superwhite ))))
-    `(lsp-face-highlight-read ((t (:background ,violetdream-violet3 :foreground ,violetdream-superwhite ))))
+   ;; `(font-lock-function-name-face ((t (:foreground ,violetdream-blue))))
+   `(font-lock-type-face ((t (:foreground ,violetdream-lightviolet :italic t))))
+   `(font-lock-preprocessor-face ((t (:foreground ,violetdream-red))))
+   `(font-lock-keyword-face ((t (:foreground ,violetdream-violet :italic t))))
+   `(font-lock-variable-name-face ((t (:foreground ,violetdream-superwhite))))
+   `(font-lock-string-face ((t (:foreground ,violetdream-green))))
+   `(font-lock-constant-face ((t (:foreground ,violetdream-red))))
+   `(font-lock-comment-face ((t (:foreground ,violetdream-gray))))
+   `(font-lock-function-call-face ((t (:foreground ,violetdream-blue))))
+   `(lsp-face-highlight-textual ((t (:background ,violetdream-violet3 :foreground ,violetdream-superwhite ))))
+   `(lsp-face-highlight-read ((t (:background ,violetdream-violet3 :foreground ,violetdream-superwhite ))))
 
-    `(fixed-pitch ((t (:family "monospace"))))
-    `(variable-pitch ((((type w32)) (:foundry "outline" :family "arial")) (t (:family "sans serif"))))
-    `(escape-glyph ((((background dark)) (:foreground "cyan")) (((type pc)) (:foreground "magenta")) (t (:foreground "brown"))))
-    `(homoglyph ((((background dark)) (:foreground "cyan")) (((type pc)) (:foreground "magenta")) (t (:foreground "brown"))))
-    `(minibuffer-prompt ((((background dark)) (:foreground "cyan")) (((type pc)) (:foreground "magenta")) (t (:foreground "medium blue"))))
-    `(shadow ((((class color grayscale) (min-colors 88) (background light)) (:foreground "grey50")) (((class color grayscale) (min-colors 88) (background dark)) (:foreground "grey70")) (((class color) (min-colors 8) (background light)) (:foreground "green")) (((class color) (min-colors 8) (background dark)) (:foreground "yellow"))))
-    `(secondary-selection ((((class color) (min-colors 88) (background light)) (:extend t :background "yellow1")) (((class color) (min-colors 88) (background dark)) (:extend t :background "skyblue4")) (((class color) (min-colors 16) (background light)) (:extend t :background "yellow")) (((class color) (min-colors 16) (background dark)) (:extend t :background "skyblue4")) (((class color) (min-colors 8)) (:extend t :foreground "black" :background "cyan")) (t (:inverse-video t))))
-    `(trailing-whitespace ((((class color) (background light)) (:background "red1")) (((class color) (background dark)) (:background "red1")) (t (:inverse-video t))))
+   `(fixed-pitch ((t (:family "monospace"))))
+   `(variable-pitch ((((type w32)) (:foundry "outline" :family "arial")) (t (:family "sans serif"))))
+   `(escape-glyph ((((background dark)) (:foreground "cyan")) (((type pc)) (:foreground "magenta")) (t (:foreground "brown"))))
+   `(homoglyph ((((background dark)) (:foreground "cyan")) (((type pc)) (:foreground "magenta")) (t (:foreground "brown"))))
+   `(minibuffer-prompt ((((background dark)) (:foreground "cyan")) (((type pc)) (:foreground "magenta")) (t (:foreground "medium blue"))))
+   `(shadow ((((class color grayscale) (min-colors 88) (background light)) (:foreground "grey50")) (((class color grayscale) (min-colors 88) (background dark)) (:foreground "grey70")) (((class color) (min-colors 8) (background light)) (:foreground "green")) (((class color) (min-colors 8) (background dark)) (:foreground "yellow"))))
+   `(secondary-selection ((((class color) (min-colors 88) (background light)) (:extend t :background "yellow1")) (((class color) (min-colors 88) (background dark)) (:extend t :background "skyblue4")) (((class color) (min-colors 16) (background light)) (:extend t :background "yellow")) (((class color) (min-colors 16) (background dark)) (:extend t :background "skyblue4")) (((class color) (min-colors 8)) (:extend t :foreground "black" :background "cyan")) (t (:inverse-video t))))
+   `(trailing-whitespace ((((class color) (background light)) (:background "red1")) (((class color) (background dark)) (:background "red1")) (t (:inverse-video t))))
 
-    `(button ((t (:inherit (link)))))
-    `(link ((t (:underline (:color foreground-color :style line :position nil) :foreground "royalblue3"))))
-    `(link-visited ((t (:foreground "magenta4" :inherit (link)))))
-    `(fringe ((((class color) (background light)) (:background "grey95")) (((class color) (background dark)) (:background "grey10")) (t (:background "gray"))))
-    `(header-line ((t (:box nil :foreground "grey20" :background "grey90" :inherit (mode-line)))))
-    `(tooltip ((t (:foreground "black" :background "lightyellow" :inherit (variable-pitch)))))
+   `(button ((t (:inherit (link)))))
+   `(link ((t (:underline (:color foreground-color :style line :position nil) :foreground ,violetdream-blue))))
+   `(link-visited ((t (:foreground "magenta4" :inherit (link)))))
+   `(fringe ((((class color) (background light)) (:background "grey95")) (((class color) (background dark)) (:background "grey10")) (t (:background "gray"))))
+   `(header-line ((t (:box nil :foreground "grey20" :background "grey90" :inherit (mode-line)))))
+   `(tooltip ((t (:foreground "black" :background "lightyellow" :inherit (variable-pitch)))))
 
-    ;; mode-line
-    `(mode-line ((t (:foreground "white" :background ,violetdream-black))))
-    `(mode-line-buffer-id ((t (:weight bold :foreground ,"#94004F"))))
-    `(mode-line-emphasis ((t (:weight bold))))
-    `(mode-line-highlight ((t (:box (:line-width (2 . 2) :color "grey40" :style released-button)))))
-    `(mode-line-inactive ((t (:weight light :box (:line-width (1 . -1) :color "grey75" :style nil) :foreground "grey20" :background "grey90" :inherit (mode-line)))))
-    `(isearch ((((class color) (min-colors 88) (background light)) (:foreground "lightskyblue1" :background "magenta3")) (((class color) (min-colors 88) (background dark)) (:foreground "black" :background "palevioletred2")) (((class color) (min-colors 16)) (:foreground "cyan1" :background "magenta4")) (((class color) (min-colors 8)) (:foreground "cyan1" :background "magenta4")) (t (:inverse-video t))))
-    `(isearch-fail ((((class color) (min-colors 88) (background light)) (:background "rosybrown1")) (((class color) (min-colors 88) (background dark)) (:background "red4")) (((class color) (min-colors 16)) (:background "red")) (((class color) (min-colors 8)) (:background "red")) (((class color grayscale)) (:foreground "grey")) (t (:inverse-video t))))
-    `(lazy-highlight ((((class color) (min-colors 88) (background light)) (:distant-foreground "black" :background "paleturquoise")) (((class color) (min-colors 88) (background dark)) (:distant-foreground "white" :background "paleturquoise4")) (((class color) (min-colors 16)) (:distant-foreground "white" :background "turquoise3")) (((class color) (min-colors 8)) (:distant-foreground "white" :background "turquoise3")) (t (:underline (:color foreground-color :style line :position nil)))))
-    `(match ((((class color) (min-colors 88) (background light)) (:background "khaki1")) (((class color) (min-colors 88) (background dark)) (:background "royalblue3")) (((class color) (min-colors 8) (background light)) (:foreground "black" :background "yellow")) (((class color) (min-colors 8) (background dark)) (:foreground "white" :background "blue")) (((type tty) (class mono)) (:inverse-video t)) (t (:background "gray"))))
-    `(next-error ((t (:inherit (region)))))
-    `(query-replace ((t (:inherit (isearch)))))
-    `(default ((t (:inherit nil :extend nil :stipple nil :inverse-video nil :box nil :strike-through nil :overline nil :underline nil :slant normal :weight regular :width normal :foundry "adbo" ))))))
+   ;; mode-line
+   `(mode-line ((t (:foreground "white" :background ,violetdream-black))))
+   `(mode-line-buffer-id ((t (:weight bold :foreground ,"#94004F"))))
+   `(mode-line-emphasis ((t (:weight bold))))
+   `(mode-line-highlight ((t (:box (:line-width (2 . 2) :color "grey40" :style released-button)))))
+   `(mode-line-inactive ((t (:weight light :box (:line-width (1 . -1) :color "grey75" :style nil) :foreground "grey20" :background "grey90" :inherit (mode-line)))))
+   `(isearch ((((class color) (min-colors 88) (background light)) (:foreground "lightskyblue1" :background "magenta3")) (((class color) (min-colors 88) (background dark)) (:foreground "black" :background "palevioletred2")) (((class color) (min-colors 16)) (:foreground "cyan1" :background "magenta4")) (((class color) (min-colors 8)) (:foreground "cyan1" :background "magenta4")) (t (:inverse-video t))))
+   `(isearch-fail ((((class color) (min-colors 88) (background light)) (:background "rosybrown1")) (((class color) (min-colors 88) (background dark)) (:background "red4")) (((class color) (min-colors 16)) (:background "red")) (((class color) (min-colors 8)) (:background "red")) (((class color grayscale)) (:foreground "grey")) (t (:inverse-video t))))
+   `(lazy-highlight ((((class color) (min-colors 88) (background light)) (:distant-foreground "black" :background "paleturquoise")) (((class color) (min-colors 88) (background dark)) (:distant-foreground "white" :background "paleturquoise4")) (((class color) (min-colors 16)) (:distant-foreground "white" :background "turquoise3")) (((class color) (min-colors 8)) (:distant-foreground "white" :background "turquoise3")) (t (:underline (:color foreground-color :style line :position nil)))))
+   `(match ((((class color) (min-colors 88) (background light)) (:background "khaki1")) (((class color) (min-colors 88) (background dark)) (:background "royalblue3")) (((class color) (min-colors 8) (background light)) (:foreground "black" :background "yellow")) (((class color) (min-colors 8) (background dark)) (:foreground "white" :background "blue")) (((type tty) (class mono)) (:inverse-video t)) (t (:background "gray"))))
+   `(next-error ((t (:inherit (region)))))
+   `(query-replace ((t (:inherit (isearch)))))
+   `(default ((t (:inherit nil :extend nil :stipple nil :inverse-video nil :box nil :strike-through nil :overline nil :underline nil :slant normal :weight regular :width normal :foundry "adbo" ))))
+
+   ;; org mode
+   `(org-level-1 ((t (:foreground ,violetdream-lightpink
+                                  :height 1.4 :bold t))))
+   `(org-level-2 ((t (:foreground ,violetdream-lightviolet
+                                  :height 1.2  :bold t))))
+   `(org-level-3 ((t (:foreground ,violetdream-violet4
+                                  :bold t))))
+
+             ))
+
+
+
+
 
 (when load-file-name
   (add-to-list 'custom-theme-load-path

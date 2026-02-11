@@ -1,20 +1,20 @@
 export PATH=$HOME/bin:/usr/local/bin:$PATH
 
-## comment if using nix
+# comment if using nix
 # export ZSH="$HOME/.oh-my-zsh"
 # plugins=( 
 #     zsh-syntax-highlighting
 #     tmux
 #     git
-#     zsh-autosuggestions
+#     # zsh-autosuggestions
 # )
 # source $ZSH/oh-my-zsh.sh
-##
+#
 
 ## PROMPT ##
 export PS1="%F{#FD43B7}%n%f@%F{cyan}%m%f-> %1~ $ " ## BASH-like prompt
 
-SAVEHIST=1000
+SAVEHIST=3000
 HISTFILE=~/.zsh_history
 
 
@@ -30,11 +30,11 @@ antigen bundle git
 antigen bundle command-not-found
 
 antigen bundle zsh-users/zsh-syntax-highlighting
-antigen bundle zsh-users/zsh-completions
+# antigen bundle zsh-users/zsh-completions
 # antigen bundle zsh-users/zsh-autosuggestions
 
 # Load the theme.
-# antigen theme robbyrussell
+# antigen theme candy 
 
 # Tell Antigen that you're done.
 antigen apply
@@ -100,7 +100,12 @@ export PATH=$BUN_INSTALL/bin:$PATH
 # . "$HOME/.cargo/env"
 
 eval "$(fzf --zsh)"
-# eval "$(ssh-agent -s)"
+
+# SSH_AUTH_SOCK=/tmp/ssh-XXXXXXxsH8Mf/agent.206828;
+# export SSH_AUTH_SOCK;
+# SSH_AGENT_PID=206829;
+# export SSH_AGENT_PID;
+
 
 # bun completions
 [ -s "/home/saif/.bun/_bun" ] && source "/home/saif/.bun/_bun"
@@ -119,7 +124,15 @@ export EDITOR='emacs'
 
 # export PATH=$HOME/.config/emacs/bin:$PATH
 
+# Start SSH agent
+# if [ -z "$SSH_AUTH_SOCK" ]; then
+#     eval "$(ssh-agent -s)"
+#     ssh-add ~/.ssh/id_rsa
+# fi
+
 # pnpm
 export PNPM_HOME="/home/owlenz/.local/share/pnpm"
 export PATH="$PNPM_HOME:$PATH"
 # pnpm end
+export PATH="$HOME/.local/bin:$PATH"
+export PATH="$HOME/.local/bin:$PATH"

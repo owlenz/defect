@@ -1,15 +1,15 @@
 {
 	"layer": "top",
 	"position": "top",
-	"margin-top": 4,
-	"margin-right": 10,
-	"margin-left": 10,
+	"margin-top": 0,
+	"margin-right": 0,
+	"margin-left": 0,
 	"modules-left": [
 		"hyprland/window"
 	],
 	"modules-center": [
-		"image"
-		// "custom/media"
+		"image",
+		"custom/media"
 	],
 	"modules-right": [
 		"tray",
@@ -25,6 +25,7 @@
 		"format": "{title}",
 		"rewrite": {
 			"(.*) — Zen Browser": "$1",
+			"(.*) — Mozilla Firefox": "$1",
 			"(.*) - Brave": "$1",
 			"(.*) - Discord": "$1",
 			"_zsh_tmux_plugin_run": "foot"
@@ -46,7 +47,7 @@
 		"format-muted": "muted",
 
 		"format-icons": {
-			"headphone": "󰋋"
+			"headphone": "󰋋 "
 		},
 		"on-click": "pactl set-sink-mute @DEFAULT_SINK@ toggle",
 		"on-click-right": "pavucontrol",
@@ -63,8 +64,9 @@
 		"return-type": "json",
 		"max-length": 40,
 		"escape": true,
-		"on-click": "playerctl -p spotify play-pause",
-		"on-scroll-up": "playerctl -p spotify next",
-		"on-scroll-down": "playerctl -p spotify previous"
+        // spotify, chromium for cider. remove -p with name entirely for pausing anything playing 
+		"on-click": "playerctl -p chromium play-pause",
+		"on-scroll-up": "playerctl -p chromium next",
+		"on-scroll-down": "playerctl -p chromium previous"
 	}
 }
