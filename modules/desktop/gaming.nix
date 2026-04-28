@@ -25,10 +25,10 @@ in {
     };
   };
   environment.systemPackages = with pkgs; [
-    lutris
+    # lutris
     mangohud
   ];
-  users.users.saif.extraGroups = [ "gamemode" ];
-  systemd.extraConfig = "DefaultLimitNOFILE=1048576";
+  users.users.owlenz.extraGroups = [ "gamemode" ];
+  # systemd.extraConfig = "DefaultLimitNOFILE=1048576";
 }
   

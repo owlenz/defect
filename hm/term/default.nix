@@ -1,0 +1,8 @@
+{
+  imports = [
+    ./foot.nix
+    ./programs
+  ];
+
+
+}

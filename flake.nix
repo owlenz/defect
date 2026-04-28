@@ -1,5 +1,5 @@
 {
-  description = "owlenz's system flake";
+  description = "defect's system flake";
 
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
@@ -7,49 +7,44 @@
       url = "github:0xc000022070/zen-browser-flake";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-    # cider = {
-    #   url = "git+https://git.nvds.be/NicolaiVdS/Nix-Cider2.git";
-    #   rev = "151de67423c86208e885fd4794d064521207029c";
-    # };
+    hm = {
+      url = "github:nix-community/home-manager";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+    emacs-overlay = {
+      url = "github:nix-community/emacs-overlay";
+    };
+    import-tree.url = "github:vic/import-tree";
+    flake-parts.url = "github:hercules-ci/flake-parts";
   };
+  outputs =
+    {
+      nixpkgs,
+      flake-parts,
+      zen-browser,
+      emacs-overlay,
+      hm,
+      ...
+    }@inputs:
+    flake-parts.lib.mkFlake { inherit inputs; } {
+      systems = [ "x86_64-linux" ];
+      flake = {
+      };
 
-	outputs = { nixpkgs, zen-browser, ...}:
-		let
-      getNixFiles = dir: let
-        dirContents = builtins.readDir dir;
-        isNixFile = name: type: type == "regular" && builtins.match ".*\.nix$" name != null;
-        nixFiles = builtins.filter (name: isNixFile name (dirContents.${name})) (builtins.attrNames dirContents);
-        nixFilesPaths = map (x: dir + "/${x}") nixFiles;
-        isDir = type: type == "directory";
-        test =  builtins.filter (name: isDir (dirContents.${name})) (builtins.attrNames dirContents);
-        subDirPaths = map (x: getNixFiles ( dir + "/${x}" )) test;
-      in
-        nixFilesPaths ++ builtins.concatLists subDirPaths;
+      imports = [
+        ./hosts
+        ./pkgs
+      ];
 
-      moduleFiles = getNixFiles ./modules;
-		  lib = nixpkgs.lib;
-      system = "x86_64-linux";
-      pkgs = import nixpkgs { inherit system; };
-
-      spotxOverlay = import ./overlays/spotx.nix;
-      bibata-hyprcursor = pkgs.callPackage ./pkgs/bibata_hyprcursor { inherit (pkgs) hyprcursor; variant = "original"; };
-      soulseek = pkgs.callPackage ./pkgs/soulseek {};
-	  in {
-		  nixosConfigurations = {
-			  owlen = lib.nixosSystem {
-          inherit system;
-          specialArgs = {
-            inherit zen-browser bibata-hyprcursor soulseek;
+      perSystem =
+        { pkgs, ... }:
+        {
+          devShells.default = pkgs.mkShell {
+            packages = [
+              pkgs.git
+              pkgs.nixd
+            ];
           };
-
-				  modules = moduleFiles ++ [
-            ./configuration.nix
-            { nixpkgs.overlays = [ spotxOverlay ]; }
-            ({pkgs, ...}: {
-              environment.systemPackages = [pkgs.spotify];
-            })
-          ];
         };
-		  };
-	  };
+    };
 }

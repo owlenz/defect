@@ -2,6 +2,6 @@
 let
 in {
   environment.systemPackages = [
-    pkgs.onlyoffice-bin
+    # pkgs.onlyoffice-bin
   ];
 }

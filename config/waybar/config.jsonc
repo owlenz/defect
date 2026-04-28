@@ -59,7 +59,7 @@
 		"spacing": 10
 	},
 	"custom/media": {
-		"exec": "python3 ~/.config/waybar/scripts/mediaplayer.py",
+		"exec": "mediaplayer",
 		"format": "{}",
 		"return-type": "json",
 		"max-length": 40,

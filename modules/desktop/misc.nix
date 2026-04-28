@@ -1,29 +1,5 @@
 { pkgs, soulseek, ... }:
-let
-
-in {
-  services.displayManager.ly = {
-    enable = true;
-  };
-  services.picom = {
-    enable = false;
-    backend = "glx";
-    vSync = true;
-  };
-  services.xserver = {
-    xkb = {
-      layout = "us,ara";
-      variant = ",";
-      options = "grp:alt_shift_toggle";
-    };
-    enable = false;
-    desktopManager = {
-      # xterm.enable = true;
-      xfce.enable =  false;
-    };
-  };
-  services.gvfs.enable = true;
-
+{
   environment.systemPackages = with pkgs; [
     krita
     anydesk
@@ -32,16 +8,16 @@ in {
     qbittorrent
     soulseek
 
-    wineWowPackages.stable
+    # wineWowPackages.stable
     winetricks
-    wineWowPackages.waylandFull
+    # wineWowPackages.waylandFull
 
-    nemo
-    adwaita-icon-theme
+    # nemo
+    nautilus
 
     obs-studio
     (discord.override {
-      withOpenASAR = true;
+      # withOpenASAR = true;
       withVencord = true;
     })
   ];
