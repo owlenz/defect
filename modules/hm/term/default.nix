@@ -1,8 +1,0 @@
-{
-  imports = [
-    ./foot.nix
-    ./programs
-  ];
-
-
-}
