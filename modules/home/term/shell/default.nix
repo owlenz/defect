@@ -29,6 +29,7 @@
         tokei
         unar
         zip
+        unzip
         feh
         ## man pages
         man-pages

@@ -1,9 +1,0 @@
-[window]
-padding = { x = 5, y = 5 }
-opacity = 0.88
-
-[font]
-normal = { family = "BlexMono Nerd Font", style = "Regular" }
-bold = { style = "Medium" }
-bold_italic = { style = "Medium Italic" }
-size = 18

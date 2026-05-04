@@ -10,6 +10,7 @@
         nodejs
         php
         phpactor
+        postman
       ];
     };
 }

@@ -12,6 +12,8 @@
       ];
       programs.niri = {
         settings = {
+          screenshot-path = "~/Pictures/Screenshots/sc_%Y-%m-%d_%H-%M-%S.png";
+          spawn-at-startup = "waybar";
         };
       };
     };

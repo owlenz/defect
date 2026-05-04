@@ -6,9 +6,6 @@
   };
   flake.modules.nixos.niri =
     { pkgs,  ... }:
-    # let
-    #   # pkgs' = pkgs.extend (import inputs.niri.overlays.niri);
-    # in
     {
       imports = [ inputs.niri.nixosModules.niri ];
       nixpkgs.overlays = [ inputs.niri.overlays.niri ];

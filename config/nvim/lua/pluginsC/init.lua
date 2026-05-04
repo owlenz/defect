@@ -1,7 +1,0 @@
-require("pluginsC.lsp")
-require("pluginsC.cmp")
-require("pluginsC.treesitter")
-require("pluginsC.tele")
-require("pluginsC.qol")
-require("pluginsC.web-devicons")
--- require("pluginsC.colorbuddy")
