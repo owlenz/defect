@@ -4,7 +4,7 @@
     { ... }:
     {
       imports = [
-        config.flake.modules.nixos.ly
+        config.flake.modules.nixos.dm
         config.flake.modules.nixos.ssh
         config.flake.modules.nixos.ssh
         config.flake.modules.nixos.x11

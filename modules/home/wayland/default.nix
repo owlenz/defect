@@ -24,12 +24,12 @@
       imports = [
         config.flake.modules.homeManager.fuzzel
         config.flake.modules.homeManager.niri
+        config.flake.modules.homeManager.waybar
       ];
       home.packages =
         hyprland-eco
         ++ niri-eco
         ++ (with pkgs; [
-          waybar
           mako
           wl-clipboard
         ]);

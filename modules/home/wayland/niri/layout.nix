@@ -1,9 +1,15 @@
 {
   flake.modules.homeManager.niri = {
-    programs.niri.settings.input = {
-      border.off = true;
+    programs.niri.settings.layout = {
+      default-column-width.proportion = 1. / 3.;
+      preset-column-widths = [
+        { proportion = 1. / 3.; }
+        { proportion = 1. / 2.; }
+        { proportion = 2. / 3.; }
+      ];
       focus-ring = {
-        width = 2;
+        enable = true;
+        width = 4;
         active = {
           color = "#663E90";
         };

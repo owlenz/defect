@@ -213,12 +213,11 @@
   :ensure t
   :config
   (direnv-mode))
-
+;; shell-file-name "/usr/bin/zsh"
 (use-package vterm
   :ensure t
   :config
-  (setq shell-file-name "/usr/bin/zsh"
-        vterm-max-scrollback 5000
+  (setq vterm-max-scrollback 5000
         vterm-kill-buffer-on-exit t
         vterm-timer-delay 0.00)
   (add-hook 'vterm-mode-hook (lambda ()
