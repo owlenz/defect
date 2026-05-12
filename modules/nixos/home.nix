@@ -12,7 +12,6 @@
         users.owlenz = {
           imports = [
             config.flake.modules.homeManager.defectHome
-            # inputs.niri.homeModules.niri
             ];
           home.username = lib.mkDefault "owlenz";
           home.homeDirectory = lib.mkDefault "/home/owlenz";

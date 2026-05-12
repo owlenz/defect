@@ -14,6 +14,7 @@
         # killall command and more
         psmisc
 
+        just
         at
         bat
         btop
