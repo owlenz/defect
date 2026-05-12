@@ -5,12 +5,10 @@
     let
       hyprland-eco = with pkgs; [
         hyprpicker
-        hyprpaper
         hyprsunset
         hypridle
         hyprlock
 
-        # screenshot
         grim
         slurp
       ];
@@ -24,13 +22,14 @@
       imports = [
         config.flake.modules.homeManager.fuzzel
         config.flake.modules.homeManager.niri
+        config.flake.modules.homeManager.hyprland
         config.flake.modules.homeManager.waybar
+        config.flake.modules.homeManager.mako
       ];
       home.packages =
         hyprland-eco
         ++ niri-eco
         ++ (with pkgs; [
-          mako
           wl-clipboard
         ]);
 

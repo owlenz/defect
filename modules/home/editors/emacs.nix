@@ -18,6 +18,10 @@
             defaultInitFile = false;
             extraEmacsPackages = epkgs: [
               epkgs.nerd-icons
+              epkgs.astro-ts-mode
+              (epkgs.treesit-grammars.with-grammars (g: [
+                g.tree-sitter-astro
+              ]))
             ];
           }
         );

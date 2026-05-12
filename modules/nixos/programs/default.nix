@@ -9,6 +9,7 @@
         config.flake.modules.nixos.fonts
         config.flake.modules.nixos.gaming
         config.flake.modules.nixos.niri
+        config.flake.modules.nixos.hyprland
       ];
     };
 }

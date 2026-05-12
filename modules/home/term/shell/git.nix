@@ -12,11 +12,11 @@
         settings = {
           user = {
             name = "Saif Al-Din Samy";
-            email = "saifowlenzz@proton.me";
+            email = "saifowlenzz@gmail.com";
             username = "owlenz";
           };
           url = {
-            "ssh://git@github.com:" = {
+            "git@github.com:" = {
               insteadOf = "https://github.com/";
             };
           };

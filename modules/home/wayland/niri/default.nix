@@ -15,8 +15,18 @@
         settings = {
           screenshot-path = "~/Pictures/Screenshots/sc_%Y-%m-%d_%H-%M-%S.png";
           spawn-at-startup = [
-            { argv = ["waybar"]; }
-            { argv = ["systemctl" "--user" "import-environment" "WAYLAND_DISPLAY" "XDG_CURRENT_DESKTOP" "XDG_SESSION_TYPE" "DISPLAY"]; }
+            { argv = [ "waybar" ]; }
+            {
+              argv = [
+                "systemctl"
+                "--user"
+                "import-environment"
+                "WAYLAND_DISPLAY"
+                "XDG_CURRENT_DESKTOP"
+                "XDG_SESSION_TYPE"
+                "DISPLAY"
+              ];
+            }
             { argv = [ "awww-daemon" ]; }
           ];
           environment = {

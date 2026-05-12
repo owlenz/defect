@@ -1,0 +1,13 @@
+{ inputs, ... }:
+{
+  flake.modules.nixos.hyprland =
+    { pkgs,  ... }:
+    {
+      programs.hyprland = {
+        enable = true;
+        withUWSM = true;
+        xwayland.enable = true;
+        # portalPackage = pkgs.xdg-desktop-portal-hyprland;
+      };
+    };
+}

@@ -10,6 +10,7 @@
       };
       imports = [
         config.flake.modules.nixos.home
+        config.flake.modules.nixos.nix
         config.flake.modules.nixos.programs
         config.flake.modules.nixos.services
         config.flake.modules.nixos.hardware

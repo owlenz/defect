@@ -36,6 +36,7 @@ in
           ENABLE_CORRECTION="true"
 
           COMPLETION_WAITING_DOTS="true"
+          export PATH="$HOME/.npm-global/bin:$PATH"
         '';
 
         shellAliases = {

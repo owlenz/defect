@@ -59,8 +59,8 @@
                     :slant 'italic)
 
 ;; transparency
-(set-frame-parameter nil 'alpha-background 85) ;; frames (emacs client)
-(add-to-list 'default-frame-alist '(alpha-background . 85)) ;; default window (emacs)
+(set-frame-parameter nil 'alpha-background 90) ;; frames (emacs client)
+(add-to-list 'default-frame-alist '(alpha-background . 90)) ;; default window (emacs)
 
 ;; evil
 (use-package evil
@@ -113,16 +113,47 @@
 ;;   (global-undo-tree-mode 1)
 ;;   (setq undo-tree-auto-save-history 0))
 
-;; tree-sitter
-(use-package tree-sitter
-  :ensure t
-  :init
-  (global-tree-sitter-mode)
+(require 'treesit)
+
+;;;;;;;;;;;; lsp ;;;;;;;;;;;;
+
+(defun get-ts-path ()
+  (interactive)
+  (let* ((output (shell-command-to-string "nix-store --query --requisites /run/current-system | grep typescript | head -n 1")) (trimmed (string-trim output)))
+    (concat trimmed "/lib"))
   )
 
-(use-package tree-sitter-langs
+(use-package astro-ts-mode
+  :hook (astro-ts-mode . lsp-deferred))
+
+(with-eval-after-load 'lsp-mode
+  (add-to-list 'lsp-language-id-configuration '(astro-mode . "astro"))
+  (lsp-register-client
+   (make-lsp-client
+    :new-connection (lsp-stdio-connection '("astro-ls" "--stdio"))
+    :activation-fn (lsp-activate-on "astro")
+    :server-id 'astro-ls
+    :initialization-options
+    (lambda ()
+      (list :typescript
+            (list :tsdk (or (get-ts-path)
+                            "/etc/profiles/per-user/owlenz/lib/node_modules/typescript/lib")))))))
+
+(use-package lsp-mode
   :ensure t
-  )
+  :init
+  ;; set prefix for lsp-command-keymap (few alternatives - "C-l", "C-c l")
+  (setq lsp-keymap-prefix "C-c l")
+  (setq lsp-clangd-binary-path "/home/owlenz/clangd/bin/clangd")
+  :hook (
+         (c-mode . lsp-deferred)
+         (c++-mode . lsp-deferred)
+         (php-mode . lsp-deferred)
+         (js-mode . lsp-deferred)
+         (python-mode . lsp-deferred)
+         (astro-mode . lsp-deferred)
+         (lsp-mode . lsp-enable-which-key-integration))
+  :commands lsp-deferred)
 
 
 ;; (use-package typst-ts-mode
@@ -146,11 +177,6 @@
   :ensure t
   :config (exec-path-from-shell-initialize))
 
-;; (defun get-ts-path ()
-;;   (interactive)
-;;   (let ((output (shell-command-to-string "nix-store --query --requisites /run/current-system | grep typescript")))
-;;     (string-trim output))
-;;   )
 
 (add-hook 'c-mode-hook 'hs-minor-mode)
 
@@ -213,6 +239,7 @@
   :ensure t
   :config
   (direnv-mode))
+
 ;; shell-file-name "/usr/bin/zsh"
 (use-package vterm
   :ensure t
@@ -420,20 +447,6 @@
 (use-package dap-mode 
   :ensure t)
 
-(use-package lsp-mode
-  :ensure t
-  :init
-  ;; set prefix for lsp-command-keymap (few alternatives - "C-l", "C-c l")
-  (setq lsp-keymap-prefix "C-c l")
-  (setq lsp-clangd-binary-path "/home/owlenz/clangd/bin/clangd")
-  :hook (
-         (c-mode . lsp-deferred)
-         (c++-mode . lsp-deferred)
-         (php-mode . lsp-deferred)
-         (js-mode . lsp-deferred)
-         (python-mode . lsp-deferred)
-         (lsp-mode . lsp-enable-which-key-integration))
-  :commands lsp-deferred)
 
 (use-package pyvenv
   :ensure t

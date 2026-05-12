@@ -2,7 +2,7 @@
 let
   pname = "Cider";
   version = "3.1.8";
-  src = ./cider.AppImage;
+  src = /home/owlenz/pkgs/cider-2/cider.AppImage;
   appimageContents = appimageTools.extractType2 {
     inherit pname version src;
   };

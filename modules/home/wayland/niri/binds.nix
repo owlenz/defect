@@ -41,7 +41,8 @@
           action = spawn-sh "playerctl next";
         };
 
-        # "Print".action  = screenshot;
+        "Print".action.screenshot = { show-pointer = false; };
+        "Mod+Print".action.screenshot-screen = { show-pointer = false; };
         # "Ctrl+Print".action = screenshot-screen;
         # "Alt+Print".action = screenshot-window; 
 
@@ -60,6 +61,11 @@
         "Mod+F".action = maximize-column;
         "Mod+Shift+F".action = fullscreen-window;
 
+        "Mod+X".action = center-column;
+
+       "Mod+Minus".action = set-column-width "-10%";
+       "Mod+Equal".action = set-column-width "+10%";
+
         ## workspaces
         "Mod+1".action = focus-workspace 1;
         "Mod+2".action = focus-workspace 2;
@@ -70,15 +76,6 @@
         "Mod+7".action = focus-workspace 7;
         "Mod+8".action = focus-workspace 8;
         "Mod+9".action = focus-workspace 9;
-        # "Mod+Ctrl+1".action = move-column-to-workspace 1;
-        # "Mod+Ctrl+2".action = move-column-to-workspace 2;
-        # "Mod+Ctrl+3".action = move-column-to-workspace 3;
-        # "Mod+Ctrl+4".action = move-column-to-workspace 4;
-        # "Mod+Ctrl+5".action = move-column-to-workspace 5;
-        # "Mod+Ctrl+6".action = move-column-to-workspace 6;
-        # "Mod+Ctrl+7".action = move-column-to-workspace 7;
-        # "Mod+Ctrl+8".action = move-column-to-workspace 8;
-        # "Mod+Ctrl+9".action = move-column-to-workspace 9;
       };
     };
 }
