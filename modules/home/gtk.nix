@@ -13,7 +13,7 @@
 
       gtk = {
         enable = true;
-        colorScheme = "light";
+        colorScheme = "dark";
         iconTheme = {
           name = "Adwaita";
           package = pkgs.adwaita-icon-theme;

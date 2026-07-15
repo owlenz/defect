@@ -17,11 +17,11 @@ in
       programs.zsh = {
         enable = true;
         autosuggestion.enable = true;
+        syntaxHighlighting.enable = true;
         autocd = true;
-        defaultKeymap = "vicmd";
         enableCompletion = true;
         sessionVariables = {
-          EDITOR = "emacs";
+          EDITOR = editor;
         };
         history = {
           ignoreAllDups = true;
@@ -30,13 +30,17 @@ in
         };
 
         initContent = ''
+          bindkey -v
           DISABLE_MAGIC_FUNCTIONS="true"
           export PS1="%F{#FD43B7}%n%f@%F{cyan}%m%f-> %1~ $ "
 
           ENABLE_CORRECTION="true"
 
           COMPLETION_WAITING_DOTS="true"
+          # npm
           export PATH="$HOME/.npm-global/bin:$PATH"
+          # cargo
+          export PATH="$HOME/.cargo/bin:$PATH"
         '';
 
         shellAliases = {
@@ -58,8 +62,8 @@ in
           pick = "hyprpicker | tail -c +2 | head -c -1 |wl-copy";
           xpick = "xcolor | xclip -sel clip";
           ### eza ###
-          ls = "eza --icons=always --group-directories-first --no-user";
-          ll = "eza -blF --icons";
+          ls = "eza --icons=always --group-directories-first";
+          ll = "eza -bglF --icons";
           tree = "eza --tree --icons";
 
           # nix aliases
@@ -77,11 +81,12 @@ in
           enable = true;
           plugins = [
             "git"
+            "docker"
+            "tmux"
+            "emacs"
+            "rust"
             "command-not-found"
-            "zsh-users/zsh-syntax-highlighting"
-            "zsh-users/zsh-completions"
           ];
-
         };
       };
     };

@@ -16,31 +16,38 @@
 
 (package-initialize)
 
+(setq gc-cons-threshold (* 100 1024 1024)
+      read-process-output-max (* 1024 1024)
+      lsp-headerline-breadcrumb-enable nil
+      lsp-idle-delay 1.0
+      lsp-headerline-breadcrumb-enable nil
+      header-line-format nil
+      )
+
+(use-package exec-path-from-shell
+  :ensure t
+  :demand t
+  :config
+  (exec-path-from-shell-initialize))
+
 ;; (load-theme 'violetdream t)
 
 (use-package doom-themes
   :ensure t
   :custom
-  ;; Global settings (defaults)
-  (doom-themes-enable-bold t)   ; if nil, bold is universally disabled
-  (doom-themes-enable-italic t) ; if nil, italics is universally disabled
-  ;; for treemacs users
-  (doom-themes-treemacs-theme "doom-nord") ; use "doom-colors" for less minimal icon theme
+  (doom-themes-enable-bold t)
+  (doom-themes-enable-italic t)
+  (doom-themes-treemacs-theme "doom-tokyo-night")
   :config
-  (load-theme 'doom-nord-light t)
-
-  ;; Enable flashing mode-line on errors
+  (load-theme 'doom-tokyo-night t)
   (doom-themes-visual-bell-config)
-  ;; Enable custom neotree theme (nerd-icons must be installed!)
   (doom-themes-neotree-config)
-  ;; or for treemacs users
   (doom-themes-treemacs-config)
-  ;; Corrects (and improves) org-mode's native fontification.
   (doom-themes-org-config))
 
 ;; indentation
 (setq-default indent-tabs-mode nil)
-(setq-default tab-width 4)
+(setq-default tab-width 2)
 (setq display-line-numbers-type 'relative)
 (global-display-line-numbers-mode 1)
 
@@ -113,21 +120,168 @@
 ;;   (global-undo-tree-mode 1)
 ;;   (setq undo-tree-auto-save-history 0))
 
+(use-package nix-mode
+  :mode ("\\.nix\\'" "\\.nix.in\\'"))
+
+(use-package nix-drv-mode
+  :ensure nix-mode
+  :mode "\\.drv\\'")
+
+(use-package nix-shell
+  :ensure nix-mode
+  :commands (nix-shell-unpack nix-shell-configure nix-shell-build))
+
+(use-package nix-repl
+  :ensure nix-mode
+  :commands (nix-repl))
+
+(use-package direnv
+  :ensure t
+  :config
+  (direnv-mode))
+
+(use-package dockerfile-mode
+  :ensure t
+  :mode "Dockerfile\\'")
+
+(add-hook 'dockerfile-mode-hook #'lsp)
+
+;; shell-file-name "/usr/bin/zsh"
+(use-package vterm
+  :ensure t
+  :config
+  (setq vterm-max-scrollback 5000
+        vterm-kill-buffer-on-exit t
+        vterm-timer-delay 0.00)
+  (add-hook 'vterm-mode-hook (lambda ()
+                               (display-line-numbers-mode -1)))
+  )
+
+(use-package multi-vterm
+  :ensure t
+  :config
+  (add-hook 'vterm-mode-hook
+            (lambda ()
+              (setq-local evil-insert-state-cursor 'box)
+              (evil-insert-state)))
+  (define-key vterm-mode-map [return]                      #'vterm-send-return)
+
+  (setq vterm-keymap-exceptions nil)
+  (evil-define-key 'insert vterm-mode-map (kbd "C-c <escape>") #'vterm--next-insert)
+  )
+
+
+;; (use-package vterm-toggle
+;;   :after vterm
+;;   )
+
+;; magit
+(use-package transient 
+  :ensure t)
+(use-package magit
+  :ensure t)
+
+;;;;;;;;;;;; ts ;;;;;;;;;;;;
+
 (require 'treesit)
+
+(use-package astro-ts-mode)
+
+(use-package typst-ts-mode
+  :ensure t
+  :custom
+  (typst-ts-mode-watch-options "--open"))
+
+(use-package rustic
+  :ensure
+  :bind (:map rustic-mode-map
+              ("M-j" . lsp-ui-imenu)
+              ("M-?" . lsp-find-references)
+              ("C-c C-c l" . flycheck-list-errors)
+              ("C-c C-c a" . lsp-execute-code-action)
+              ("C-c C-c r" . lsp-rename)
+              ("C-c C-c q" . lsp-workspace-restart)
+              ("C-c C-c Q" . lsp-workspace-shutdown)
+              ("C-c C-c s" . lsp-rust-analyzer-status))
+  :config
+  ;; uncomment for less flashiness
+  (setq lsp-eldoc-hook nil)
+  ;; (setq lsp-enable-symbol-highlighting nil)
+  ;; (setq lsp-signature-auto-activate nil)
+
+  ;; comment to disable rustfmt on save
+  ;; (setq rustic-format-on-save t)
+  (add-hook 'rustic-mode-hook 'rk/rustic-mode-hook))
+
+(defun rk/rustic-mode-hook ()
+  ;; so that run C-c C-c C-r works without having to confirm, but don't try to
+  ;; save rust buffers that are not file visiting. Once
+  ;; https://github.com/brotzeit/rustic/issues/253 has been resolved this should
+  ;; no longer be necessary.
+  (when buffer-file-name
+    (setq-local buffer-save-without-query t))
+  (add-hook 'before-save-hook 'lsp-format-buffer nil t))
 
 ;;;;;;;;;;;; lsp ;;;;;;;;;;;;
 
 (defun get-ts-path ()
-  (interactive)
-  (let* ((output (shell-command-to-string "nix-store --query --requisites /run/current-system | grep typescript | head -n 1")) (trimmed (string-trim output)))
-    (concat trimmed "/lib"))
-  )
+  (let* ((output (shell-command-to-string
+                  "nix-store --query --requisites /run/current-system | grep typescript | sed -n '2p'"))
+         (trimmed (string-trim output)))
+    (concat trimmed "/lib/node_modules/typescript/lib")))
 
-(use-package astro-ts-mode
-  :hook (astro-ts-mode . lsp-deferred))
+(use-package lsp-mode
+  :ensure t
+  :init
+  (setq lsp-keymap-prefix "C-c l")
+  (setq lsp-completion-provider :none)
+  :hook ((c-mode             . lsp-deferred)
+         (c++-mode           . lsp-deferred)
+         (php-mode           . lsp-deferred)
+         (js-mode            . lsp-deferred)
+         (js-ts-mode         . lsp-deferred)
+         (python-mode        . lsp-deferred)
+         (css-ts-mode        . lsp-deferred)
+         (typescript-ts-mode . lsp-deferred)
+         (nix-mode           . lsp-deferred)
+         (rustic-mode        . lsp-deferred)
+         (tsx-ts-mode        . lsp-deferred)
+         (lsp-mode           . lsp-enable-which-key-integration))
+  :config
+  ;; C
+  (setq lsp-clients-clangd-executable "clangd")
+  (setq lsp-clients-clangd-args
+        '("--background-index"      ; index project in background
+          "--clang-tidy"            ; enable clang-tidy diagnostics
+          "--completion-style=detailed"
+          "--header-insertion=never"
+          "--log=error"))
+  (setq lsp-enable-on-type-formatting nil)
+
+  ;; rust
+  (setq lsp-eldoc-render-all t)
+  (setq eldoc-echo-area-use-multiline-p 1)
+  (setq lsp-idle-delay 0.6)
+  (setq lsp-inlay-hint-enable t)
+  (setq lsp-rust-analyzer-display-lifetime-elision-hints-use-parameter-names nil)
+  (setq lsp-rust-analyzer-display-closure-return-type-hints t)
+  (setq lsp-rust-analyzer-display-parameter-hints nil)
+  (setq lsp-auto-guess-root nil)
+  :commands lsp-deferred)
+
+(use-package lsp-ui
+  :ensure t
+  :commands lsp-ui-mode
+  :hook (lsp-mode . lsp-ui-mode)
+  :config
+  (setq lsp-ui-doc-enable t)
+  (setq lsp-ui-doc-position 'at-point)
+  (setq lsp-ui-sideline-show-diagnostics t)
+  (setq lsp-ui-sideline-show-hover nil)
+  (setq lsp-ui-peek-enable t))
 
 (with-eval-after-load 'lsp-mode
-  (add-to-list 'lsp-language-id-configuration '(astro-mode . "astro"))
+  (add-to-list 'lsp-language-id-configuration '(astro-ts-mode . "astro"))
   (lsp-register-client
    (make-lsp-client
     :new-connection (lsp-stdio-connection '("astro-ls" "--stdio"))
@@ -136,47 +290,36 @@
     :initialization-options
     (lambda ()
       (list :typescript
-            (list :tsdk (or (get-ts-path)
-                            "/etc/profiles/per-user/owlenz/lib/node_modules/typescript/lib")))))))
+            (list :tsdk (get-ts-path)))))))
 
-(use-package lsp-mode
+(with-eval-after-load 'lsp-mode
+  (add-to-list 'lsp-language-id-configuration '(typst-ts-mode . "typst"))
+  (lsp-register-client
+   (make-lsp-client
+    :new-connection (lsp-stdio-connection '("tinymist" "--stdio"))
+    :activation-fn (lsp-activate-on "typst")
+    :server-id 'tinymist
+    )))
+
+(use-package lsp-tailwindcss
   :ensure t
+  :after lsp-mode
   :init
-  ;; set prefix for lsp-command-keymap (few alternatives - "C-l", "C-c l")
-  (setq lsp-keymap-prefix "C-c l")
-  (setq lsp-clangd-binary-path "/home/owlenz/clangd/bin/clangd")
-  :hook (
-         (c-mode . lsp-deferred)
-         (c++-mode . lsp-deferred)
-         (php-mode . lsp-deferred)
-         (js-mode . lsp-deferred)
-         (python-mode . lsp-deferred)
-         (astro-mode . lsp-deferred)
-         (lsp-mode . lsp-enable-which-key-integration))
-  :commands lsp-deferred)
+  (setq lsp-tailwindcss-add-on-mode t)
+  :config
+  (setq lsp-tailwindcss-server-path
+        "/etc/profiles/per-user/owlenz/bin/tailwindcss-language-server")
+  (setq lsp-tailwindcss-server-command
+        `(,(executable-find "tailwindcss-language-server") "--stdio"))
+  (setq lsp-tailwindcss-server-options
+        `(:typescript (:tsdk ,(get-ts-path))))
+  (dolist (mode '(astro-ts-mode css-ts-mode typescript-ts-mode tsx-ts-mode js-ts-mode))
+    (add-to-list 'lsp-tailwindcss-major-modes mode)))
 
-
-;; (use-package typst-ts-mode
-;;   :ensure (:type git :host sourcehut :repo "meow_king/typst-ts-mode")
-;;   :custom
-;;   (typst-ts-mode-watch-options "--open"))
 
 ;; WEB MODE
 (use-package web-mode
   :ensure t)
-
-;; ASTRO
-(define-derived-mode astro-mode web-mode "astro")
-(setq auto-mode-alist
-      (append '((".*\\.astro\\'" . astro-mode))
-              auto-mode-alist))
-
-;; (setq explicit-shell-file-name "/usr/bin/zsh")
-
-(use-package exec-path-from-shell
-  :ensure t
-  :config (exec-path-from-shell-initialize))
-
 
 (add-hook 'c-mode-hook 'hs-minor-mode)
 
@@ -220,60 +363,6 @@
                 (list #'php-complete-complete-function)
                         )))
 
-(use-package nix-mode
-  :mode ("\\.nix\\'" "\\.nix.in\\'"))
-
-(use-package nix-drv-mode
-  :ensure nix-mode
-  :mode "\\.drv\\'")
-
-(use-package nix-shell
-  :ensure nix-mode
-  :commands (nix-shell-unpack nix-shell-configure nix-shell-build))
-
-(use-package nix-repl
-  :ensure nix-mode
-  :commands (nix-repl))
-
-(use-package direnv
-  :ensure t
-  :config
-  (direnv-mode))
-
-;; shell-file-name "/usr/bin/zsh"
-(use-package vterm
-  :ensure t
-  :config
-  (setq vterm-max-scrollback 5000
-        vterm-kill-buffer-on-exit t
-        vterm-timer-delay 0.00)
-  (add-hook 'vterm-mode-hook (lambda ()
-                               (display-line-numbers-mode -1)))
-  )
-
-(use-package multi-vterm
-  :ensure t
-  :config
-  (add-hook 'vterm-mode-hook
-            (lambda ()
-              (setq-local evil-insert-state-cursor 'box)
-              (evil-insert-state)))
-  (define-key vterm-mode-map [return]                      #'vterm-send-return)
-
-  (setq vterm-keymap-exceptions nil)
-  (evil-define-key 'insert vterm-mode-map (kbd "C-c <escape>") #'vterm--next-insert)
-  )
-
-
-;; (use-package vterm-toggle
-;;   :after vterm
-;;   )
-
-;; magit
-;; (use-package transient 
-;;   :ensure t)
-;; (use-package magit
-;;   :ensure t)
 
 
 ;; vertico
@@ -282,7 +371,6 @@
   :ensure nil
   :custom
   (enable-recursive-minibuffers t)
-  (read-extended-command-predicate #'command-completion-default-include-p)
   (minibuffer-prompt-properties
    '(read-only t cursor-intangible t face minibuffer-prompt)))
 
@@ -309,18 +397,9 @@
 
 (use-package cape
   :ensure t
-  :bind ("C-c p" . cape-prefix-map) ;; Alternative key: M-<tab>, M-p, M-+
+  :bind ("C-c p" . cape-prefix-map)
   :bind ("M-<tab>" . completion-at-point)
-  ;; Alternatively bind Cape commands individually.
-  ;; :bind (("C-c f" . cape-file)
-  ;;        ("C-c p h" . cape-history)
-  ;;        ("C-c p f" . cape-file)
-  ;;        ...)
   :init
-  ;; Add to the global default value of `completion-at-point-functions' which is
-  ;; used by `completion-at-point'.  The order of the functions matters, the
-  ;; first function returning a result wins.  Note that the list of buffer-local
-  ;; completion functions takes precedence over the global list.
   (add-hook 'completion-at-point-functions #'cape-dabbrev)
   (add-hook 'completion-at-point-functions #'cape-file)
   (add-hook 'completion-at-point-functions #'cape-elisp-block)
@@ -329,23 +408,11 @@
 (use-package orderless
   :ensure t
   :custom
-  ;; (orderless-style-dispatchers '(orderless-affix-dispatch))
-  ;; (orderless-component-separator #'orderless-escapable-split-on-space)
   (completion-styles '(orderless basic))
   (completion-category-defaults nil)
   (completion-category-overrides '((file (styles partial-completion)))))
 
 (use-package eat :ensure t)
-
-;; (use-package claude-code :ensure t
-;;   :vc (:url "https://github.com/stevemolitor/claude-code.el" :rev :newest)
-;;   :config
-
-;;   (claude-code-mode)
-;;   :bind-keymap ("C-c c" . claude-code-command-map)
-
-;;   :bind
-;;   (:repeat-map my-claude-code-map ("M" . claude-code-cycle-mode)))
 
 (use-package eca
   :ensure t
@@ -380,13 +447,21 @@
 (use-package visual-fill-column
   :ensure t)
 
-;; (require 'writeroom-mode)
-;; (add-hook 'writeroom-mode-hook (lambda ()
-;;                                  (display-line-numbers-mode -1)))
+
+;;;;;;;;; dired ;;;;;;;;;
+(use-package dired
+  :custom ((dired-listing-switches "-algh --group-directories-first")))
 
 (with-eval-after-load 'dired
-  (define-key dired-mode-map (kbd "C-a") 'dired-create-empty-file)
-  )
+  (put 'dired-find-alternate-file 'disabled nil)
+  (define-key dired-mode-map (kbd "RET") 'dired-find-alternate-file)
+  (define-key dired-mode-map [mouse-2] 'dired-find-alternate-file)
+  (define-key dired-mode-map (kbd "C-a") 'dired-create-empty-file))
+
+;; (use-package nerd-icons-dired
+;;   :ensure t
+;;   :hook (dired-mode . nerd-icons-dired-mode))
+  
 
 ;; keybindings
 (use-package general
@@ -426,12 +501,9 @@
   "wh" '(split-window-below :wk "split horizontal window")
 
   "vt" '(multi-vterm :wk "multi vterm")
-
-  "uz" '(writeroom-mode :wk "Zen Mode")
   )
 
 ;; keybindings
-
 (global-set-key (kbd "<escape>") 'keyboard-quit)
 (evil-define-key 'normal 'global (kbd "K") 'man)
 
@@ -453,13 +525,6 @@
   :config (pyvenv-mode)
   )
 
-(setq gc-cons-threshold (* 100 1024 1024)
-      read-process-output-max (* 1024 1024)
-      lsp-headerline-breadcrumb-enable nil
-      lsp-idle-delay 1.0
-      lsp-headerline-breadcrumb-enable nil
-      header-line-format nil
-      )
 
 (font-lock-add-keywords
  'c-mode
@@ -468,31 +533,3 @@
 (use-package org
   :ensure t
   )
-
-(custom-set-variables
- ;; custom-set-variables was added by Custom.
- ;; If you edit it by hand, you could mess it up, so be careful.
- ;; Your init file should contain only one such instance.
- ;; If there is more than one, they won't work right.
- '(custom-safe-themes
-   '("3613617b9953c22fe46ef2b593a2e5bc79ef3cc88770602e7e569bbd71de113b"
-     "7dc1dd6fae32c5840715cecebed8c5a58e43fc855d729d289a770f58f4cbf2c8"
-     default))
- '(package-selected-packages
-   '(cape claude-code corfu diminish direnv doom-themes eca ein
-          evil-collection evil-commentary evil-surround
-          exec-path-from-shell general gotham-theme lsp-java magit
-          multi-vterm nerd-icons nix-mode no-littering noxml-fold
-          orderless php-mode pyvenv tree-sitter-langs typst-ts-mode
-          vertico visual-fill-column web-mode))
- '(package-vc-selected-packages
-   '((claude-code :url "https://github.com/stevemolitor/claude-code.el")))
- '(php-imenu-generic-expression 'php-imenu-generic-expression)
- '(php-mode-coding-style 'psr2)
- '(php-mode-template-compatibility nil))
-(custom-set-faces
- ;; custom-set-faces was added by Custom.
- ;; If you edit it by hand, you could mess it up, so be careful.
- ;; Your init file should contain only one such instance.
- ;; If there is more than one, they won't work right.
- )

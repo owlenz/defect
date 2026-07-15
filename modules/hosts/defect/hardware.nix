@@ -36,7 +36,6 @@
           "dmask=0077"
         ];
       };
-
       fileSystems."/home/owlenz/games" = {
         device = "/dev/disk/by-uuid/1648D8C248D8A1B3";
         fsType = "ntfs";
@@ -50,6 +49,12 @@
           "relatime"
           "user_xattr"
         ];
+      };
+
+      fileSystems."/media" = {
+        device = "/dev/disk/by-uuid/382db4b5-5460-458c-b7e5-c796c4be582f";
+        fsType = "ext4";
+        options = [ "rw" "defaults" ];
       };
 
       swapDevices = [

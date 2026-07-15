@@ -18,6 +18,8 @@
       time.timeZone = "Africa/Cairo";
 
       programs.zsh.enable= true;
+
+      users.groups.media = {};
       users.users.owlenz = {
         isNormalUser = true;
         home = "/home/owlenz";
@@ -27,7 +29,31 @@
           "networkmanager"
           "wheel"
           "audio"
+          "media"
         ];
+      };
+
+      networking.networkmanager.enable = false;
+      networking.dhcpcd.enable = false;
+      systemd.services.systemd-networkd-wait-online.enable = true;
+      systemd.network = {
+        enable = true;
+        networks."10-lan" = {
+          # Match your network interface name (run `ip link` to find yours)
+          matchConfig.Name = "enp4s0";
+          networkConfig = {
+            DHCP = "no";
+            DNS = "8.8.8.8 8.8.4.4";
+          };
+          addresses = [
+            {
+              Address = "192.168.1.104/24";
+            }
+          ];
+          routes = [
+            { routeConfig.Gateway = "192.168.1.1"; }
+          ];
+        };
       };
 
       i18n.defaultLocale = "en_US.UTF-8";

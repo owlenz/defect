@@ -4,7 +4,7 @@
     imports = [
       config.flake.modules.homeManager.term
       config.flake.modules.homeManager.wayland
-      config.flake.modules.homeManager.emacs
+      config.flake.modules.homeManager.editors
       config.flake.modules.homeManager.gtk
       config.flake.modules.homeManager.browsers
       config.flake.modules.homeManager.media

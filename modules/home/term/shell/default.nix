@@ -13,7 +13,6 @@
       home.packages = with pkgs; [
         # killall command and more
         psmisc
-
         just
         at
         bat
@@ -32,6 +31,7 @@
         zip
         unzip
         feh
+        tmux
         ## man pages
         man-pages
         man-pages-posix

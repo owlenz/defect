@@ -7,12 +7,15 @@
         config.flake.modules.homeManager.kopuz
       ];
       home.packages = with pkgs; [
-        local.cider-2
+        # local.cider-2
         pavucontrol
         ffmpeg
         qbittorrent
         nicotine-plus
+        picard
         amberol
+        lrcget
+        vlc
       ];
       # programs.mpv.enable = true;
     };

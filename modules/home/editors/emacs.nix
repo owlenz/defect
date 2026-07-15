@@ -19,9 +19,14 @@
             extraEmacsPackages = epkgs: [
               epkgs.nerd-icons
               epkgs.astro-ts-mode
-              (epkgs.treesit-grammars.with-grammars (g: [
-                g.tree-sitter-astro
-              ]))
+              epkgs.lsp-tailwindcss
+              epkgs.magit
+              epkgs.treesit-grammars.with-all-grammars
+              epkgs.exec-path-from-shell
+              epkgs.lsp-mode
+              epkgs.lsp-ui
+              epkgs.rustic
+              epkgs.dockerfile-mode
             ];
           }
         );

@@ -23,7 +23,8 @@
         config.flake.modules.homeManager.fuzzel
         config.flake.modules.homeManager.niri
         config.flake.modules.homeManager.hyprland
-        config.flake.modules.homeManager.waybar
+        # config.flake.modules.homeManager.waybar
+        config.flake.modules.homeManager.noctalia
         config.flake.modules.homeManager.mako
       ];
       home.packages =
