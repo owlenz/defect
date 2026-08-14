@@ -32,9 +32,11 @@
               "192.168.1.104   fin.owlenz.xyz"
               "192.168.1.104   navi.owlenz.xyz"
               "192.168.1.104   vault.owlenz.xyz"
+              "192.168.1.104   abs.owlenz.xyz"
             ];
             upstreams = [
               "1.1.1.1"
+              "8.8.4.4"
               "9.9.9.9"
               "1.1.1.2"
             ];

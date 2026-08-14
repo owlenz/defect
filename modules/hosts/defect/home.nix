@@ -3,8 +3,9 @@
   flake.modules.homeManager.defectHome =
     { lib, ... }:
     {
-      imports = with config.flake.modules.homeManager; [
-        root
+      imports = [
+        config.flake.modules.homeManager.root
+        # (config.flake.modules.homeManager.desktop or { })
       ];
     };
 }

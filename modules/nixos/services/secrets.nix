@@ -1,6 +1,8 @@
 {
-  flake-file.inputs.sops-nix.url = "github:Mic92/sops-nix";
-
+  flake-file.inputs.sops-nix = {
+    url = "github:Mic92/sops-nix";
+    inputs.nixpkgs.follows = "nixpkgs";
+  };
   flake.modules.nixos.secrets =
     { pkgs, inputs, ... }:
     {
@@ -10,6 +12,5 @@
       ];
       sops.defaultSopsFile = ../../../secrets/secrets.yaml;
       sops.age.keyFile = "/home/owlenz/.config/sops/age/keys.txt";
-      sops.secrets."vaultwarden/admin_token" = {};
     };
 }

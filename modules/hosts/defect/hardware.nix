@@ -20,7 +20,7 @@
       ];
 
       boot.initrd.kernelModules = [ ];
-      boot.kernelModules = [ ];
+      boot.kernelModules = [ "kvm_amd" ];
       boot.extraModulePackages = [ ];
 
       fileSystems."/" = {
@@ -54,7 +54,10 @@
       fileSystems."/media" = {
         device = "/dev/disk/by-uuid/382db4b5-5460-458c-b7e5-c796c4be582f";
         fsType = "ext4";
-        options = [ "rw" "defaults" ];
+        options = [
+          "rw"
+          "defaults"
+        ];
       };
 
       swapDevices = [

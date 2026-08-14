@@ -1,13 +1,12 @@
 { ... }:
 let
-  editor = "emacsclient -c";
+  editor = "nvim";
 in
 {
   flake.modules.homeManager.zsh =
     { pkgs, ... }:
     {
       programs.fzf.enableZshIntegration = true;
-      programs.direnv.enableZshIntegration = true;
 
       home.sessionVariables = {
         SHELL = "${pkgs.zsh}/bin/zsh";
@@ -16,7 +15,10 @@ in
 
       programs.zsh = {
         enable = true;
-        autosuggestion.enable = true;
+        autosuggestion = {
+          enable = true;
+          highlight = "fg=#585b70";
+        };
         syntaxHighlighting.enable = true;
         autocd = true;
         enableCompletion = true;
@@ -30,6 +32,10 @@ in
         };
 
         initContent = ''
+
+          eval "$(hister completion zsh)"
+          eval "$(fasd --init auto)"
+
           bindkey -v
           DISABLE_MAGIC_FUNCTIONS="true"
           export PS1="%F{#FD43B7}%n%f@%F{cyan}%m%f-> %1~ $ "
@@ -41,6 +47,9 @@ in
           export PATH="$HOME/.npm-global/bin:$PATH"
           # cargo
           export PATH="$HOME/.cargo/bin:$PATH"
+          # go
+          export PATH="$HOME/go/bin:$PATH"
+
         '';
 
         shellAliases = {
@@ -49,8 +58,8 @@ in
           hyprC = "${editor} ~/.config/hypr/hyprland.conf";
           tmuxC = "${editor} ~/.tmux.conf";
           barC = "cd ~/.config/waybar/ ; ${editor}";
-          nvimC = "cd ~/.config/nvim/ ;  ${editor} nvim";
-          vimC = "cd ~/.config/nvim/ ; ${editor} nvim";
+          nvimC = "cd ~/.config/nvim/ ;  ${editor}";
+          vimC = "cd ~/.config/nvim/ ; ${editor}";
           i3C = "cd ~/.config/i3/ ; ${editor}";
           zshC = "${editor} ~/.zshrc";
           starC = "${editor} ~/.config/starship/starship.toml";
@@ -59,6 +68,9 @@ in
           ".." = "cd ..";
           vim = "nvim";
           nivm = "nvim";
+          tx = "tmux";
+          ec = "emacs-client -c";
+
           pick = "hyprpicker | tail -c +2 | head -c -1 |wl-copy";
           xpick = "xcolor | xclip -sel clip";
           ### eza ###
@@ -81,11 +93,13 @@ in
           enable = true;
           plugins = [
             "git"
+            "golang"
             "docker"
             "tmux"
             "emacs"
             "rust"
             "command-not-found"
+            "vi-mode"
           ];
         };
       };

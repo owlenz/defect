@@ -1,5 +1,9 @@
 {
-  flake-file.inputs.kopuz.url = "github:temidaradev/kopuz";
+  flake-file.inputs.kopuz = {
+    url = "github:temidaradev/kopuz";
+    inputs.nixpkgs.follows = "nixpkgs";
+    inputs.rust-overlay.follows = "rust-overlay";
+  };
   flake.modules.homeManager.kopuz =
     { pkgs, inputs, ... }:
     {

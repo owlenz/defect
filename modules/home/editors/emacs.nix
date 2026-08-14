@@ -27,6 +27,7 @@
               epkgs.lsp-ui
               epkgs.rustic
               epkgs.dockerfile-mode
+              epkgs.go-mode
             ];
           }
         );

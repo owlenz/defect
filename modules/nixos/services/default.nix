@@ -6,18 +6,12 @@
       imports = [
         config.flake.modules.nixos.dm
         config.flake.modules.nixos.ssh
-        config.flake.modules.nixos.ssh
         config.flake.modules.nixos.x11
         config.flake.modules.nixos.pipewire
-        config.flake.modules.nixos.jellyfin
-        config.flake.modules.nixos.arr
-        config.flake.modules.nixos.syncthing
-        config.flake.modules.nixos.pi-hole
-        config.flake.modules.nixos.vaultwarden
         config.flake.modules.nixos.secrets
-        config.flake.modules.nixos.ddns
-        config.flake.modules.nixos.navidrome
       ];
+      programs.wireshark.enable = true;
+
       services = {
         gvfs.enable = true;
         blueman.enable = true;
@@ -25,5 +19,36 @@
         flatpak.enable = true;
         # cloudflare-warp.enable = true;
       };
+
+      virtualisation.oci-containers = {
+        containers.couchdb-obsidian = {
+          image = "couchdb:latest";
+          ports = [ "5984:5984" ];
+          environment = {
+            COUCHDB_USER="owlenz";
+            COUCHDB_PASSWORD="test";
+          };
+          volumes = [
+            "./couchdb-data:/var/lib/couchdb/data"
+            "./couchdb-etc:/var/lib/couchdb/etc/local.d "
+          ];
+        };
+      };
+
+      services.nginx = {
+        enable = true;
+        virtualHosts."cdb.owlenz.xyz" = {
+          forceSSL = true;
+          enableACME = true;
+          locations."/" = {
+            proxyPass = "http://127.0.0.1:5984";
+            proxyWebsockets = true;
+          };
+        };
+      };
+
+      networking.extraHosts = ''
+        127.0.0.1 cdb.owlenz.xyz
+      '';
     };
 }

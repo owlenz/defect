@@ -17,9 +17,9 @@
       networking.hostName = "defect";
       time.timeZone = "Africa/Cairo";
 
-      programs.zsh.enable= true;
+      programs.zsh.enable = true;
 
-      users.groups.media = {};
+      users.groups.media = { };
       users.users.owlenz = {
         isNormalUser = true;
         home = "/home/owlenz";
@@ -43,7 +43,7 @@
           matchConfig.Name = "enp4s0";
           networkConfig = {
             DHCP = "no";
-            DNS = "8.8.8.8 8.8.4.4";
+            # DNS = "8.8.8.8 8.8.4.4";
           };
           addresses = [
             {
@@ -51,7 +51,7 @@
             }
           ];
           routes = [
-            { routeConfig.Gateway = "192.168.1.1"; }
+            { Gateway = "192.168.1.1"; }
           ];
         };
       };

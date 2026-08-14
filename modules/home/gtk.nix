@@ -13,18 +13,6 @@
 
       gtk = {
         enable = true;
-        colorScheme = "dark";
-        iconTheme = {
-          name = "Adwaita";
-          package = pkgs.adwaita-icon-theme;
-        };
-
-        gtk4.theme = null;
-
-        theme = {
-          name = "adw-gtk3";
-          package = pkgs.adw-gtk3;
-        };
       };
       home.packages = with pkgs; [
         nwg-look

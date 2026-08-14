@@ -142,9 +142,9 @@
 
 (use-package dockerfile-mode
   :ensure t
-  :mode "Dockerfile\\'")
-
-(add-hook 'dockerfile-mode-hook #'lsp)
+  :mode "Dockerfile\\'"
+  :hook ((dockerfile-mode . lsp-deferred)
+         (before-save . lsp-format-buffer)))
 
 ;; shell-file-name "/usr/bin/zsh"
 (use-package vterm
@@ -222,6 +222,12 @@
     (setq-local buffer-save-without-query t))
   (add-hook 'before-save-hook 'lsp-format-buffer nil t))
 
+;; go
+(use-package go-mode
+  :ensure t
+  :hook ((go-mode . lsp-deferred)
+         (before-save . gofmt-before-save)))
+
 ;;;;;;;;;;;; lsp ;;;;;;;;;;;;
 
 (defun get-ts-path ()
@@ -246,6 +252,7 @@
          (nix-mode           . lsp-deferred)
          (rustic-mode        . lsp-deferred)
          (tsx-ts-mode        . lsp-deferred)
+         (go-mode            . lsp-deferred)
          (lsp-mode           . lsp-enable-which-key-integration))
   :config
   ;; C
@@ -268,6 +275,7 @@
   (setq lsp-rust-analyzer-display-parameter-hints nil)
   (setq lsp-auto-guess-root nil)
   :commands lsp-deferred)
+
 
 (use-package lsp-ui
   :ensure t

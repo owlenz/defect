@@ -1,6 +1,7 @@
 { ... }:
 {
   flake.modules.nixos.vaultwarden = { config, ... }: {
+    sops.secrets."vaultwarden/admin_token" = {};
     services.vaultwarden = {
       enable = true;
       dbBackend = "sqlite";
@@ -15,7 +16,7 @@
     };
     security.acme = {
       acceptTerms = true;
-      defaults.email = "admin@owlenz.xyz";
+      defaults.email = "saifowlenzz@gmail.com";
     };
 
     services.nginx = {

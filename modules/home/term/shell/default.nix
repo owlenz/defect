@@ -8,7 +8,12 @@
         zsh
         direnv
         nix
+        tmux
       ];
+      programs.fzf = {
+        enable = true;
+        enableZshIntegration = true;
+      };
 
       home.packages = with pkgs; [
         # killall command and more
@@ -24,17 +29,19 @@
         fasd
         fd
         nil
-        fzf
         ripgrep
         tokei
         unar
         zip
         unzip
         feh
-        tmux
         ## man pages
         man-pages
         man-pages-posix
+
+        ## network
+        lsof
+        iotop
       ];
     };
 }

@@ -1,8 +1,13 @@
 {
-  flake.modules.nixos.navidrome = { ... }: {
+  flake.modules.nixos.navidrome = { config, pkgs, ... }: {
     services.navidrome = {
       enable = true;
       settings.MusicFolder = "/media/Music";
+      plugins = with pkgs.navidromePlugins; [
+        discord-rich-presence
+        listenbrainz-daily-playlist
+        apple-music
+      ];
     };
 
     services.nginx = {

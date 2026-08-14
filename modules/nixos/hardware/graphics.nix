@@ -8,9 +8,11 @@
         gst_all_1.gst-plugins-base
         gst_all_1.gst-plugins-good
         gst_all_1.gst-plugins-bad
-        gst_all_1.gst-plugins-ugly    # needed for some H.264/AAC support depending on licensing
-        gst_all_1.gst-libav           # ffmpeg-based codecs, broad H.264 support
+        gst_all_1.gst-plugins-ugly
+        gst_all_1.gst-libav
       ];
+
+      environment.variables.LIBVA_DRIVER_NAME = "nvidia";
       hardware = {
         graphics = {
           enable = true;

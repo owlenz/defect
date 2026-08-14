@@ -18,8 +18,10 @@ in
               type = types.str;
               default = "x86_64-linux";
             };
-
-            unstable = lib.mkOption {
+            # specialArgs = mkOption {
+            #   type = ;
+            # }
+            unstable = mkOption {
               type = types.bool;
               default = true;
             };
@@ -41,10 +43,14 @@ in
           in
           nixpkgs'.lib.nixosSystem {
             inherit (options) system;
-            specialArgs.inputs = inputs;
+            specialArgs = {
+              inherit inputs;
+            }
+            # // options.specialArgs
+            ;
             modules = [
               config.flake.modules.nixos.root
-              # (config.flake.modules.nixos."${hostname}Home" or { })
+              (config.flake.modules.nixos."${hostname}Home" or { })
               (config.flake.modules.nixos."${hostname}Configuration" or { })
               (config.flake.modules.nixos."${hostname}Hardware" or { })
             ];

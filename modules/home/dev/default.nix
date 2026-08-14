@@ -8,7 +8,7 @@
         typst
         tinymist
         ispell
-        dockerfile-language-server-nodejs
+        dockerfile-language-server
 
         (pkgs.unityhub.override {
           extraPkgs = pkgs: with pkgs; [

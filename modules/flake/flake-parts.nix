@@ -14,6 +14,12 @@
   ];
 
   flake-file.outputs = ''
-    inputs: inputs.flake-parts.lib.mkFlake { inherit inputs; } (inputs.import-tree ./modules)
+    inputs:
+      let
+        lib = inputs.nixpkgs.lib;
+        isNixvimExtra = path: lib.hasInfix "/nixvim/" path && !(lib.hasSuffix "/nixvim/default.nix" path);
+        tree = inputs.import-tree.filterNot isNixvimExtra;
+      in
+      inputs.flake-parts.lib.mkFlake { inherit inputs; } (tree ./modules)
   '';
 }
