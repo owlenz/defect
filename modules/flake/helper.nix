@@ -45,9 +45,7 @@ in
             inherit (options) system;
             specialArgs = {
               inherit inputs;
-            }
-            # // options.specialArgs
-            ;
+            };
             modules = [
               config.flake.modules.nixos.root
               (config.flake.modules.nixos."${hostname}Home" or { })

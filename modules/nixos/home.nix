@@ -1,4 +1,9 @@
-{ inputs, config, lib, ... }:
+{
+  inputs,
+  config,
+  lib,
+  ...
+}:
 {
   flake.modules.nixos.home =
     { ... }:
@@ -8,11 +13,16 @@
         useGlobalPkgs = true;
         useUserPackages = true;
         extraSpecialArgs = { inherit inputs; };
-        
+
         users.owlenz = {
           imports = [
-            config.flake.modules.homeManager.defectHome
-            ];
+            (
+              if config.networking.hostName == "p03" then
+                config.flake.modules.homeManager.p03Home
+              else
+                config.flake.modules.homeManager.defectHome
+            )
+          ];
           home.username = lib.mkDefault "owlenz";
           home.homeDirectory = lib.mkDefault "/home/owlenz";
           home.stateVersion = "24.11";

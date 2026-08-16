@@ -4,7 +4,7 @@
     { inputs, pkgs, ... }:
     {
       imports = [
-        config.flake.modules.homeManager.kopuz
+        # config.flake.modules.homeManager.kopuz
       ];
       home.packages = with pkgs; [
         # local.cider-2
@@ -13,7 +13,6 @@
         qbittorrent
         nicotine-plus
         picard
-        amberol
         lrcget
         vlc
       ];

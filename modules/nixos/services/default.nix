@@ -9,6 +9,7 @@
         config.flake.modules.nixos.x11
         config.flake.modules.nixos.pipewire
         config.flake.modules.nixos.secrets
+        config.flake.modules.nixos.virt
       ];
       programs.wireshark.enable = true;
 
@@ -25,8 +26,8 @@
           image = "couchdb:latest";
           ports = [ "5984:5984" ];
           environment = {
-            COUCHDB_USER="owlenz";
-            COUCHDB_PASSWORD="test";
+            COUCHDB_USER = "owlenz";
+            COUCHDB_PASSWORD = "test";
           };
           volumes = [
             "./couchdb-data:/var/lib/couchdb/data"
