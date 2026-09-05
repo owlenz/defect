@@ -1,5 +1,9 @@
-{ inputs, ... }: {
-
+{ inputs, ... }:
+let
+  searxng_url = "http://localhost:8888/search?q={query}&language=auto&time_range=&safesearch=0&categories=general";
+  startpage_url = "https://www.startpage.com/do/metasearch.pl?query={query}";
+in
+{
   flake-file.inputs.hister = {
     url = "github:asciimoo/hister";
     inputs.nixpkgs.follows = "nixpkgs";
@@ -14,7 +18,7 @@
       port = 4433;
       settings = {
         app = {
-          search_url = "http://localhost:8888/search?q={query}&language=auto&time_range=&safesearch=0&categories=general";
+          search_url = startpage_url;
         };
       };
     };

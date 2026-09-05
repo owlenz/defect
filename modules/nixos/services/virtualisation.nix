@@ -12,8 +12,11 @@
       boot.kernel.sysctl."net.ipv4.ip_forward" = 1;
       virtualisation = {
         lxc.enable = true;
-        docker = {
+        podman = {
           enable = true;
+        };
+        docker = {
+          enable = false;
           rootless.enable = false;
           daemon.settings = {
             features.cdi = true;
@@ -57,13 +60,21 @@
             80
             443
           ];
-          environment.systemPackages = [ pkgs.caddy ];
+          environment.systemPackages = [
+            pkgs.caddy
+            pkgs.go
+            pkgs.vim
+            pkgs.gopls
+          ];
         };
 
       };
 
       users.users.owlenz = {
-        extraGroups = [ "docker" ];
+        extraGroups = [
+          "docker"
+          "podman"
+        ];
       };
     };
 }

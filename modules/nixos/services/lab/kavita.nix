@@ -24,15 +24,15 @@
     };
 
     virtualisation.oci-containers = {
-      backend = "docker";
+      backend = "podman";
       containers.komf = {
         image = "sndxr/komf:latest";
         ports = [ "8085:8085" ];
         volumes = [
           "/var/lib/komf/config:/config"
         ];
-        extraOptions = [ 
-          "--network=host" 
+        extraOptions = [
+          "--network=host"
         ];
         environment = {
           KOMF_KOMGA_BASE_URI = "http://127.0.0.1:5001";

@@ -28,7 +28,7 @@
             format-muted = "muted";
 
             format-icons = {
-              headphone = "󰋋 ";
+              headphone = "󰋋";
             };
             on-click = "pactl set-sink-mute @DEFAULT_SINK@ toggle";
             on-click-right = "pavucontrol";
@@ -36,7 +36,7 @@
             on-scroll-down = "pactl set-sink-volume @DEFAULT_SINK@ -5%";
           };
           tray = {
-            icon-size = 20;
+            icon-size = 16;
             spacing = 10;
           };
 

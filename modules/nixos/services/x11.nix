@@ -3,11 +3,6 @@
     { ... }:
     {
       services = {
-        picom = {
-          enable = false;
-          backend = "glx";
-          vSync = true;
-        };
         xserver = {
           xkb = {
             layout = "us,ara";
@@ -19,6 +14,7 @@
             xterm.enable = false;
             xfce.enable = false;
           };
+          windowManager.xmonad.enable = true;
         };
       };
     };

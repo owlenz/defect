@@ -18,7 +18,7 @@
         blueman.enable = true;
         xserver.videoDrivers = [ "nvidia" ];
         flatpak.enable = true;
-        # cloudflare-warp.enable = true;
+        cloudflare-warp.enable = true;
       };
 
       virtualisation.oci-containers = {
@@ -36,15 +36,10 @@
         };
       };
 
-      services.nginx = {
+      services.caddy = {
         enable = true;
         virtualHosts."cdb.owlenz.xyz" = {
-          forceSSL = true;
-          enableACME = true;
-          locations."/" = {
-            proxyPass = "http://127.0.0.1:5984";
-            proxyWebsockets = true;
-          };
+          extraConfig = "reverse_proxy 127.0.0.1:5984";
         };
       };
 

@@ -1,4 +1,12 @@
+{ pkgs, ... }:
 {
+  extraPackages = with pkgs; [
+    fourmolu
+    yamlfmt
+    tombi
+    dockerfmt
+    shellcheck
+  ];
   plugins.conform-nvim = {
     enable = true;
     settings = {
@@ -10,6 +18,7 @@
         ];
         cpp = [ "clang_format" ];
         c = [ "clang_format" ];
+        haskell = [ "fourmolu" ];
         go = [
           "gofmt"
           "goimports"

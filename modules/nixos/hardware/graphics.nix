@@ -13,6 +13,7 @@
       ];
 
       environment.variables.LIBVA_DRIVER_NAME = "nvidia";
+      services.xserver.videoDrivers = [ "nvidia" ];
       hardware = {
         graphics = {
           enable = true;

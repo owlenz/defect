@@ -13,15 +13,10 @@
         jellyfin-ffmpeg
       ];
 
-      services.nginx = {
+      services.caddy = {
         enable = true;
         virtualHosts."fin.owlenz.xyz" = {
-          forceSSL = true;
-          enableACME = true;
-          locations."/" = {
-            proxyPass = "http://127.0.0.1:8096";
-            proxyWebsockets = true;
-          };
+          extraConfig = "reverse_proxy 127.0.0.1:8096";
         };
       };
 

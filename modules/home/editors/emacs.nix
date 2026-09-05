@@ -33,9 +33,9 @@
         );
       };
       services.emacs = {
-        enable = true;
+        enable = false;
         startWithUserSession = "graphical";
-        defaultEditor = true;
+        defaultEditor = false;
       };
       xdg.configFile."emacs" = {
         source = ./emacs;

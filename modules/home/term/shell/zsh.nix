@@ -70,6 +70,7 @@ in
           nivm = "nvim";
           tx = "tmux";
           ec = "emacs-client -c";
+          icat = "kitten icat";
 
           pick = "hyprpicker | tail -c +2 | head -c -1 |wl-copy";
           xpick = "xcolor | xclip -sel clip";
@@ -95,10 +96,12 @@ in
             "git"
             "golang"
             "docker"
+            "podman"
             "tmux"
             "emacs"
             "rust"
             "command-not-found"
+            "bun"
             "vi-mode"
           ];
         };

@@ -9,21 +9,16 @@
       extraGroups = [ "media" ];
     };
 
-    services.nginx = {
+    services.caddy = {
       enable = true;
-      recommendedProxySettings = true;
+      email = "saifowlenzz@gmail.com";
       virtualHosts."abs.owlenz.xyz" = {
-        forceSSL = true;
-        enableACME = true;
-        locations."/" = {
-          proxyPass = "http://127.0.0.1:${toString config.services.audiobookshelf.port}";
-          proxyWebsockets = true;
-        };
+        extraConfig = "reverse_proxy 127.0.0.1:${toString config.services.audiobookshelf.port}";
       };
     };
 
     networking.extraHosts = ''
-        127.0.0.1 abs.owlenz.xyz
-      '';
+      127.0.0.1 abs.owlenz.xyz
+    '';
   };
 }

@@ -21,15 +21,10 @@
         };
       };
 
-      services.nginx = {
+      services.caddy = {
         enable = true;
         virtualHosts."krkp.owlenz.xyz" = {
-          forceSSL = true;
-          enableACME = true;
-          locations."/" = {
-            proxyPass = "http://127.0.0.1:3000";
-            proxyWebsockets = true;
-          };
+          extraConfig = "reverse_proxy 127.0.0.1:3000";
         };
       };
 

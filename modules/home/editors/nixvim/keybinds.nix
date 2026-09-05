@@ -1,57 +1,62 @@
+{ lib, ... }:
 let
-  leaderKey = " ";
-  n = "n";
-  actionCmd = cmd: "<cmd>${cmd}<CR>";
-  leader = keys: "<leader>${keys}";
-  mkKeymap =
+  utils = import ./lib/utils.nix { inherit lib; };
+  buffers = map utils.mkKeymap [
     {
-      key,
-      action,
-      desc,
-      mode ? n,
-      opts ? { },
-    }:
-    {
-      mode = n;
-      key = leader key;
-      action = actionCmd action;
-      options = {
-        inherit desc;
-        silent = true;
-      }
-      // opts;
-    };
+      key = "bd";
+      action = "bdelete";
+      desc = "Kill Current Buffer";
+    }
+  ];
 
-  telescope = map mkKeymap [
+  search = map utils.mkKeymap [
     {
-      key = "ff";
-      action = "Telescope find_files";
-      desc = "Find Files";
+      leaderKey = false;
+      key = "<Esc>";
+      action = "noh";
+      desc = "Clear Search Highlight";
+    }
+  ];
+
+  lines = map utils.mkKeymap [
+    {
+      leaderKey = false;
+      mode = "n";
+      key = "<A-j>";
+      action = "m .+1<CR>==";
+      desc = "Move line down";
     }
     {
-      key = "fd";
-      action = "lua require('telescope.builtin').find_files({ find_command = { 'fd', '--type', 'd' } })";
-      desc = "Find Directories";
+      leaderKey = false;
+      mode = "n";
+      key = "<A-k>";
+      action = "m .-2<CR>==";
+      desc = "Move line up";
     }
     {
-      key = "/";
-      action = "Telescope live_grep";
-      desc = "Live grep";
+      leaderKey = false;
+      mode = "v";
+      key = "<A-j>";
+      action = "m '>+1<CR>gv=gv";
+      desc = "Move selection down";
     }
     {
-      key = "bb";
-      action = "Telescope buffers";
-      desc = "Buffers";
+      leaderKey = false;
+      mode = "v";
+      key = "<A-k>";
+      action = "m '<-2<CR>gv=gv";
+      desc = "Move selection up";
     }
   ];
 
 in
 {
   globals = {
-    mapleader = leaderKey;
+    mapleader = utils.leaderKey;
   };
   keymaps = [
-
   ]
-  ++ telescope;
+  ++ buffers
+  ++ search
+  ++ lines;
 }

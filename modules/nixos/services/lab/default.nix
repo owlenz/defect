@@ -5,6 +5,7 @@
     {
       imports = [
         config.flake.modules.nixos.audiobookshelf
+        config.flake.modules.nixos.paperless
         config.flake.modules.nixos.slskd
 
         config.flake.modules.nixos.ddns
@@ -24,7 +25,7 @@
         ## ebooks and manga
         config.flake.modules.nixos.kavita
 
-        config.flake.modules.nixos.searxng
+        # config.flake.modules.nixos.searxng
         config.flake.modules.nixos.hister
         config.flake.modules.nixos.karakeep
         config.flake.modules.nixos.timetagger

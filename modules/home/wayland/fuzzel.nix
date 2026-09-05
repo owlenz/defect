@@ -1,5 +1,5 @@
 {
-  flake.modules.homeManager.fuzzel = {...}: {
+  flake.modules.homeManager.fuzzel = { ... }: {
     programs.fuzzel.enable = true;
   };
 }

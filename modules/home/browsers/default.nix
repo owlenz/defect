@@ -5,12 +5,17 @@
     url = "github:schembriaiden/helium-browser-nix-flake";
     inputs.nixpkgs.follows = "nixpkgs";
   };
+
+  # flake-file.inputs.nixpkgs-unstable-brave = {
+  #   url = "github:nixos/nixpkgs/nixos-unstable";
+  # };
   flake.modules.homeManager.browsers =
     { pkgs, inputs, ... }:
     {
       home.packages = [
         pkgs.chromium
         inputs.helium.packages.${pkgs.system}.default
+        # inputs.nixpkgs-unstable-brave.legacyPackages.${pkgs.system}.brave-origin
       ];
 
       imports = [ config.flake.modules.homeManager.firefox ];

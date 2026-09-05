@@ -1,7 +1,7 @@
 { ... }:
 {
   flake.modules.nixos.vaultwarden = { config, ... }: {
-    sops.secrets."vaultwarden/admin_token" = {};
+    sops.secrets."vaultwarden/admin_token" = { };
     services.vaultwarden = {
       enable = true;
       dbBackend = "sqlite";
@@ -14,20 +14,11 @@
       };
       environmentFile = config.sops.secrets."vaultwarden/admin_token".path;
     };
-    security.acme = {
-      acceptTerms = true;
-      defaults.email = "saifowlenzz@gmail.com";
-    };
 
-    services.nginx = {
+    services.caddy = {
       enable = true;
       virtualHosts."vault.owlenz.xyz" = {
-        forceSSL = true;
-        enableACME = true;
-        locations."/" = {
-          proxyPass = "http://127.0.0.1:${toString config.services.vaultwarden.config.ROCKET_PORT}";
-          proxyWebsockets = true;
-        };
+        extraConfig = "reverse_proxy 127.0.0.1:${toString config.services.vaultwarden.config.ROCKET_PORT}";
       };
     };
     networking.extraHosts = ''

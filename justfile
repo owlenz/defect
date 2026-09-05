@@ -1,4 +1,3 @@
-sername := `whoami`
 host := `hostname -s`
 
 # lists all recipes

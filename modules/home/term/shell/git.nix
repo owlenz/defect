@@ -7,6 +7,7 @@
         ignores = [
           ".#*"
           "node_modules"
+          ".direnv"
         ];
         signing.format = null;
         settings = {
@@ -21,7 +22,7 @@
             };
           };
           core = {
-            editor = "emacsclient -c";
+            editor = "vim";
             credential.helper = "store";
           };
         };

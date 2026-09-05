@@ -6,6 +6,7 @@
     folding.enable = true;
     grammarPackages = with config.plugins.treesitter.package.builtGrammars; [
       bash
+      haskell
       json
       lua
       toml

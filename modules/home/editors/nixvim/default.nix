@@ -22,6 +22,7 @@
         (inputs.import-tree ./plugins)
         ./options.nix
         ./keybinds.nix
+        ./colorscheme.nix
       ];
     };
   };

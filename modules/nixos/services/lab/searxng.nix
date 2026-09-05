@@ -92,7 +92,6 @@
           ];
         };
       };
-      users.groups.searx.members = [ "nginx" ];
-
+      users.groups.searx.members = [ "caddy" ];
     };
 }

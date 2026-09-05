@@ -23,8 +23,13 @@
           inherit polarity;
 
           enable = true;
-          targets.emacs.enable = false;
           base16Scheme = "${pkgs.base16-schemes}/share/themes/rose-pine.yaml";
+
+          targets.emacs.enable = false;
+          targets.nixvim = {
+            enable = false;
+            plugin = "base16-nvim";
+          };
 
           icons = {
             enable = true;
@@ -49,7 +54,7 @@
               name = "DejaVu Serif";
             };
             sizes = {
-              terminal = 12;
+              terminal = 11;
             };
           };
           opacity = {

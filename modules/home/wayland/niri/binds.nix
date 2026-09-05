@@ -91,7 +91,7 @@
           "Mod+8".action = focus-workspace 8;
           "Mod+9".action = focus-workspace 9;
         }
-        // lib.optionalAttrs config.programs.noctalia.enable {
+        // lib.optionalAttrs (config.programs.noctalia.enable or false) {
           "Mod+R".action = spawn-sh "noctalia msg panel-toggle launcher";
           XF86AudioRaiseVolume = {
             action = spawn-sh "noctalia msg volume-up";

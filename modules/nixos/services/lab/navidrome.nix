@@ -1,5 +1,5 @@
 {
-  flake.modules.nixos.navidrome = { config, pkgs, ... }: {
+  flake.modules.nixos.navidrome = { pkgs, ... }: {
     services.navidrome = {
       enable = true;
       settings.MusicFolder = "/media/Music";
@@ -10,15 +10,10 @@
       ];
     };
 
-    services.nginx = {
+    services.caddy = {
       enable = true;
       virtualHosts."navi.owlenz.xyz" = {
-        forceSSL = true;
-        enableACME = true;
-        locations."/" = {
-          proxyPass = "http://127.0.0.1:4533";
-          proxyWebsockets = true;
-        };
+        extraConfig = "reverse_proxy 127.0.0.1:4533";
       };
     };
 

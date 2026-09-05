@@ -4,7 +4,6 @@
     { pkgs, ... }:
     let
       hyprland-eco = with pkgs; [
-        hyprpicker
         hyprsunset
         hypridle
         hyprlock
@@ -16,8 +15,13 @@
         swaylock
         swaybg
         swayidle
-        udiskie
         awww
+      ];
+      xmonad-eco = with pkgs; [
+        xterm
+        rofi
+        dmenu
+        xclip
       ];
     in
     {
@@ -25,14 +29,18 @@
         config.flake.modules.homeManager.fuzzel
         config.flake.modules.homeManager.niri
         # config.flake.modules.homeManager.hyprland
-        # config.flake.modules.homeManager.waybar
-        config.flake.modules.homeManager.noctalia
+        config.flake.modules.homeManager.waybar
+        # config.flake.modules.homeManager.noctalia
         config.flake.modules.homeManager.mako
+        # config.flake.modules.homeManager.xmonad
       ];
       home.packages =
         niri-eco
+        # ++ xmonad-eco
         ++ (with pkgs; [
           wl-clipboard
+          hyprpicker
+          udiskie
         ]);
 
     };
