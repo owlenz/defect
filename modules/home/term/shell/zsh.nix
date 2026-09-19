@@ -6,8 +6,6 @@ in
   flake.modules.homeManager.zsh =
     { pkgs, ... }:
     {
-      programs.fzf.enableZshIntegration = true;
-
       home.sessionVariables = {
         SHELL = "${pkgs.zsh}/bin/zsh";
       };
@@ -32,7 +30,6 @@ in
         };
 
         initContent = ''
-
           eval "$(hister completion zsh)"
 
           bindkey -v
@@ -48,7 +45,6 @@ in
           export PATH="$HOME/.cargo/bin:$PATH"
           # go
           export PATH="$HOME/go/bin:$PATH"
-
         '';
 
         shellAliases = {
@@ -97,6 +93,7 @@ in
             "docker"
             "podman"
             "tmux"
+            "tmuxinator"
             "emacs"
             "rust"
             "command-not-found"

@@ -13,6 +13,7 @@
       programs.fzf = {
         enable = true;
         enableZshIntegration = true;
+        tmux.enableShellIntegration = true;
       };
 
       home.packages = with pkgs; [
@@ -22,6 +23,9 @@
         at
         bat
         btop
+        htop
+        lazygit
+
         man
         bc
         dust
@@ -34,11 +38,12 @@
         zip
         unzip
         feh
+
         ## man pages
         man-pages
         man-pages-posix
 
-        ## network
+        ## io
         lsof
         iotop
       ];

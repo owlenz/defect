@@ -30,7 +30,7 @@
           matches = [
             {
               app-id = "steam";
-              title = "^notificationtoasts_\d+_desktop$";
+              title = "^notificationtoasts";
             }
           ];
           default-floating-position = {
@@ -43,7 +43,7 @@
       ];
       layer-rules = [
         {
-          matches = [ { namespace = "^noctalia-backdrop"; } ];
+          matches = [ { namespace = "^awww-daemonbackdrop"; } ];
           place-within-backdrop = true;
         }
       ];

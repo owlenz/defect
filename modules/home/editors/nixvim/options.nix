@@ -9,6 +9,7 @@
     conceallevel = 2;
     termguicolors = true;
 
+    expandtab = true;
     tabstop = 4;
     shiftwidth = 2;
     numberwidth = 2;
@@ -29,24 +30,25 @@
     severity_sort = true;
     virtual_text = false;
   };
+
   autoCmd = [
-    {
-      event = "BufWinEnter";
-      callback.__raw = ''
-        function()
-          local buftype = vim.bo.buftype
-          local special = {
-            help = true,
-            quickfix = true,
-            nofile = true,
-            terminal = true,
-            prompt = true,
-          }
-          if special[buftype] then
-            vim.cmd("wincmd J")
-          end
-        end
-      '';
-    }
+    # {
+    #   event = "BufWinEnter";
+    #   callback.__raw = ''
+    #     function()
+    #       local buftype = vim.bo.buftype
+    #       local special = {
+    #         help = true,
+    #         quickfix = true,
+    #         nofile = true,
+    #         terminal = true,
+    #         prompt = true,
+    #       }
+    #       if special[buftype] then
+    #         vim.cmd("wincmd J")
+    #       end
+    #     end
+    #   '';
+    # }
   ];
 }

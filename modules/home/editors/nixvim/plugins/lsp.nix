@@ -6,18 +6,18 @@
         # taplo.enable = true;
         bashls.enable = true;
         nil_ls.enable = true;
-        nixd = {
-          enable = true;
-          settings = {
-            nixpkgs.expr = "import <nixpkgs> { }";
-            formatting.command = [ "nixfmt" ];
-            options = {
-              nixos.expr = ''(builtins.getFlake "/path/to/your/flake").nixosConfigurations.HOSTNAME.options'';
-              # if you also use home-manager:
-              home_manager.expr = ''(builtins.getFlake "/path/to/your/flake").homeConfigurations.USERNAME.options'';
-            };
-          };
-        };
+        # nixd = {
+        #   enable = true;
+        #   settings = {
+        #     nixpkgs.expr = "import <nixpkgs> { }";
+        #     formatting.command = [ "nixfmt" ];
+        #     options = {
+        #       nixos.expr = ''(builtins.getFlake "/path/to/your/flake").nixosConfigurations.HOSTNAME.options'';
+        #       # if you also use home-manager:
+        #       home_manager.expr = ''(builtins.getFlake "/path/to/your/flake").homeConfigurations.USERNAME.options'';
+        #     };
+        #   };
+        # };
         hls = {
           enable = true;
           # installGhc = false;

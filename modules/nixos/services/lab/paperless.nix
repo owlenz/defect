@@ -3,7 +3,7 @@
     services.paperless = {
       enable = true;
       port = 5003;
-      mediaDir = "/media";
+      mediaDir = "/media/paperless";
       domain = "ppr.owlenz.xyz";
     };
     users.users.paperless = {

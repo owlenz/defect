@@ -10,8 +10,7 @@
         systemd = {
           enable = true;
         };
-        settings =  {
-          theme = "Nord";
+        settings = {
         };
       };
     };
