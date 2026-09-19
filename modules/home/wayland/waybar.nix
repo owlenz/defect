@@ -2,7 +2,7 @@
   flake.modules.homeManager.waybar = {
 
     programs.waybar = {
-      enable = true;
+      enable = false;
       settings = {
         mainBar = {
           layer = "top";
@@ -12,7 +12,7 @@
           margin-left = 0;
 
           modules-right = [
-            "tray"
+            # "tray"
             "pulseaudio"
             "clock"
           ];
@@ -57,7 +57,7 @@
         @define-color text1 #c6c1c9;
 
         window#waybar {
-            background-color: @background;
+            /* background-color: @background; */
             color: @text1;
             border-radius: 3px;
             transition-property: background-color;

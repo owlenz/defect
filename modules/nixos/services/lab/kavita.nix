@@ -1,17 +1,17 @@
 {
   flake.modules.nixos.kavita = { config, ... }: {
 
-    sops.secrets."kavita_token_key" = { };
-    services.kavita = {
-      enable = true;
-      settings.Port = 5000;
-      tokenKeyFile = config.sops.secrets."kavita_token_key".path;
-    };
+    # sops.secrets."kavita_token_key" = { };
+    # services.kavita = {
+    #   enable = true;
+    #   settings.Port = 5000;
+    #   tokenKeyFile = config.sops.secrets."kavita_token_key".path;
+    # };
 
-    users.users.kavita = {
-      isSystemUser = true;
-      extraGroups = [ "media" ];
-    };
+    #  users.users.kavita = {
+    #   isSystemUser = true;
+    #   extraGroups = [ "media" ];
+    # };
 
     services.komga = {
       enable = true;

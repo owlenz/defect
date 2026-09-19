@@ -10,7 +10,7 @@
 
         config.flake.modules.nixos.ddns
 
-        config.flake.modules.nixos.syncthing
+        # config.flake.modules.nixos.syncthing
         config.flake.modules.nixos.pi-hole
         ## streaming media
         config.flake.modules.nixos.jellyfin

@@ -5,12 +5,16 @@
       programs.niri.settings.binds =
         with config.lib.niri.actions;
         {
-          "Mod+Q".action = spawn "kitty";
+          "Mod+Q".action = spawn "footclient";
           "Mod+E".action = spawn "nautilus";
           "Mod+R".action = spawn "fuzzel";
           ## hister
           "Mod+S".action = spawn-sh "xdg-open 'http://127.0.0.1:4433/' ";
           "Mod+W".action = spawn-sh "hyprpicker | tail -c +1 | head -c -1 | wl-copy";
+          "Mod+Tab" = {
+            action = toggle-overview;
+            repeat = false;
+          };
           "Mod+V".action = toggle-window-floating;
           "Mod+C".action = close-window;
           "Mod+Alt+L".action = spawn "swaylock";

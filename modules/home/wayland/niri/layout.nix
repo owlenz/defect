@@ -10,9 +10,9 @@
       gaps = 4;
       focus-ring = {
         enable = true;
-        width = 2;
+        width = 1;
         active = {
-          color = "#663E90";
+          color = "#C4A7E7";
         };
         inactive = {
           color = "#505050";

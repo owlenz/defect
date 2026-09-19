@@ -1,5 +1,5 @@
 {
-  flake.modules.homeManager.tmux = { pkgs, ... }: {
+  flake.modules.homeManager.tmux = { config, pkgs, ... }: {
     programs.tmux = {
       enable = true;
       focusEvents = true;
@@ -12,6 +12,12 @@
       mouse = true;
       keyMode = "vi";
 
+      disableConfirmationPrompt = true;
+
+      tmuxinator = {
+        enable = true;
+      };
+
       extraConfig = ''
         bind-key -T copy-mode-vi v send-keys -X begin-selection
         bind-key -T copy-mode-vi y send-keys -X copy-pipe-and-cancel "wl-copy && wl-paste -n | wl-copy -p"
@@ -21,6 +27,8 @@
 
         unbind '%'
         unbind '"'
+        set -gq allow-passthrough on
+        set -as terminal-features ',*:sixel'
 
         bind v split-window -h -c "#{pane_current_path}"
         bind s split-window -v -c "#{pane_current_path}"
@@ -29,6 +37,19 @@
         bind j select-pane -D
         bind k select-pane -U
         bind l select-pane -R
+        bind R source-file ${config.home.homeDirectory}/.config/tmux/tmux.conf \; display-message "Config reloaded!"
+
+        bind C-g display-popup \
+            -d "#{pane_current_path}" \
+            -w 80% \
+            -h 80% \
+            -E "lazygit"
+
+        set -g status-style bg=default
+        set -g window-status-style bg=default
+        set -g window-status-current-style bg=default
+        set -g pane-active-border-style bg=default
+        set -g pane-border-style bg=default
       '';
 
       plugins = with pkgs.tmuxPlugins; [
@@ -51,7 +72,6 @@
             set -g @continuum-save-interval '10' # in minutes
           '';
         }
-
       ];
     };
   };

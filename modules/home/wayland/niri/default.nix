@@ -6,8 +6,10 @@
         settings = {
           screenshot-path = "~/Pictures/Screenshots/sc_%Y-%m-%d_%H-%M-%S.png";
           spawn-at-startup = [
-            { argv = [ "noctalia" ]; }
+            { argv = [ "waybar" ]; }
+            # { argv = [ "noctalia" ]; }
             { argv = [ "awww-daemon" ]; }
+            { argv = [ "awww-daemon --namespace backdrop" ]; }
           ];
           environment = {
             XDG_CURRENT_DESKTOP = "niri";
@@ -26,7 +28,7 @@
 
             WLR_NO_HARDWARE_CURSORS = "1";
           };
-          # prefer-no-csd = true;
+          prefer-no-csd = true;
         };
       };
     };
