@@ -2,16 +2,14 @@
   flake.modules.nixos.p03Configuration =
     { pkgs, ... }:
     {
-      boot.loader.efi = {
-        canTouchEfiVariables = true;
-        efiSysMountPoint = "/boot";
-      };
+	    boot.loader = { 
+		systemd-boot.enable = true;
+		    efi = {
+			    canTouchEfiVariables = true;
+			    efiSysMountPoint = "/boot";
+		    };
+	    };
 
-      boot.loader.grub = {
-        enable = true;
-        device = "nodev";
-        efiSupport = true;
-      };
       networking.hostName = "p03";
       time.timeZone = "Africa/Cairo";
 

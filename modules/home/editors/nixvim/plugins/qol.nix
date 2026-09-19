@@ -17,12 +17,12 @@
       settings = {
         legacy_commands = false;
         new_notes_location = "current_dir";
-        workspaces = [
-          {
-            name = "study";
-            path = "~/Documents/obsidian/test";
-          }
-        ];
+        # workspaces = [
+          # {
+          #   name = "study";
+          #   path = "~/Documents/obsidian/test";
+          # }
+        # ];
       };
     };
   };

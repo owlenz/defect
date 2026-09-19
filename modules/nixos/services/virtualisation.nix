@@ -7,7 +7,7 @@
       ...
     }:
     {
-      hardware.nvidia-container-toolkit.enable = true;
+      #hardware.nvidia-container-toolkit.enable = true;
       # port forwarding
       boot.kernel.sysctl."net.ipv4.ip_forward" = 1;
       virtualisation = {

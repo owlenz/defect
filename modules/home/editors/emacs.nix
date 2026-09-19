@@ -10,7 +10,7 @@
     in
     {
       programs.emacs = {
-        enable = true;
+        enable = false;
         package = (
           pkgs'.emacsWithPackagesFromUsePackage {
             package = pkgs'.emacs-pgtk;

@@ -34,7 +34,6 @@ in
         initContent = ''
 
           eval "$(hister completion zsh)"
-          eval "$(fasd --init auto)"
 
           bindkey -v
           DISABLE_MAGIC_FUNCTIONS="true"

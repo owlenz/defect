@@ -26,7 +26,6 @@
         bc
         dust
         eza
-        fasd
         fd
         nil
         ripgrep

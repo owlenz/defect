@@ -16,7 +16,7 @@
       services = {
         gvfs.enable = true;
         blueman.enable = true;
-        xserver.videoDrivers = [ "nvidia" ];
+       # xserver.videoDrivers = [ "nvidia" ];
         flatpak.enable = true;
         cloudflare-warp.enable = true;
       };
@@ -36,15 +36,15 @@
         };
       };
 
-      services.caddy = {
-        enable = true;
-        virtualHosts."cdb.owlenz.xyz" = {
-          extraConfig = "reverse_proxy 127.0.0.1:5984";
-        };
-      };
-
-      networking.extraHosts = ''
-        127.0.0.1 cdb.owlenz.xyz
-      '';
+      # services.caddy = {
+      #   enable = true;
+      #   virtualHosts."cdb.owlenz.xyz" = {
+      #     extraConfig = "reverse_proxy 127.0.0.1:5984";
+      #   };
+      # };
+      #
+      # networking.extraHosts = ''
+      #   127.0.0.1 cdb.owlenz.xyz
+      # '';
     };
 }

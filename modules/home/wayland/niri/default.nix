@@ -14,11 +14,6 @@
             XDG_SESSION_TYPE = "wayland";
             WAYLAND_DISPLAY = "wayland-1";
 
-            GBM_BACKEND = "nvidia-drm";
-            __GLX_VENDOR_LIBRARY_NAME = "nvidia";
-            LIBVA_DRIVER_NAME = "nvidia";
-            NVD_BACKEND = "direct";
-
             MOZ_ENABLE_WAYLAND = "1";
             MOZ_DISABLE_RDD_SANDBOX = "1";
             ELECTRON_OZONE_PLATFORM_HINT = "auto";
@@ -26,7 +21,7 @@
 
             WLR_NO_HARDWARE_CURSORS = "1";
           };
-          # prefer-no-csd = true;
+          prefer-no-csd = true;
         };
       };
     };

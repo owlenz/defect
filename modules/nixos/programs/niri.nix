@@ -1,7 +1,7 @@
 { inputs, ... }:
 {
   flake-file.inputs.niri = {
-    url = "github:sodiboo/niri-flake";
+    url = "github:epireyn/niri-flake";
     inputs.nixpkgs.follows = "nixpkgs";
   };
   flake.modules.nixos.niri =
@@ -11,7 +11,7 @@
       nixpkgs.overlays = [ inputs.niri.overlays.niri ];
       programs.niri = {
         enable = true;
-        package = pkgs.niri-stable;
+        package = pkgs.niri-unstable;
       };
     };
 }

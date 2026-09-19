@@ -6,11 +6,11 @@
   flake.modules.nixos.secrets =
     { pkgs, inputs, ... }:
     {
-      imports = [ inputs.sops-nix.nixosModules.sops ];
+    #  imports = [ inputs.sops-nix.nixosModules.sops ];
       environment.systemPackages = with pkgs; [
-        sops
+ #       sops
       ];
-      sops.defaultSopsFile = ../../../secrets/secrets.yaml;
-      sops.age.keyFile = "/home/owlenz/.config/sops/age/keys.txt";
+  #    sops.defaultSopsFile = ../../../secrets/secrets.yaml;
+   #   sops.age.keyFile = "/home/owlenz/.config/sops/age/keys.txt";
     };
 }
