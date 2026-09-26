@@ -6,7 +6,7 @@
       enable = true;
       dbBackend = "sqlite";
       config = {
-        DOMAIN = "https://vault.owlenz.xyz";
+        DOMAIN = "https://192.168.1.100";
         SIGNUPS_ALLOWED = true;
         ROCKET_ADDRESS = "0.0.0.0";
         ROCKET_PORT = 8222;
@@ -17,13 +17,17 @@
 
     services.caddy = {
       enable = true;
-      virtualHosts."vault.owlenz.xyz" = {
-        extraConfig = "reverse_proxy 127.0.0.1:${toString config.services.vaultwarden.config.ROCKET_PORT}";
+      email = "saifowlenzz@gmail.com";
+      virtualHosts."vaultowlenz.duckdns.org" = {
+        extraConfig = ''
+          reverse_proxy 127.0.0.1:${toString config.services.vaultwarden.config.ROCKET_PORT}
+        '';
       };
     };
-    networking.extraHosts = ''
-      127.0.0.1 vault.owlenz.xyz
-    '';
+
+    # networking.extraHosts = ''
+    #   127.0.0.1 vault.owlenz.xyz
+    # '';
 
     networking.firewall.allowedTCPPorts = [ 8222 ];
   };

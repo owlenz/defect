@@ -13,11 +13,12 @@
     { pkgs, inputs, ... }:
     {
       home.packages = [
-        #pkgs.chromium
+        # pkgs.chromium
         inputs.helium.packages.${pkgs.system}.default
-        # inputs.nixpkgs-unstable-brave.legacyPackages.${pkgs.system}.brave-origin
+        # inputs.nixpkgs-unstable-brave.legacyPackages.${pkgs.system}.
+        pkgs.brave-origin
       ];
 
-     # imports = [ config.flake.modules.homeManager.firefox ];
+      # imports = [ config.flake.modules.homeManager.firefox ];
     };
 }

@@ -12,13 +12,13 @@
 
     services.caddy = {
       enable = true;
-      virtualHosts."navi.owlenz.xyz" = {
+      virtualHosts."naviz.duckdns.org" = {
         extraConfig = "reverse_proxy 127.0.0.1:4533";
       };
     };
 
     networking.extraHosts = ''
-      127.0.0.1 navi.owlenz.xyz
+      127.0.0.1 naviz.duckdns.org
     '';
     users.users.navidrome = {
       isSystemUser = true;

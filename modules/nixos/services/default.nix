@@ -16,25 +16,25 @@
       services = {
         gvfs.enable = true;
         blueman.enable = true;
-       # xserver.videoDrivers = [ "nvidia" ];
+        # xserver.videoDrivers = [ "nvidia" ];
         flatpak.enable = true;
         cloudflare-warp.enable = true;
       };
 
-      virtualisation.oci-containers = {
-        containers.couchdb-obsidian = {
-          image = "couchdb:latest";
-          ports = [ "5984:5984" ];
-          environment = {
-            COUCHDB_USER = "owlenz";
-            COUCHDB_PASSWORD = "test";
-          };
-          volumes = [
-            "./couchdb-data:/var/lib/couchdb/data"
-            "./couchdb-etc:/var/lib/couchdb/etc/local.d "
-          ];
-        };
-      };
+      # virtualisation.oci-containers = {
+      # containers.couchdb-obsidian = {
+      #   image = "couchdb:latest";
+      #   ports = [ "5984:5984" ];
+      #   environment = {
+      #     COUCHDB_USER = "owlenz";
+      #     COUCHDB_PASSWORD = "test";
+      #   };
+      #   volumes = [
+      #     "./couchdb-data:/var/lib/couchdb/data"
+      #     "./couchdb-etc:/var/lib/couchdb/etc/local.d "
+      #   ];
+      # };
+      # };
 
       # services.caddy = {
       #   enable = true;

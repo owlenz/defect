@@ -4,26 +4,34 @@
     inputs.flake-parts.follows = "flake-parts";
     inputs.nixpkgs.follows = "nixpkgs";
   };
-  flake.modules.homeManager.nixvim = { inputs, pkgs, ... }: {
-    imports = [
-      inputs.nixvim.homeModules.default
-    ];
-    programs.nixvim = {
-      enable = true;
-      nixpkgs.source = pkgs.path;
-      waylandSupport = true;
-      clipboard.providers.wl-copy.enable = true;
-      clipboard.register = "unnamedplus";
-      extraConfigLua = ''
-        		dofile(os.getenv("HOME") .. "/dotfiles/modules/home/editors/nixvim/test.lua")
-        		'';
-
+  flake.modules.homeManager.nixvim =
+    {
+      inputs,
+      pkgs,
+      hostname,
+      ...
+    }:
+    {
       imports = [
-        (inputs.import-tree ./plugins)
-        ./options.nix
-        ./keybinds.nix
-        ./colorscheme.nix
+        inputs.nixvim.homeModules.default
       ];
+      programs.nixvim = {
+        enable = true;
+        nixpkgs.source = pkgs.path;
+        waylandSupport = true;
+        clipboard.providers.wl-copy.enable = true;
+        clipboard.register = "unnamedplus";
+        extraConfigLua = ''
+          		dofile(os.getenv("HOME") .. "/dotfiles/modules/home/editors/nixvim/test.lua")
+          		'';
+        _module.args = { inherit hostname; };
+
+        imports = [
+          (inputs.import-tree ./plugins)
+          ./options.nix
+          ./keybinds.nix
+          ./colorscheme.nix
+        ];
+      };
     };
-  };
 }

@@ -39,7 +39,7 @@
         bind l select-pane -R
         bind R source-file ${config.home.homeDirectory}/.config/tmux/tmux.conf \; display-message "Config reloaded!"
 
-        bind C-g display-popup \
+        bind g display-popup \
             -d "#{pane_current_path}" \
             -w 80% \
             -h 80% \

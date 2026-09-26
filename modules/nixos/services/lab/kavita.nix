@@ -26,7 +26,7 @@
     virtualisation.oci-containers = {
       backend = "podman";
       containers.komf = {
-        image = "sndxr/komf:latest";
+        image = "docker.io/sndxr/komf:latest";
         ports = [ "8085:8085" ];
         volumes = [
           "/var/lib/komf/config:/config"
@@ -38,8 +38,8 @@
           KOMF_KOMGA_BASE_URI = "http://127.0.0.1:5001";
           KOMF_KOMGA_USER = "saifowlenzz@gmail.com";
           KOMF_KOMGA_PASSWORD = "$a!f";
-          KOMF_KAVITA_BASE_URI = "http://127.0.0.1:5000";
-          KOMF_KAVITA_API_KEY = "QhXCU3bm";
+          # KOMF_KAVITA_BASE_URI = "http://127.0.0.1:5000";
+          # KOMF_KAVITA_API_KEY = "QhXCU3bm";
           KOMF_LOG_LEVEL = "INFO";
           JAVA_TOOL_OPTIONS = "-XX:+UnlockExperimentalVMOptions -XX:+UseShenandoahGC -XX:ShenandoahGCHeuristics=compact -XX:ShenandoahGuaranteedGCInterval=3600000 -XX:TrimNativeHeapInterval=3600000";
         };

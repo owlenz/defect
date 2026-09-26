@@ -20,8 +20,11 @@
       rust
       regex
       c
+      # js
+      # ts
       tsx
       typescript
+      qmljs
     ];
 
   };

@@ -31,14 +31,9 @@
             allow-when-locked = true;
             action = spawn-sh "wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle";
           };
-
-          XF86AudioPlay = {
+          XF86PickupPhone = {
             allow-when-locked = true;
             action = spawn-sh "playerctl play-pause";
-          };
-          XF86AudioStop = {
-            allow-when-locked = true;
-            action = spawn-sh "playerctl stop";
           };
           XF86AudioPrev = {
             allow-when-locked = true;
@@ -55,7 +50,6 @@
           "Mod+Print".action.screenshot-screen = {
             show-pointer = false;
           };
-          # "Ctrl+Print".action = screenshot-screen;
           # "Alt+Print".action = screenshot-window;
 
           "Mod+Shift+E".action.spawn = [
@@ -96,7 +90,7 @@
           "Mod+9".action = focus-workspace 9;
         }
         // lib.optionalAttrs (config.programs.noctalia.enable or false) {
-          "Mod+R".action = spawn-sh "noctalia msg panel-toggle launcher";
+          # "Mod+R".action = spawn-sh "noctalia msg panel-toggle launcher";
           XF86AudioRaiseVolume = {
             action = spawn-sh "noctalia msg volume-up";
             allow-when-locked = true;
@@ -115,6 +109,14 @@
           };
           XF86MonBrightnessDown = {
             action = spawn-sh "noctalia msg brightness-down";
+            allow-when-locked = true;
+          };
+          XF86AudioMicMute = {
+            action = spawn-sh "noctalia msg mic-mute";
+            allow-when-locked = true;
+          };
+          XF86PickupPhone = {
+            action = spawn-sh "noctalia msg media toggle";
             allow-when-locked = true;
           };
         };

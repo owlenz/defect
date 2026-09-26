@@ -6,8 +6,8 @@
         settings = {
           screenshot-path = "~/Pictures/Screenshots/sc_%Y-%m-%d_%H-%M-%S.png";
           spawn-at-startup = [
-            { argv = [ "waybar" ]; }
-            # { argv = [ "noctalia" ]; }
+            # { argv = [ "waybar" ]; }
+            { argv = [ "noctalia" ]; }
             { argv = [ "awww-daemon" ]; }
             { argv = [ "awww-daemon --namespace backdrop" ]; }
           ];

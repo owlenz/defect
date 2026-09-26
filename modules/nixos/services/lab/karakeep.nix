@@ -17,19 +17,19 @@
         extraEnvironment = {
           PORT = "3000";
           DISABLE_SIGNUPS = "true";
-          NEXTAUTH_URL = "https://krkp.owlenz.xyz";
+          NEXTAUTH_URL = "https://krkp.duckdns.org";
         };
       };
 
       services.caddy = {
         enable = true;
-        virtualHosts."krkp.owlenz.xyz" = {
+        virtualHosts."krkp.duckdns.org" = {
           extraConfig = "reverse_proxy 127.0.0.1:3000";
         };
       };
 
       networking.extraHosts = ''
-        127.0.0.1 krkp.owlenz.xyz
+        127.0.0.1 krkp.duckdns.org
       '';
     };
 }

@@ -1,27 +1,44 @@
-{ ... }: {
+{
+  pkgs,
+  hostname,
+  ...
+}:
+{
   plugins = {
     lsp = {
       enable = true;
       servers = {
         # taplo.enable = true;
         bashls.enable = true;
-        nil_ls.enable = true;
-        # nixd = {
-        #   enable = true;
-        #   settings = {
-        #     nixpkgs.expr = "import <nixpkgs> { }";
-        #     formatting.command = [ "nixfmt" ];
-        #     options = {
-        #       nixos.expr = ''(builtins.getFlake "/path/to/your/flake").nixosConfigurations.HOSTNAME.options'';
-        #       # if you also use home-manager:
-        #       home_manager.expr = ''(builtins.getFlake "/path/to/your/flake").homeConfigurations.USERNAME.options'';
-        #     };
-        #   };
-        # };
-        hls = {
+        # nil_ls.enable = true;
+        yamlls = {
           enable = true;
+          package = pkgs.yaml-language-server;
+          settings = {
+            yaml.schemas = {
+              "https://raw.githubusercontent.com/SchemaStore/schemastore/master/src/schemas/json/github-workflow.json" =
+                "/.github/workflows/*.{yml,yaml}";
+            };
+          };
+        };
+        nixd = {
+          enable = true;
+          settings = {
+            nixpkgs.expr = "import <nixpkgs> { }";
+            formatting.command = [ "nixfmt" ];
+            diagnostic.suppress = [ ];
+            options = {
+              nixos.expr = ''(builtins.getFlake "/home/owlenz/dotfiles").nixosConfigurations.${hostname}.options'';
+            };
+          };
+        };
+        hls = {
+          enable = false;
           # installGhc = false;
           package = null;
+        };
+        qmlls = {
+          enable = true;
         };
         gopls = {
           enable = true;

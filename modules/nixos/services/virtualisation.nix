@@ -11,13 +11,17 @@
       # port forwarding
       boot.kernel.sysctl."net.ipv4.ip_forward" = 1;
       virtualisation = {
-        lxc.enable = true;
+        # lxc.enable = true;
         podman = {
           enable = true;
         };
         docker = {
           enable = false;
-          rootless.enable = false;
+          rootless = {
+            enable = true;
+            setSocketVariable = true;
+          };
+
           daemon.settings = {
             features.cdi = true;
             dns = [

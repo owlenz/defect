@@ -2,7 +2,7 @@
   flake.modules.nixos.pi-hole = { ... }: {
     services = {
       pihole-ftl = {
-        enable = false;
+        enable = true;
         lists = [
           {
             url = "https://raw.githubusercontent.com/StevenBlack/hosts/master/hosts";

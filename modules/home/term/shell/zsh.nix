@@ -71,7 +71,7 @@ in
           xpick = "xcolor | xclip -sel clip";
           ### eza ###
           ls = "eza --icons=always --group-directories-first";
-          ll = "eza -bglF --icons";
+          ll = "eza -bglF --icons always";
           tree = "eza --tree --icons";
 
           # nix aliases

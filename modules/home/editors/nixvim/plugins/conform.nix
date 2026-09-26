@@ -6,6 +6,8 @@
     tombi
     dockerfmt
     shellcheck
+    nixfmt
+    tombi
   ];
   plugins.conform-nvim = {
     enable = true;
@@ -40,6 +42,15 @@
           "trim_whitespace"
           "trim_newlines"
         ];
+      };
+      formatters.yamlfmt = {
+        command = "${pkgs.yamlfmt}/bin/yamlfmt";
+        args = [
+          "-formatter"
+          "retain_line_breaks=true"
+          "-"
+        ];
+        stdin = true;
       };
       format_on_save = # Lua
         ''

@@ -2,13 +2,13 @@
   flake.modules.nixos.p03Configuration =
     { pkgs, ... }:
     {
-	    boot.loader = { 
-		systemd-boot.enable = true;
-		    efi = {
-			    canTouchEfiVariables = true;
-			    efiSysMountPoint = "/boot";
-		    };
-	    };
+      boot.loader = {
+        systemd-boot.enable = true;
+        efi = {
+          canTouchEfiVariables = true;
+          efiSysMountPoint = "/boot";
+        };
+      };
 
       networking.hostName = "p03";
       time.timeZone = "Africa/Cairo";
@@ -50,7 +50,7 @@
         curl
         wget
       ];
-      networking.firewall.enable = true;
+      networking.firewall.enable = false;
       nixpkgs.config.allowUnfree = true;
       system.stateVersion = "26.05";
 

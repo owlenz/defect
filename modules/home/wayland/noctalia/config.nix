@@ -11,16 +11,15 @@
         settings = {
           dock = {
             active_monitor_only = true;
-            enabled = true;
+            enabled = false;
             launcher_icon = "noctalia";
             magnification_scale = 1.3;
             pinned = [
               "helium"
               "obsidian"
-              "kopuz"
+              "spotify"
               "vesktop"
-              "files"
-              "krita"
+              "nautilus"
               "steam"
               "org.pwmt.zathura"
             ];
@@ -33,16 +32,26 @@
           weather.auto_locate = true;
 
           bar.default = {
+            margin_ends = 0;
+            padding = 10;
+            radius = 0;
             center = [ "media" ];
             end = [
               "tray"
-              "notifications"
-              "clipboard"
-              "bluetooth"
               "volume"
-              "control-center"
+              "clock"
             ];
-            start = [ "workspaces" ];
+            start = [
+              "workspaces"
+              "lid-guard"
+              "led"
+            ];
+          };
+          widget.workspaces = {
+            hide_when_empty = true;
+            style = "minimal";
+            font_weight = "Bold";
+            occupied_color = "on_surface_variant";
           };
 
           shell = {

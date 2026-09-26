@@ -13,7 +13,7 @@
       enable = true;
     };
     obsidian = {
-      enable = true;
+      enable = false;
       settings = {
         legacy_commands = false;
         new_notes_location = "current_dir";
